@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>prediction on David Fornborg</title>
+    <link>https://dfornis.github.io/dfornis/tags/prediction/</link>
+    <description>Recent content in prediction on David Fornborg</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 31 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://dfornis.github.io/dfornis/tags/prediction/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Predicting movement patterns with R</title>
+      <link>https://dfornis.github.io/dfornis/p/predicting-movement-patterns-with-r/</link>
+      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://dfornis.github.io/dfornis/p/predicting-movement-patterns-with-r/</guid>
+      <description>There is an unmistakably niche but growing field in economics. It&amp;rsquo;s an approach that has been somewhat successfully advocated for by Robert Shiller and George Akerlof for some time now. It has featured as a theme in many works without being mentioned by name, such as in Galbraith&amp;rsquo;s classic &amp;ldquo;The Great Crash of 1929&amp;rdquo; from 1955. But tracing its origins takes us back as far as the 1930&amp;rsquo;s when Keynes coined the phrase Animal Spirits, meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics.</description>
+    </item>
+    
+  </channel>
+</rss>
