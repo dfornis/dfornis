@@ -32,14 +32,14 @@ One of the problems with a simple linear regression model is that time series da
 The assumption here is that narratives are spread at time t and have an effect on economic behavior at time t+1. Having input variables lagged at t+1 allows us to use external regressors as fresh input for 1-step-ahead prediction in an ARIMAX model. My idea was to have 1 variable which is a proxy for to what extent people spread information about a virus. In this case, as the word spreads about Covid-19, people go online to search for information which registers in the index from Google Trends. This variable should be negatively correlated with movement patterns. And then another variable that captures the behavioral change. For this variable my query in Google Trends was ```snälltåget``` and ```sj``` which are the main operators of long distance trains in Sweden. The assumption here is that people on average go online and search for train tickets 1 week ahead of departure. This variable should be positively correlated with movement patterns. 
 
 ## R code
-```
+    
 library(tidyverse)
 library(gtrendsR) # for Google Trends API calls.
 library(fable) # fable is the tidyverse compatible replacement of the forecast package.
 library(feasts)
 library(tsibble)
 library(lubridate) # to help with some weekly time series strangeness.
-```
+    
 
 These were the inputs I went with for the Google Trends API call. 
 ```
