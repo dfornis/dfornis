@@ -1,5 +1,5 @@
 baseurl: "https://dfornis.github.io/dfornis/"
-publishDir: "docs"
+publishDir: "master"
 ignoreFiles: ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 languageCode: en-us
 theme: "hugo-theme-stack"
