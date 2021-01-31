@@ -299,8 +299,8 @@ df_se &lt;- gtrends_se %&gt;% # join data sets together
 df_se$retail &lt;- df_se$retail + 100 # for potential differencing and log transformations
 </code></pre><p>It seemed efficient to inspect the relationship between y, x1 and x2 while running regressions with and without lag at the same time. Inspecting the plots we see that there is a linear relationship between the variables. The narrative (virus search) variable does well with 1 lag, while the behavioral (train ticket search) does better without a lag. But this will depend a lot on the data you get from your queries, and on the reliability of Google&rsquo;s black box of magic. So we will stick with the theory in order to be able to predict 1-step-ahead. Lagged variables it is.</p>
 <p><figure style="flex-grow: 166; flex-basis: 400px">
-		<a href="/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot.png" data-size="3000x1800"><img src="/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot.png"
-				srcset="/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot_hu6e29b94eb638e79919907e9cb84f666e_376178_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot_hu6e29b94eb638e79919907e9cb84f666e_376178_1024x0_resize_box_2.png 1024w"
+		<a href="/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2.png" data-size="3000x1800"><img src="/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2.png"
+				srcset="/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2_hud61600addb25d8ce55434e991048429b_398110_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2_hud61600addb25d8ce55434e991048429b_398110_1024x0_resize_box_2.png 1024w"
 				width="3000"
 				height="1800"
 				loading="lazy"
