@@ -12,7 +12,7 @@
         <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
         
         <guid>https://dfornis.github.io/dfornis/p/predicting-movement-patterns-with-r/</guid>
-        <description>&lt;img src="https://dfornis.github.io/dfornis/p/predicting-movement-patterns-with-r/nicolas-perondi--Ho_obgLFs4-unsplash.jpg" alt="Featured image of post Predicting movement patterns with R" /&gt;&lt;hr&gt;
+        <description>&lt;img src="https://dfornis.github.io/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts.png" alt="Featured image of post Predicting movement patterns with R" /&gt;&lt;hr&gt;
 &lt;p&gt;There is an unmistakably niche but growing field in economics. It&amp;rsquo;s an approach that has been somewhat successfully advocated for by Robert Shiller and George Akerlof for some time now. It has featured as a theme in many works without being mentioned by name, such as in Galbraith&amp;rsquo;s classic &amp;ldquo;The Great Crash of 1929&amp;rdquo; from 1955. But tracing its origins takes us back as far as the 1930&amp;rsquo;s when Keynes coined the phrase Animal Spirits, meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics. The underlying assumption is that economic behavior, to some extent, is a function of the stories and ideas that people spread. When these stories reach a wide and receptive audience they turn economic behavior into heard behavior. I will try to put this theory to use in a very modest way, while I haphazardly grow my skills in R at the same time.&lt;/p&gt;
 &lt;h2 id=&#34;data&#34;&gt;Data&lt;/h2&gt;
 &lt;p&gt;The Google Mobility Report is one of the most interesting publicly available data sets on the internet. It was launched in the infancy of the Covid-19 pandemic to track changes in movement patterns all over the globe. It calculates changes from the same days baseline categorized by country, sub region and type of location/activity (retail and recreation, parks, homes etc). So what would be the purpose of predicting changing movement patterns? A sharp drop in movement can easily be categorized as a black swan event for affected parties, whether they are retail stores, public transport companies or government agencies. For public transport, even a 1-week-ahead forecast of a sharp drop or increase in commuting could be a great help (I would think).&lt;/p&gt;
@@ -214,11 +214,11 @@ arimax_plot &amp;lt;-
   scale_color_identity() 
   
 grid.arrange(tslm_plot, arimax_plot, nrow = 2)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;figure style=&#34;flex-grow: 106; flex-basis: 256px&#34;&gt;
-		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts.png&#34; data-size=&#34;1782x1668&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts.png&#34;
-				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts_hud3bda35f27209ac83bf0dea4dc6b4a45_350355_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts_hud3bda35f27209ac83bf0dea4dc6b4a45_350355_1024x0_resize_box_2.png 1024w&#34;
-				width=&#34;1782&#34;
-				height=&#34;1668&#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;figure style=&#34;flex-grow: 100; flex-basis: 240px&#34;&gt;
+		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts.png&#34; data-size=&#34;3000x3000&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts.png&#34;
+				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts_huc40fba21372cb792f3bb494eb617785c_621530_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts_huc40fba21372cb792f3bb494eb617785c_621530_1024x0_resize_box_2.png 1024w&#34;
+				width=&#34;3000&#34;
+				height=&#34;3000&#34;
 				loading=&#34;lazy&#34;
 				alt=&#34;tslm arimax forecast plot&#34;&gt;
 		&lt;/a&gt;
