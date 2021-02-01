@@ -2,7 +2,7 @@
 author = "Hugo Authors"
 title = "Predicting movement patterns with R"
 date = "2021-01-31"
-description = "One thing this pandemic has been a humbling reminder of is of our inability to make accurate predictions."
+description = "The pandemic has been a humbling reminder of our inability to make accurate predictions."
 tags = [
     "r",
     "narrative economics",
@@ -14,7 +14,7 @@ categories = [
 ]
 series = ["Themes Guide"]
 aliases = ["migrate-from-jekyl"]
-image = "tslm_arimax_forecasts.png"
+image = "nicolas-perondi--Ho_obgLFs4-unsplash.jpg"
 +++
 
 ---
