@@ -203,8 +203,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/dfornis/p/predicting-movement-patterns-with-r/">
-                <img src="/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts_huc40fba21372cb792f3bb494eb617785c_621530_800x0_resize_box_2.png"
-                        srcset="/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts_huc40fba21372cb792f3bb494eb617785c_621530_800x0_resize_box_2.png 800w, /dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts_huc40fba21372cb792f3bb494eb617785c_621530_1600x0_resize_box_2.png 1600w"
+                <img src="/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts_hu0fe7471231a66fd5429b5a3e1d0846d0_617345_800x0_resize_box_2.png"
+                        srcset="/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts_hu0fe7471231a66fd5429b5a3e1d0846d0_617345_800x0_resize_box_2.png 800w, /dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts_hu0fe7471231a66fd5429b5a3e1d0846d0_617345_1600x0_resize_box_2.png 1600w"
                         width="800" 
                         height="800" 
                         loading="lazy"
@@ -283,11 +283,11 @@ gtrends_beh &lt;- search_se_mean(query2)
 gtrends_se &lt;- gtrends_nar %&gt;%
   full_join(gtrends_beh, by = &quot;week&quot;, suffix = c(&quot;_nar&quot;, &quot;_beh&quot;))
 </code></pre><p>Let&rsquo;s plot them together.</p>
-<p><figure style="flex-grow: 166; flex-basis: 400px">
-		<a href="/dfornis/p/predicting-movement-patterns-with-r/hits_plot.png" data-size="3000x1800"><img src="/dfornis/p/predicting-movement-patterns-with-r/hits_plot.png"
-				srcset="/dfornis/p/predicting-movement-patterns-with-r/hits_plot_hu1238d386edb72f0e5a637086f045ade6_295200_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/hits_plot_hu1238d386edb72f0e5a637086f045ade6_295200_1024x0_resize_box_2.png 1024w"
+<p><figure style="flex-grow: 250; flex-basis: 600px">
+		<a href="/dfornis/p/predicting-movement-patterns-with-r/hits_plot.png" data-size="3000x1200"><img src="/dfornis/p/predicting-movement-patterns-with-r/hits_plot.png"
+				srcset="/dfornis/p/predicting-movement-patterns-with-r/hits_plot_hu8a9dc56aae27cc461731f2e0e0e26a6d_220425_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/hits_plot_hu8a9dc56aae27cc461731f2e0e0e26a6d_220425_1024x0_resize_box_2.png 1024w"
 				width="3000"
-				height="1800"
+				height="1200"
 				loading="lazy"
 				alt="hits plot">
 		</a>
@@ -317,11 +317,11 @@ df_se &lt;- gtrends_se %&gt;% # join data sets together
 
 df_se$retail &lt;- df_se$retail + 100 # for potential differencing and log transformations
 </code></pre><p>I inspected the relationship between y, x1 and x2 while running regressions with and without lag at the same time. Inspecting the plots we see that there is a linear relationship between the variables. The narrative (virus search) variable does well with 1 lag, while the behavioral (train ticket search) does better without a lag. But this will depend a lot on the data you get from your queries, and on the reliability of Google&rsquo;s black box of magic. So we will stick with the theory in order to be able to predict 1-step-ahead. Lagged variables it is.</p>
-<p><figure style="flex-grow: 166; flex-basis: 400px">
-		<a href="/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2.png" data-size="3000x1800"><img src="/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2.png"
-				srcset="/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2_hud61600addb25d8ce55434e991048429b_398110_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2_hud61600addb25d8ce55434e991048429b_398110_1024x0_resize_box_2.png 1024w"
+<p><figure style="flex-grow: 250; flex-basis: 600px">
+		<a href="/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2.png" data-size="3000x1200"><img src="/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2.png"
+				srcset="/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2_hu8a9dc56aae27cc461731f2e0e0e26a6d_220425_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2_hu8a9dc56aae27cc461731f2e0e0e26a6d_220425_1024x0_resize_box_2.png 1024w"
 				width="3000"
-				height="1800"
+				height="1200"
 				loading="lazy"
 				alt="hits plot">
 		</a>
@@ -445,7 +445,7 @@ arimax_plot &lt;-
 grid.arrange(tslm_plot, arimax_plot, nrow = 2)
 </code></pre><p><figure style="flex-grow: 100; flex-basis: 240px">
 		<a href="/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts.png" data-size="3000x3000"><img src="/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts.png"
-				srcset="/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts_huc40fba21372cb792f3bb494eb617785c_621530_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts_huc40fba21372cb792f3bb494eb617785c_621530_1024x0_resize_box_2.png 1024w"
+				srcset="/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts_hu0fe7471231a66fd5429b5a3e1d0846d0_617345_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts_hu0fe7471231a66fd5429b5a3e1d0846d0_617345_1024x0_resize_box_2.png 1024w"
 				width="3000"
 				height="3000"
 				loading="lazy"
@@ -509,11 +509,11 @@ arimax_direct_plot &lt;-
   )
 
 grid.arrange(tslm_plot, arimax_plot, arimax_direct_plot,  nrow = 3)
-</code></pre><p><figure style="flex-grow: 106; flex-basis: 256px">
-		<a href="/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_direct_forecasts.png" data-size="1778x1666"><img src="/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_direct_forecasts.png"
-				srcset="/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_direct_forecasts_hub0022d451022b9d5bb4c4ddca1dfdd21_346921_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_direct_forecasts_hub0022d451022b9d5bb4c4ddca1dfdd21_346921_1024x0_resize_box_2.png 1024w"
-				width="1778"
-				height="1666"
+</code></pre><p><figure style="flex-grow: 100; flex-basis: 240px">
+		<a href="/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_direct_forecasts.png" data-size="3000x3000"><img src="/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_direct_forecasts.png"
+				srcset="/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_direct_forecasts_hu0fe7471231a66fd5429b5a3e1d0846d0_694508_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_direct_forecasts_hu0fe7471231a66fd5429b5a3e1d0846d0_694508_1024x0_resize_box_2.png 1024w"
+				width="3000"
+				height="3000"
 				loading="lazy"
 				alt="tslm arimax direct forecast plot">
 		</a>
