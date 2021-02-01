@@ -2,7 +2,7 @@
 author = "Hugo Authors"
 title = "Predicting movement patterns with R"
 date = "2021-01-31"
-description = "The pandemic has been a humbling reminder of our inability to make accurate predictions."
+description = "The pandemic has been a humbling reminder of our inability to make accurate predictions. So let's try something new."
 tags = [
     "r",
     "narrative economics",
@@ -19,9 +19,9 @@ image = "nicolas-perondi--Ho_obgLFs4-unsplash.jpg"
 
 ---
 
-One thing this pandemic has been a humbling reminder of is of our inability to make accurate predictions. Economic forecasts have proven to be as unreliable as predictions on infection rates. Part of the difficulty lies in economics being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. In these cases, complexity in modeling doesn't necessarily help. My idea for an improvement is to circumnavigate the pandemic predictions in order to make 1-week-ahead forecasts of movement patterns with a novel data source and a simple model. The theory has been advocated for as "narrative economics" by Robert Shiller and George Akerlof for some time now. But it has featured as a theme in many works without being mentioned by name, such as in Galbraith's "The Great Crash of 1929" from 1955. Tracing its origins takes us back as far as the 1930's when Keynes coined the phrase Animal spirits, meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics. The underlying assumption is that economic outcomes, to some extent, is a function of the stories and ideas people spread. When these stories reach a wide and receptive audience they turn economic behavior into heard behavior.
+Economic forecasts have proven to be as unreliable as predictions on infection rates. Part of the difficulty lies in economics being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. In these cases, complexity in modeling doesn't necessarily help. My idea is to circumnavigate the pandemic predictions in order to make 1-week-ahead forecasts of movement patterns with a novel data source and a simple model. The underlying theory has been advocated for as "narrative economics" by Robert Shiller and George Akerlof for some time now. But it has featured as a theme in many works without being mentioned by name, such as in Galbraith's "The Great Crash of 1929" from 1955. Tracing its origins takes us back as far as the 1930's when Keynes coined the phrase "animal spirits", meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics. The underlying assumption is that economic outcomes, to some extent, is a function of the stories and ideas people spread. When these stories reach a wide and receptive audience they turn economic behavior into heard behavior.
 
-So what would be the utility of predicting changes in movement patterns? A sharp drop in movement can easily be categorized as a black swan event for affected parties, whether they are retail stores, public transport companies or government agencies. For public transport, even a 1-week-ahead forecast of a sharp drop or increase in commuting could be useful (I would think). 
+So what would be the utility of predicting changes in movement patterns? A sharp drop in movement can be categorized as a black swan event for affected parties, whether they are retail stores, public transport companies or government agencies. For public transport, even a 1-week-ahead forecast of a sharp drop or increase in commuting could be useful (I would think). 
 
 ## Data
 To capture the narrative component I turned to tried and true Google Trends. It's convenient, free and there's a package for R called ```gtrendsR``` which does the API call for you so you don't have to cURL it. The data however is a bit wonky, in the sense that Google provides the amount of hits as an index which is calculated in a black box of unpredictable magic, as noted by Shiller in his 2019 book Narrative Economics (but not in those words).
@@ -78,7 +78,7 @@ gtrends_se <- gtrends_nar %>%
 
 Let's plot them together. 
 
-![hits plot](hits_plot.jpeg)
+![](hits_plot.png)
 
 Hits for train travel drops sharply, as one would expect, and then rebounds over the summer. Hits for the virus jumps up but starts dropping surprisingly fast. Lower levels over the summer is in line with lower spread. Come autumn and the index jumps up again. This inverse relationship between narrative and behavioral predictors make intuitive sense and looks promising.
 
@@ -109,7 +109,7 @@ df_se$retail <- df_se$retail + 100 # for potential differencing and log transfor
 
 I inspected the relationship between y, x1 and x2 while running regressions with and without lag at the same time. Inspecting the plots we see that there is a linear relationship between the variables. The narrative (virus search) variable does well with 1 lag, while the behavioral (train ticket search) does better without a lag. But this will depend a lot on the data you get from your queries, and on the reliability of Google's black box of magic. So we will stick with the theory in order to be able to predict 1-step-ahead. Lagged variables it is.
 
-![hits plot](hits_regressions_plot2.png)
+![](hits_regressions_plot2.png)
 
 Preparing the data for model fitting.
 ```
@@ -133,7 +133,7 @@ tsibble_se_val <- tsibble_se %>%
 
 Let's compute both the TSLM and the ARIMAX (1,1,0) model to see if it makes sense to model the residuals as an ARIMA-process.
 The equation for the ARIMAX model is
-![equation1](equation1.png) where ![equation2](equation2.png) is the ARIMA error term.
+![](equation1.png) where ![](equation2.png) is the ARIMA error term.
 Prime notations for differencing are missing here.
 
 ```
@@ -157,11 +157,11 @@ fit_tslm %>% gg_tsresiduals()
 ```
 
 The patterns at index > 18 or so don't look like a white noise-process to me. This shows up in the ACF plot as well, even though the spikes aren't significant. This will depend a lot on your data, so I will try fitting the ARIMAX model.
-![tslm residual plot](tslm_residuals_plot.png)
+![TSLM residuals](tslm_residuals_plot.png)
 
 Let's evaluate the same set of plots for ARIMAX. This looks more like a stationary white noise process. No significant spikes.
 
-![arimax residual plot](arimax_residuals_plot.png)
+![ARIMAX residuals](arimax_residuals_plot.png)
 
 For plotting models and forecasts produced with Fable, I went with this:
 ```
@@ -193,7 +193,7 @@ arimax_plot <-
   
 grid.arrange(tslm_plot, arimax_plot, nrow = 2)
 ```
-![tslm arimax forecast plot](tslm_arimax_forecasts.png)
+![](tslm_arimax_forecasts.png)
 
 I'm a bit surprised that the fitted TSLM model performed better than ARIMAX. I think this might vary a lot depending on the data you end up with. Both models do a decent job on the training data. But they both do a poor job at forecasting the sharp drop in movement that occurs at the end of the time series. I should point out that the ARIMAX model is forecasting the AR(1)-process recursively here, which means that there is a mean reversion where it looses its effect over time. 
 
@@ -254,7 +254,7 @@ arimax_direct_plot <-
 grid.arrange(tslm_plot, arimax_plot, arimax_direct_plot,  nrow = 3)
 ```
 
-![tslm arimax direct forecast plot](tslm_arimax_direct_forecasts.png)
+![](tslm_arimax_direct_forecasts.png)
 
 It seems like the direct 1-step-ahead ARIMAX forecast does a little better than both the TSLM and the ARIMAX recursive forecast at self-correcting for the last drop off in movement. But still, it essentially fails to predict that last drop 1 week ahead. Leaving that aside, I'm a bit surprised at the level of predictive power in the model considering its simplicity.
 

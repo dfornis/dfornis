@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en-us">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='The pandemic has been a humbling reminder of our inability to make accurate predictions.'><title>Predicting movement patterns with R</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='The pandemic has been a humbling reminder of our inability to make accurate predictions. So let&#39;s try something new.'><title>Predicting movement patterns with R</title>
 
 <link rel='canonical' href='https://dfornis.github.io/dfornis/p/predicting-movement-patterns-with-r/'>
 
 <link rel="stylesheet" href="/dfornis/scss/style.min.css"><meta property='og:title' content='Predicting movement patterns with R'>
-<meta property='og:description' content='The pandemic has been a humbling reminder of our inability to make accurate predictions.'>
+<meta property='og:description' content='The pandemic has been a humbling reminder of our inability to make accurate predictions. So let&#39;s try something new.'>
 <meta property='og:url' content='https://dfornis.github.io/dfornis/p/predicting-movement-patterns-with-r/'>
 <meta property='og:site_name' content='David Fornborg'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='r' /><meta property='article:tag' content='narrative economics' /><meta property='article:tag' content='prediction' /><meta property='article:tag' content='gtrends' /><meta property='article:published_time' content='2021-01-31T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2021-01-31T00:00:00&#43;00:00'/><meta property='og:image' content='https://dfornis.github.io/dfornis/p/predicting-movement-patterns-with-r/nicolas-perondi--Ho_obgLFs4-unsplash.jpg' />
 <meta name="twitter:title" content="Predicting movement patterns with R">
-<meta name="twitter:description" content="The pandemic has been a humbling reminder of our inability to make accurate predictions."><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="The pandemic has been a humbling reminder of our inability to make accurate predictions. So let&#39;s try something new."><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://dfornis.github.io/dfornis/p/predicting-movement-patterns-with-r/nicolas-perondi--Ho_obgLFs4-unsplash.jpg' /><style>
 		
     :root {
@@ -223,7 +223,7 @@
 
     
     <h3 class="article-subtitle">
-        The pandemic has been a humbling reminder of our inability to make accurate predictions.
+        The pandemic has been a humbling reminder of our inability to make accurate predictions. So let&#39;s try something new.
     </h3>
     <footer class="article-time">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -240,8 +240,8 @@
 
     <section class="article-content">
     <hr>
-<p>One thing this pandemic has been a humbling reminder of is of our inability to make accurate predictions. Economic forecasts have proven to be as unreliable as predictions on infection rates. Part of the difficulty lies in economics being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. In these cases, complexity in modeling doesn&rsquo;t necessarily help. My idea for an improvement is to circumnavigate the pandemic predictions in order to make 1-week-ahead forecasts of movement patterns with a novel data source and a simple model. The theory has been advocated for as &ldquo;narrative economics&rdquo; by Robert Shiller and George Akerlof for some time now. But it has featured as a theme in many works without being mentioned by name, such as in Galbraith&rsquo;s &ldquo;The Great Crash of 1929&rdquo; from 1955. Tracing its origins takes us back as far as the 1930&rsquo;s when Keynes coined the phrase Animal spirits, meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics. The underlying assumption is that economic outcomes, to some extent, is a function of the stories and ideas people spread. When these stories reach a wide and receptive audience they turn economic behavior into heard behavior.</p>
-<p>So what would be the utility of predicting changes in movement patterns? A sharp drop in movement can easily be categorized as a black swan event for affected parties, whether they are retail stores, public transport companies or government agencies. For public transport, even a 1-week-ahead forecast of a sharp drop or increase in commuting could be useful (I would think).</p>
+<p>Economic forecasts have proven to be as unreliable as predictions on infection rates. Part of the difficulty lies in economics being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. In these cases, complexity in modeling doesn&rsquo;t necessarily help. My idea is to circumnavigate the pandemic predictions in order to make 1-week-ahead forecasts of movement patterns with a novel data source and a simple model. The underlying theory has been advocated for as &ldquo;narrative economics&rdquo; by Robert Shiller and George Akerlof for some time now. But it has featured as a theme in many works without being mentioned by name, such as in Galbraith&rsquo;s &ldquo;The Great Crash of 1929&rdquo; from 1955. Tracing its origins takes us back as far as the 1930&rsquo;s when Keynes coined the phrase &ldquo;animal spirits&rdquo;, meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics. The underlying assumption is that economic outcomes, to some extent, is a function of the stories and ideas people spread. When these stories reach a wide and receptive audience they turn economic behavior into heard behavior.</p>
+<p>So what would be the utility of predicting changes in movement patterns? A sharp drop in movement can be categorized as a black swan event for affected parties, whether they are retail stores, public transport companies or government agencies. For public transport, even a 1-week-ahead forecast of a sharp drop or increase in commuting could be useful (I would think).</p>
 <h2 id="data">Data</h2>
 <p>To capture the narrative component I turned to tried and true Google Trends. It&rsquo;s convenient, free and there&rsquo;s a package for R called <code>gtrendsR</code> which does the API call for you so you don&rsquo;t have to cURL it. The data however is a bit wonky, in the sense that Google provides the amount of hits as an index which is calculated in a black box of unpredictable magic, as noted by Shiller in his 2019 book Narrative Economics (but not in those words).</p>
 <p>For data on movement patterns I used Google Mobility Report, one of the most interesting publicly available data sets on the internet. It was launched in the infancy of the Covid-19 pandemic to track changes in movement patterns all over the globe. It calculates changes from the same days baseline categorized by country, sub region and type of location/activity (retail and recreation, parks, homes etc).</p>
@@ -284,15 +284,13 @@ gtrends_se &lt;- gtrends_nar %&gt;%
   full_join(gtrends_beh, by = &quot;week&quot;, suffix = c(&quot;_nar&quot;, &quot;_beh&quot;))
 </code></pre><p>Let&rsquo;s plot them together.</p>
 <p><figure style="flex-grow: 200; flex-basis: 480px">
-		<a href="/dfornis/p/predicting-movement-patterns-with-r/hits_plot.jpeg" data-size="1800x900"><img src="/dfornis/p/predicting-movement-patterns-with-r/hits_plot.jpeg"
-				srcset="/dfornis/p/predicting-movement-patterns-with-r/hits_plot_hud6a767dbdddc432ae6a3425963d41629_94405_480x0_resize_q75_box.jpeg 480w, /dfornis/p/predicting-movement-patterns-with-r/hits_plot_hud6a767dbdddc432ae6a3425963d41629_94405_1024x0_resize_q75_box.jpeg 1024w"
+		<a href="/dfornis/p/predicting-movement-patterns-with-r/hits_plot.png" data-size="1800x900"><img src="/dfornis/p/predicting-movement-patterns-with-r/hits_plot.png"
+				srcset="/dfornis/p/predicting-movement-patterns-with-r/hits_plot_hu5a943b98a0f0edf4753164ba2038e85d_150578_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/hits_plot_hu5a943b98a0f0edf4753164ba2038e85d_150578_1024x0_resize_box_2.png 1024w"
 				width="1800"
 				height="900"
 				loading="lazy"
-				alt="hits plot">
+				>
 		</a>
-		
-		<figcaption>hits plot</figcaption>
 		
 	</figure></p>
 <p>Hits for train travel drops sharply, as one would expect, and then rebounds over the summer. Hits for the virus jumps up but starts dropping surprisingly fast. Lower levels over the summer is in line with lower spread. Come autumn and the index jumps up again. This inverse relationship between narrative and behavioral predictors make intuitive sense and looks promising.</p>
@@ -319,14 +317,12 @@ df_se$retail &lt;- df_se$retail + 100 # for potential differencing and log trans
 </code></pre><p>I inspected the relationship between y, x1 and x2 while running regressions with and without lag at the same time. Inspecting the plots we see that there is a linear relationship between the variables. The narrative (virus search) variable does well with 1 lag, while the behavioral (train ticket search) does better without a lag. But this will depend a lot on the data you get from your queries, and on the reliability of Google&rsquo;s black box of magic. So we will stick with the theory in order to be able to predict 1-step-ahead. Lagged variables it is.</p>
 <p><figure style="flex-grow: 155; flex-basis: 373px">
 		<a href="/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2.png" data-size="2100x1350"><img src="/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2.png"
-				srcset="/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2_huade6df871422731f5da8133b13afb2cc_315775_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2_huade6df871422731f5da8133b13afb2cc_315775_1024x0_resize_box_2.png 1024w"
+				srcset="/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2_hua328f663b5bd7ed38e00c602276479d8_332050_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2_hua328f663b5bd7ed38e00c602276479d8_332050_1024x0_resize_box_2.png 1024w"
 				width="2100"
 				height="1350"
 				loading="lazy"
-				alt="hits plot">
+				>
 		</a>
-		
-		<figcaption>hits plot</figcaption>
 		
 	</figure></p>
 <p>Preparing the data for model fitting.</p>
@@ -354,10 +350,8 @@ The equation for the ARIMAX model is
 				width="218"
 				height="32"
 				loading="lazy"
-				alt="equation1">
+				>
 		</a>
-		
-		<figcaption>equation1</figcaption>
 		
 	</figure> where <figure style="flex-grow: 468; flex-basis: 1125px">
 		<a href="/dfornis/p/predicting-movement-patterns-with-r/equation2.png" data-size="136x29"><img src="/dfornis/p/predicting-movement-patterns-with-r/equation2.png"
@@ -365,10 +359,8 @@ The equation for the ARIMAX model is
 				width="136"
 				height="29"
 				loading="lazy"
-				alt="equation2">
+				>
 		</a>
-		
-		<figcaption>equation2</figcaption>
 		
 	</figure> is the ARIMA error term.
 Prime notations for differencing are missing here.</p>
@@ -396,10 +388,10 @@ fit_tslm %&gt;% gg_tsresiduals()
 				width="1916"
 				height="1790"
 				loading="lazy"
-				alt="tslm residual plot">
+				alt="TSLM residuals">
 		</a>
 		
-		<figcaption>tslm residual plot</figcaption>
+		<figcaption>TSLM residuals</figcaption>
 		
 	</figure></p>
 <p>Let&rsquo;s evaluate the same set of plots for ARIMAX. This looks more like a stationary white noise process. No significant spikes.</p>
@@ -409,10 +401,10 @@ fit_tslm %&gt;% gg_tsresiduals()
 				width="904"
 				height="733"
 				loading="lazy"
-				alt="arimax residual plot">
+				alt="ARIMAX residuals">
 		</a>
 		
-		<figcaption>arimax residual plot</figcaption>
+		<figcaption>ARIMAX residuals</figcaption>
 		
 	</figure></p>
 <p>For plotting models and forecasts produced with Fable, I went with this:</p>
@@ -445,14 +437,12 @@ arimax_plot &lt;-
 grid.arrange(tslm_plot, arimax_plot, nrow = 2)
 </code></pre><p><figure style="flex-grow: 100; flex-basis: 240px">
 		<a href="/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts.png" data-size="2100x2100"><img src="/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts.png"
-				srcset="/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts_hu38f55e46dfe77efd4255cd212b440f50_384656_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts_hu38f55e46dfe77efd4255cd212b440f50_384656_1024x0_resize_box_2.png 1024w"
+				srcset="/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts_huca7767ee6b312fd6039ec1285ba8e5e8_381608_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts_huca7767ee6b312fd6039ec1285ba8e5e8_381608_1024x0_resize_box_2.png 1024w"
 				width="2100"
 				height="2100"
 				loading="lazy"
-				alt="tslm arimax forecast plot">
+				>
 		</a>
-		
-		<figcaption>tslm arimax forecast plot</figcaption>
 		
 	</figure></p>
 <p>I&rsquo;m a bit surprised that the fitted TSLM model performed better than ARIMAX. I think this might vary a lot depending on the data you end up with. Both models do a decent job on the training data. But they both do a poor job at forecasting the sharp drop in movement that occurs at the end of the time series. I should point out that the ARIMAX model is forecasting the AR(1)-process recursively here, which means that there is a mean reversion where it looses its effect over time.</p>
@@ -511,14 +501,12 @@ arimax_direct_plot &lt;-
 grid.arrange(tslm_plot, arimax_plot, arimax_direct_plot,  nrow = 3)
 </code></pre><p><figure style="flex-grow: 100; flex-basis: 240px">
 		<a href="/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_direct_forecasts.png" data-size="2100x2100"><img src="/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_direct_forecasts.png"
-				srcset="/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_direct_forecasts_hu38f55e46dfe77efd4255cd212b440f50_435837_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_direct_forecasts_hu38f55e46dfe77efd4255cd212b440f50_435837_1024x0_resize_box_2.png 1024w"
+				srcset="/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_direct_forecasts_huca7767ee6b312fd6039ec1285ba8e5e8_393643_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_direct_forecasts_huca7767ee6b312fd6039ec1285ba8e5e8_393643_1024x0_resize_box_2.png 1024w"
 				width="2100"
 				height="2100"
 				loading="lazy"
-				alt="tslm arimax direct forecast plot">
+				>
 		</a>
-		
-		<figcaption>tslm arimax direct forecast plot</figcaption>
 		
 	</figure></p>
 <p>It seems like the direct 1-step-ahead ARIMAX forecast does a little better than both the TSLM and the ARIMAX recursive forecast at self-correcting for the last drop off in movement. But still, it essentially fails to predict that last drop 1 week ahead. Leaving that aside, I&rsquo;m a bit surprised at the level of predictive power in the model considering its simplicity.</p>
