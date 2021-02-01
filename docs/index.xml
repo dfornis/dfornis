@@ -286,6 +286,15 @@ grid.arrange(tslm_plot, arimax_plot, arimax_direct_plot,  nrow = 3)
 &lt;p&gt;All in all, this was a fun experiment.&lt;/p&gt;
 </description>
         </item>
+        <item>
+        <title>About me</title>
+        <link>https://dfornis.github.io/dfornis/p/about-me/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://dfornis.github.io/dfornis/p/about-me/</guid>
+        <description>&lt;p&gt;I&amp;rsquo;m a master student at the department of Economic History and Global Political Economy at Stockholm University. My areas of focus are economic crises, globalization and trust. I&amp;rsquo;ve benefited a lot from  others sharing their ideas and work flow in R and quantitative methods. So I thought I might share my experiences as well.&lt;/p&gt;
+</description>
+        </item>
         
     </channel>
 </rss>

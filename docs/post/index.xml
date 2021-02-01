@@ -16,5 +16,14 @@
       <description>Economic forecasts have proven to be as unreliable as predictions on infection rates. Part of the difficulty lies in economics being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. In these cases, complexity in modeling doesn&amp;rsquo;t necessarily help. My idea is to circumnavigate the pandemic predictions in order to make 1-week-ahead forecasts of movement patterns with a novel data source and a simple model.</description>
     </item>
     
+    <item>
+      <title>About me</title>
+      <link>https://dfornis.github.io/dfornis/p/about-me/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dfornis.github.io/dfornis/p/about-me/</guid>
+      <description>I&amp;rsquo;m a master student at the department of Economic History and Global Political Economy at Stockholm University. My areas of focus are economic crises, globalization and trust. I&amp;rsquo;ve benefited a lot from others sharing their ideas and work flow in R and quantitative methods. So I thought I might share my experiences as well.</description>
+    </item>
+    
   </channel>
 </rss>
