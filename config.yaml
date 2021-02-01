@@ -34,7 +34,7 @@ params:
 
     sidebar:
         emoji: 🍥
-        subtitle: 
+        subtitle: "In retrospect, it was inevitable."
         avatar:
             local: true
             src: img/avatar.png
