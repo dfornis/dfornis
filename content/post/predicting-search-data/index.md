@@ -78,7 +78,7 @@ gtrends_se <- gtrends_nar %>%
 
 Let's plot them together. 
 
-![hits plot](hits_plot.png)
+![hits plot](hits_plot.jpeg)
 
 Hits for train travel drops sharply, as one would expect, and then rebounds over the summer. Hits for the virus jumps up but starts dropping surprisingly fast. Lower levels over the summer is in line with lower spread. Come autumn and the index jumps up again. This inverse relationship between narrative and behavioral predictors make intuitive sense and looks promising.
 
