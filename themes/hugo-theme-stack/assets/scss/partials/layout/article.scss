@@ -240,10 +240,11 @@
 
     code {
         color: var(--code-text-color);
-        background-color: var(--code-background-color);
+        background-color: #303030;
         padding: 2px 4px;
         border-radius: var(--tag-border-radius);
         font-family: var(--code-font-family);
+        font-size: 14px;
         word-wrap: break-word;
     }
 
@@ -266,15 +267,16 @@
     pre {
         overflow-x: auto;
         display: block;
-        background-color: var(--pre-background-color);
+        background-color: #303030;
         color: var(--pre-text-color);
         font-family: var(--code-font-family);
+        font-size: 13px;
         line-height: 1.428571429;
         word-break: break-all;
         padding: var(--card-padding);
 
         code {
-            color: unset;
+            color: #c5d0d4;
             border: none;
             background: none;
             padding: 0;
