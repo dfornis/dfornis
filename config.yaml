@@ -82,10 +82,10 @@ params:
 
     colorScheme:
         # Display toggle
-        toggle: true
+        toggle: false
 
         # Available values: auto, light, dark
-        default: auto
+        default: dark
 
     imageProcessing:
         cover:
@@ -95,12 +95,6 @@ params:
 
 menu:
     main:
-        - identifier: home
-          name: Home
-          url: /
-          weight: -100
-          pre: home
-
         - identifier: about
           name: About
           url: about
