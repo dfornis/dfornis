@@ -2,7 +2,7 @@
 author = "Hugo Authors"
 title = "Predicting movement patterns with R"
 date = "2021-01-31"
-description = "Sample article showcasing basic Markdown syntax and formatting for HTML elements."
+description = "One thing this pandemic has been a humbling reminder of is of our inability to make accurate predictions."
 tags = [
     "r",
     "narrative economics",
@@ -19,7 +19,7 @@ image = "tslm_arimax_forecasts.png"
 
 ---
 
-There is an unmistakably niche but growing field in economics. It's an approach that has been somewhat successfully advocated for by Robert Shiller and George Akerlof for some time now. It has featured as a theme in many works without being mentioned by name, such as in Galbraith's classic "The Great Crash of 1929" from 1955. But tracing its origins takes us back as far as the 1930's when Keynes coined the phrase Animal Spirits, meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics. The underlying assumption is that economic behavior, to some extent, is a function of the stories and ideas that people spread. When these stories reach a wide and receptive audience they turn economic behavior into heard behavior. I will try to put this theory to use in a very modest way, while I haphazardly grow my skills in R at the same time.
+One thing this pandemic has been a humbling reminder of is of our inability to make accurate predictions. Economic forecasts have proven to be as unreliable as predictions on infection rates. Part of the difficulty lies in economics being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. In these cases, complexity in modeling doesn't necessarily help. My idea for an improvement is to circumnavigate the pandemic predictions in order to make 1-week-ahead forecasts of movement patterns with a novel data source and a simple model. The theory has been advocated for as "narrative economics" by Robert Shiller and George Akerlof for some time now. But it has featured as a theme in many works without being mentioned by name, such as in Galbraith's "The Great Crash of 1929" from 1955. Tracing its origins takes us back as far as the 1930's when Keynes coined the phrase Animal Spirits, meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics. The underlying assumption is that economic outcomes, to some extent, is a function of the stories and ideas people spread. When these stories reach a wide and receptive audience they turn economic behavior into heard behavior.
 
 ## Data
 The Google Mobility Report is one of the most interesting publicly available data sets on the internet. It was launched in the infancy of the Covid-19 pandemic to track changes in movement patterns all over the globe. It calculates changes from the same days baseline categorized by country, sub region and type of location/activity (retail and recreation, parks, homes etc). So what would be the purpose of predicting changing movement patterns? A sharp drop in movement can easily be categorized as a black swan event for affected parties, whether they are retail stores, public transport companies or government agencies. For public transport, even a 1-week-ahead forecast of a sharp drop or increase in commuting could be a great help (I would think). 
@@ -32,14 +32,14 @@ One of the problems with a simple linear regression model is that time series da
 The assumption here is that narratives are spread at time t and have an effect on economic behavior at time t+1. Having input variables lagged at t+1 allows us to use external regressors as fresh input for 1-step-ahead prediction in an ARIMAX model. My idea was to have 1 variable which is a proxy for to what extent people spread information about a virus. In this case, as the word spreads about Covid-19, people go online to search for information which registers in the index from Google Trends. This variable should be negatively correlated with movement patterns. And then another variable that captures the behavioral change. For this variable my query in Google Trends was ```snälltåget``` and ```sj``` which are the main operators of long distance trains in Sweden. The assumption here is that people on average go online and search for train tickets 1 week ahead of departure. This variable should be positively correlated with movement patterns. 
 
 ## R code
-    
+```
 library(tidyverse)
 library(gtrendsR) # for Google Trends API calls.
 library(fable) # fable is the tidyverse compatible replacement of the forecast package.
 library(feasts)
 library(tsibble)
 library(lubridate) # to help with some weekly time series strangeness.
-    
+```
 
 These were the inputs I went with for the Google Trends API call. 
 ```
