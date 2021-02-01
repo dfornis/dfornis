@@ -58,7 +58,7 @@ gtrends_se &amp;lt;- gtrends_nar %&amp;gt;%
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Let&amp;rsquo;s plot them together.&lt;/p&gt;
 &lt;p&gt;&lt;figure style=&#34;flex-grow: 250; flex-basis: 600px&#34;&gt;
 		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/hits_plot.png&#34; data-size=&#34;3000x1200&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/hits_plot.png&#34;
-				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/hits_plot_hu8a9dc56aae27cc461731f2e0e0e26a6d_220425_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/hits_plot_hu8a9dc56aae27cc461731f2e0e0e26a6d_220425_1024x0_resize_box_2.png 1024w&#34;
+				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/hits_plot_hu463b7258a582487e672e0903d9c94bb8_216028_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/hits_plot_hu463b7258a582487e672e0903d9c94bb8_216028_1024x0_resize_box_2.png 1024w&#34;
 				width=&#34;3000&#34;
 				height=&#34;1200&#34;
 				loading=&#34;lazy&#34;
@@ -92,7 +92,7 @@ df_se$retail &amp;lt;- df_se$retail + 100 # for potential differencing and log t
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I inspected the relationship between y, x1 and x2 while running regressions with and without lag at the same time. Inspecting the plots we see that there is a linear relationship between the variables. The narrative (virus search) variable does well with 1 lag, while the behavioral (train ticket search) does better without a lag. But this will depend a lot on the data you get from your queries, and on the reliability of Google&amp;rsquo;s black box of magic. So we will stick with the theory in order to be able to predict 1-step-ahead. Lagged variables it is.&lt;/p&gt;
 &lt;p&gt;&lt;figure style=&#34;flex-grow: 166; flex-basis: 400px&#34;&gt;
 		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2.png&#34; data-size=&#34;3000x1800&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2.png&#34;
-				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2_huc7a2e44d716908a7efb44d6f77db24c8_428998_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2_huc7a2e44d716908a7efb44d6f77db24c8_428998_1024x0_resize_box_2.png 1024w&#34;
+				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2_hu2f603ba9d7f1fcad2833bf0032d358a0_423214_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2_hu2f603ba9d7f1fcad2833bf0032d358a0_423214_1024x0_resize_box_2.png 1024w&#34;
 				width=&#34;3000&#34;
 				height=&#34;1800&#34;
 				loading=&#34;lazy&#34;
@@ -218,7 +218,7 @@ arimax_plot &amp;lt;-
 grid.arrange(tslm_plot, arimax_plot, nrow = 2)
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;figure style=&#34;flex-grow: 100; flex-basis: 240px&#34;&gt;
 		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts.png&#34; data-size=&#34;3000x3000&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts.png&#34;
-				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts_hu0fe7471231a66fd5429b5a3e1d0846d0_617345_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts_hu0fe7471231a66fd5429b5a3e1d0846d0_617345_1024x0_resize_box_2.png 1024w&#34;
+				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts_hu64678723883ad8745478b13c79050bd9_626040_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_forecasts_hu64678723883ad8745478b13c79050bd9_626040_1024x0_resize_box_2.png 1024w&#34;
 				width=&#34;3000&#34;
 				height=&#34;3000&#34;
 				loading=&#34;lazy&#34;
@@ -284,7 +284,7 @@ arimax_direct_plot &amp;lt;-
 grid.arrange(tslm_plot, arimax_plot, arimax_direct_plot,  nrow = 3)
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;figure style=&#34;flex-grow: 100; flex-basis: 240px&#34;&gt;
 		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_direct_forecasts.png&#34; data-size=&#34;3000x3000&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_direct_forecasts.png&#34;
-				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_direct_forecasts_hu0fe7471231a66fd5429b5a3e1d0846d0_694508_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_direct_forecasts_hu0fe7471231a66fd5429b5a3e1d0846d0_694508_1024x0_resize_box_2.png 1024w&#34;
+				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_direct_forecasts_hu64678723883ad8745478b13c79050bd9_716518_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_arimax_direct_forecasts_hu64678723883ad8745478b13c79050bd9_716518_1024x0_resize_box_2.png 1024w&#34;
 				width=&#34;3000&#34;
 				height=&#34;3000&#34;
 				loading=&#34;lazy&#34;
