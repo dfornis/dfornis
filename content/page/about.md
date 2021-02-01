@@ -7,4 +7,4 @@ author = ""
 license = "CC BY-NC-ND"
 lastmod = ""
 +++
-I'm a master student at the department of Economic History and Global Political Economy at Stockholm University. My main areas of focus are technology, knowledge, globalization and trust.
+I'm a master student at the department of Economic History and Global Political Economy at Stockholm University. My main areas of interest are information technology, transparency, globalization and trust.
