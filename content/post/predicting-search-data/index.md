@@ -107,11 +107,11 @@ df_se <- gtrends_se %>% # join data sets together
 df_se$retail <- df_se$retail + 100 # for potential differencing and log transformations
 ``` 
 
+Regressions and scatter plots:
+![](hits_regressions_plot2.png)
 I inspected the relationship between y, x1 and x2 while running regressions with and without lag at the same time. Inspecting the plots we see that there is a linear relationship between the variables. The narrative (virus search) variable does well with 1 lag, while the behavioral (train ticket search) does better without a lag. But this will depend a lot on the data you get from your queries, and on the reliability of Google's black box of magic. So we will stick with the theory in order to be able to predict 1-step-ahead. Lagged variables it is.
 
-![](hits_regressions_plot2.png)
-
-Preparing the data for model fitting.
+Next, we'll prepare the data for model fitting.
 ```
 val_weeks <- 15 #15 weeks for validating the models
 

@@ -273,8 +273,8 @@ df_se &lt;- gtrends_se %&gt;% # join data sets together
   left_join(gmr_se)
 
 df_se$retail &lt;- df_se$retail + 100 # for potential differencing and log transformations
-</code></pre><p>I inspected the relationship between y, x1 and x2 while running regressions with and without lag at the same time. Inspecting the plots we see that there is a linear relationship between the variables. The narrative (virus search) variable does well with 1 lag, while the behavioral (train ticket search) does better without a lag. But this will depend a lot on the data you get from your queries, and on the reliability of Google&rsquo;s black box of magic. So we will stick with the theory in order to be able to predict 1-step-ahead. Lagged variables it is.</p>
-<p><figure style="flex-grow: 155; flex-basis: 373px">
+</code></pre><p>Regressions and scatter plots:
+<figure style="flex-grow: 155; flex-basis: 373px">
 		<a href="/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2.png" data-size="2100x1350"><img src="/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2.png"
 				srcset="/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2_hua328f663b5bd7ed38e00c602276479d8_332050_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2_hua328f663b5bd7ed38e00c602276479d8_332050_1024x0_resize_box_2.png 1024w"
 				width="2100"
@@ -283,8 +283,9 @@ df_se$retail &lt;- df_se$retail + 100 # for potential differencing and log trans
 				>
 		</a>
 		
-	</figure></p>
-<p>Preparing the data for model fitting.</p>
+	</figure>
+I inspected the relationship between y, x1 and x2 while running regressions with and without lag at the same time. Inspecting the plots we see that there is a linear relationship between the variables. The narrative (virus search) variable does well with 1 lag, while the behavioral (train ticket search) does better without a lag. But this will depend a lot on the data you get from your queries, and on the reliability of Google&rsquo;s black box of magic. So we will stick with the theory in order to be able to predict 1-step-ahead. Lagged variables it is.</p>
+<p>Next, we&rsquo;ll prepare the data for model fitting.</p>
 <pre><code>val_weeks &lt;- 15 #15 weeks for validating the models
 
 df_se_index &lt;- df_se %&gt;%

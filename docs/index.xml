@@ -87,8 +87,8 @@ df_se &amp;lt;- gtrends_se %&amp;gt;% # join data sets together
   left_join(gmr_se)
 
 df_se$retail &amp;lt;- df_se$retail + 100 # for potential differencing and log transformations
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I inspected the relationship between y, x1 and x2 while running regressions with and without lag at the same time. Inspecting the plots we see that there is a linear relationship between the variables. The narrative (virus search) variable does well with 1 lag, while the behavioral (train ticket search) does better without a lag. But this will depend a lot on the data you get from your queries, and on the reliability of Google&amp;rsquo;s black box of magic. So we will stick with the theory in order to be able to predict 1-step-ahead. Lagged variables it is.&lt;/p&gt;
-&lt;p&gt;&lt;figure style=&#34;flex-grow: 155; flex-basis: 373px&#34;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Regressions and scatter plots:
+&lt;figure style=&#34;flex-grow: 155; flex-basis: 373px&#34;&gt;
 		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2.png&#34; data-size=&#34;2100x1350&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2.png&#34;
 				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2_hua328f663b5bd7ed38e00c602276479d8_332050_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/hits_regressions_plot2_hua328f663b5bd7ed38e00c602276479d8_332050_1024x0_resize_box_2.png 1024w&#34;
 				width=&#34;2100&#34;
@@ -97,8 +97,9 @@ df_se$retail &amp;lt;- df_se$retail + 100 # for potential differencing and log t
 				&gt;
 		&lt;/a&gt;
 		
-	&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;Preparing the data for model fitting.&lt;/p&gt;
+	&lt;/figure&gt;
+I inspected the relationship between y, x1 and x2 while running regressions with and without lag at the same time. Inspecting the plots we see that there is a linear relationship between the variables. The narrative (virus search) variable does well with 1 lag, while the behavioral (train ticket search) does better without a lag. But this will depend a lot on the data you get from your queries, and on the reliability of Google&amp;rsquo;s black box of magic. So we will stick with the theory in order to be able to predict 1-step-ahead. Lagged variables it is.&lt;/p&gt;
+&lt;p&gt;Next, we&amp;rsquo;ll prepare the data for model fitting.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;val_weeks &amp;lt;- 15 #15 weeks for validating the models
 
 df_se_index &amp;lt;- df_se %&amp;gt;%
