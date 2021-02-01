@@ -19,7 +19,11 @@ image = "nicolas-perondi--Ho_obgLFs4-unsplash.jpg"
 
 ---
 
-Economic forecasts have proven to be as unreliable as predictions on infection rates. Part of the difficulty lies in economics being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. In these cases, complexity in modeling doesn't necessarily help. My idea is to circumnavigate the pandemic predictions in order to make 1-week-ahead forecasts of movement patterns with a novel data source and a simple model. The underlying theory has been advocated for as "narrative economics" by Robert Shiller and George Akerlof for some time now. But it has featured as a theme in many works without being mentioned by name, such as in Galbraith's "The Great Crash of 1929" from 1955. Tracing its origins takes us back as far as the 1930's when Keynes coined the phrase "animal spirits", meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics. The underlying assumption is that economic outcomes, to some extent, is a function of the stories and ideas people spread. When these stories reach a wide and receptive audience they turn economic behavior into heard behavior.
+Economic forecasts have proven to be as unreliable as predictions on infection rates. Part of the difficulty lies in economics being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. In these cases, complexity in modeling doesn't necessarily help. 
+
+My idea is to circumnavigate the pandemic predictions in order to make 1-week-ahead forecasts of movement patterns with a novel data source and a simple model. The underlying theory has been advocated for as "narrative economics" by Robert Shiller and George Akerlof for some time now. But it has featured as a theme in many works without being mentioned by name, such as in Galbraith's "The Great Crash of 1929" from 1955. Tracing its origins takes us back as far as the 1930's when Keynes coined the phrase "animal spirits", meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics. 
+
+The underlying assumption is that economic outcomes, to some extent, is a function of the stories and ideas people spread. When these stories reach a wide and receptive audience they turn economic behavior into heard behavior.
 
 So what would be the utility of predicting changes in movement patterns? A sharp drop in movement can be categorized as a black swan event for affected parties, whether they are retail stores, public transport companies or government agencies. For public transport, even a 1-week-ahead forecast of a sharp drop or increase in commuting could be useful (I would think). 
 
@@ -31,7 +35,11 @@ For data on movement patterns I used Google Mobility Report, one of the most int
 ## Model
 One of the problems with a simple linear regression model is that time series data are likely to be autocorrelated which will show up in the residuals and violate all kinds of fancy OLS assumptions. One way of resolving this is to model the residuals as an ARIMA-process. I ended up with a (1,1,0) process here. So the model used will be a linear regression with ARIMA errors. Sometimes referred to as ARIMAX, where the X denotes an external regressor.
 
-In the model, narratives are spread at time t and have an effect on economic behavior at time t+1. Having input variables lagged at t+1 allows us to use external regressors as fresh input for 1-step-ahead prediction in an ARIMAX model. My idea was to have 1 variable which is a proxy for to what extent people spread information about a virus. I ended up with ```covid``` and ```virus```. In this case, as the word spreads about Covid-19, people go online to search for information which registers in the index from Google Trends. This variable should be negatively correlated with movement patterns. And then another variable that captures the behavioral change. For this variable my query in Google Trends was ```snälltåget``` and ```sj``` which are the main operators of long distance trains in Sweden. The assumption here is that people on average go online and search for train tickets 1 week ahead of departure. This variable should be positively correlated with movement patterns. 
+In the model, narratives are spread at time t and have an effect on economic behavior at time t+1. Having input variables lagged at t+1 allows us to use external regressors as fresh input for 1-step-ahead prediction in an ARIMAX model. My idea was to have 1 variable which is a proxy for to what extent people spread information about a virus. 
+
+I ended up with ```covid``` and ```virus```. In this case, as the word spreads about Covid-19, people go online to search for information which registers in the index from Google Trends. This variable should be negatively correlated with movement patterns. 
+
+And then another variable that captures the behavioral change. For this variable my query in Google Trends was ```snälltåget``` and ```sj``` which are the main operators of long distance trains in Sweden. The assumption here is that people on average go online and search for train tickets 1 week ahead of departure. This variable should be positively correlated with movement patterns. 
 
 ## R code
 ```
@@ -84,6 +92,7 @@ Hits for train travel drops sharply, as one would expect, and then rebounds over
 
 
 Next we'll see how the predictors match with what we are trying to predict: movement patterns.
+
 For the movement data, go to https://www.google.com/covid19/mobility/ and download a CSV-file. I went with global data and did the filtering in R.
 Once it's loaded, the following code will filter for the target country with ```country_region_code```. I filtered for ```sub_region_1 = "" ``` in order to capture data for all of Sweden. The data is then transformed into weeks. Note that I used the variable ```retail_and_recreation_percent_change_from_baseline```.
 
