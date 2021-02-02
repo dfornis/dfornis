@@ -14,7 +14,7 @@
         <guid>https://dfornis.github.io/dfornis/p/predicting-movement-patterns-with-r/</guid>
         <description>&lt;img src="https://dfornis.github.io/dfornis/p/predicting-movement-patterns-with-r/nicolas-perondi--Ho_obgLFs4-unsplash.jpg" alt="Featured image of post Predicting movement patterns with R" /&gt;&lt;hr&gt;
 &lt;p&gt;Economic forecasts have proven to be as unreliable as predictions on infection rates. Part of the difficulty lies in economics being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. In this context, complexity in modeling doesn&amp;rsquo;t necessarily help.&lt;/p&gt;
-&lt;p&gt;My idea is to circumnavigate the pandemic predictions in order to make 1-week-ahead forecasts of movement patterns with a novel data source and a simple model. The underlying theory has been advocated for as &amp;ldquo;narrative economics&amp;rdquo; by Robert Shiller and George Akerlof for some time now. But it has featured as a theme in many works without being mentioned by name, such as in Galbraith&amp;rsquo;s &amp;ldquo;The Great Crash of 1929&amp;rdquo; from 1955. Tracing its origins takes us back as far as the 1930&amp;rsquo;s when Keynes coined the phrase &amp;ldquo;animal spirits&amp;rdquo;, meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics.&lt;/p&gt;
+&lt;p&gt;My idea was to circumnavigate the pandemic predictions in order to make 1-week-ahead forecasts of movement patterns with a slightly unconventional data source and a simple model. The underlying theory has been advocated for as &amp;ldquo;narrative economics&amp;rdquo; by Robert Shiller for some time now. But it has featured as a theme in many works without being mentioned by name, such as in Galbraith&amp;rsquo;s &amp;ldquo;The Great Crash of 1929&amp;rdquo; from 1955. Tracing its origins takes us back as far as the 1930&amp;rsquo;s when Keynes coined the phrase &amp;ldquo;animal spirits&amp;rdquo;, meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics.&lt;/p&gt;
 &lt;p&gt;The underlying assumption is that economic outcomes, to some extent, is a function of the stories and ideas people spread. When these stories reach a wide and receptive audience they turn economic behavior into heard behavior.&lt;/p&gt;
 &lt;p&gt;So what would be the utility of predicting changes in movement patterns? A sharp drop in movement can be categorized as a black swan event for affected parties, whether they are retail stores, public transport companies or government agencies. For public transport, even a 1-week-ahead forecast of a sharp drop or increase in commuting could be useful (I would think).&lt;/p&gt;
 &lt;h2 id=&#34;data&#34;&gt;Data&lt;/h2&gt;
@@ -289,15 +289,6 @@ grid.arrange(tslm_plot, arimax_plot, arimax_direct_plot,  nrow = 3)
 	&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;It seems like the direct 1-step-ahead ARIMAX forecast does a little better than both the TSLM and the ARIMAX recursive forecast at self-correcting for the last drop off in movement. But still, it essentially fails to predict that last drop 1 week ahead. Leaving that aside, I&amp;rsquo;m a bit surprised at the level of predictive power in the model considering its simplicity.&lt;/p&gt;
 &lt;p&gt;All in all, this was a fun experiment.&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>About me</title>
-        <link>https://dfornis.github.io/dfornis/p/about-me/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-        
-        <guid>https://dfornis.github.io/dfornis/p/about-me/</guid>
-        <description>&lt;p&gt;I&amp;rsquo;m a master student at the department of Economic History and Global Political Economy at Stockholm University. My areas of focus are economic crises, globalization and trust. I&amp;rsquo;ve benefited a lot from  others sharing their ideas and work flow in R and quantitative methods. So I thought I might share my experiences as well.&lt;/p&gt;
 </description>
         </item>
         
