@@ -22,7 +22,7 @@ image = "nicolas-perondi--Ho_obgLFs4-unsplash.jpg"
 
 Economic forecasts have proven to be as unreliable as predictions on infection rates. Part of the difficulty lies in economics being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. In this context, complexity in modeling doesn't necessarily help. 
 
-My idea was to circumnavigate the pandemic predictions in order to make 1-week-ahead forecasts of movement patterns with a slightly unconventional data source and a simple model. The underlying theory has been advocated for as "narrative economics" by Robert Shiller for some time now. But it has featured as a theme in many works without being mentioned by name, such as in Galbraith's "The Great Crash of 1929" from 1955. Tracing its origins takes us back as far as the 1930's when Keynes coined the phrase "animal spirits", meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics. 
+My idea was to circumnavigate the pandemic predictions in order to make 1-week-ahead forecasts of movement patterns with a slightly unconventional data source and a simple model. The underlying theory has been advocated for as Narrative Economics by Robert Shiller for some time now. But it has featured as a theme in many works without being mentioned by name, such as in Galbraith's *The Great Crash of 1929* from 1955. Tracing its origins takes us back as far as the 1930's when Keynes coined the phrase animal spirits, meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics. 
 
 The underlying assumption is that economic outcomes, to some extent, is a function of the stories and ideas people spread. When these stories reach a wide and receptive audience they turn economic behavior into heard behavior.
 
@@ -34,15 +34,16 @@ To capture the narrative component I turned to tried and true Google Trends. It'
 For data on movement patterns I used Google Mobility Report, one of the most interesting publicly available data sets on the internet. It was launched in the infancy of the Covid-19 pandemic to track changes in movement patterns all over the globe. It calculates changes from the same days baseline categorized by country, sub region and type of location/activity (retail and recreation, parks, homes etc). 
 
 ## Model
-One of the problems with a simple linear regression model is that time series data are likely to be autocorrelated which will show up in the residuals and violate all kinds of fancy OLS assumptions. One way of resolving this is to model the residuals as an ARIMA-process. I ended up with a (1,1,0) process here. So the model used will be a linear regression with ARIMA errors. Sometimes referred to as ARIMAX, where the X denotes an external regressor.
+One of the problems with applying a simple linear regression model is that time series data are likely to be autocorrelated which will show up in the residuals and violate all kinds of fancy OLS assumptions. One way of resolving this is to model the residuals as an ARIMA-process. I ended up with a (1,1,0) process here. So the model used will be a linear regression with ARIMA errors. Sometimes referred to as ARIMAX, where the X denotes an external regressor.
 
 In the model, narratives are spread at time t and have an effect on economic behavior at time t+1. Having input variables lagged at t+1 allows us to use external regressors as fresh input for 1-step-ahead prediction in an ARIMAX model. My idea was to have 1 variable which is a proxy for to what extent people spread information about a virus. 
 
-I ended up with ```covid``` and ```virus```. In this case, as the word spreads about Covid-19, people go online to search for information which registers in the index from Google Trends. This variable should be negatively correlated with movement patterns. 
+My query in Google Trends was ```covid``` and ```virus```. In this case, as the word spreads about Covid-19, people go online to search for information which registers in the index from Google Trends. This variable should be negatively correlated with movement patterns. 
 
-And then another variable that captures the behavioral change. For this variable my query in Google Trends was ```snälltåget``` and ```sj``` which are the main operators of long distance trains in Sweden. The assumption here is that people on average go online and search for train tickets 1 week ahead of departure. This variable should be positively correlated with movement patterns. 
+And then another variable that captures the behavioral change. For this variable my query was ```snälltåget``` and ```sj``` which are the main operators of long distance trains in Sweden. The assumption here is that people on average go online and search for train tickets 1 week ahead of departure. This variable should be positively correlated with movement patterns. 
 
 ## R code
+Libraries:
 ```
 library(tidyverse)
 library(gtrendsR) # for Google Trends API calls.
@@ -92,9 +93,9 @@ Let's plot them together.
 Hits for train travel drops sharply, as one would expect, and then rebounds over the summer. Hits for the virus jumps up but starts dropping surprisingly fast. Lower levels over the summer is in line with lower spread. Come autumn and the index jumps up again. This inverse relationship between narrative and behavioral predictors make intuitive sense and looks promising.
 
 
-Next we'll see how the predictors match with what we are trying to predict: movement patterns.
+Next up was seeing how the predictors match with what I was trying to predict: movement patterns.
 
-For the movement data, go to https://www.google.com/covid19/mobility/ and download a CSV-file. I went with global data and did the filtering in R.
+The movement data is available at https://www.google.com/covid19/mobility/ I went with the .csv-file for global data and did the filtering in R.
 Once it's loaded, the following code will filter for the target country with ```country_region_code```. I filtered for ```sub_region_1 = "" ``` in order to capture data for all of Sweden. The data is then transformed into weeks. Note that I used the variable ```retail_and_recreation_percent_change_from_baseline```.
 
 ``` 
@@ -119,9 +120,9 @@ df_se$retail <- df_se$retail + 100 # for potential differencing and log transfor
 
 Regressions and scatter plots:
 ![](hits_regressions_plot2.png)
-I inspected the relationship between y, x1 and x2 while running regressions with and without lag at the same time. Inspecting the plots we see that there is a linear relationship between the variables. The narrative (virus search) variable does well with 1 lag, while the behavioral (train ticket search) does better without a lag. But this will depend a lot on the data you get from your queries, and on the reliability of Google's black box of magic. So we will stick with the theory in order to be able to predict 1-step-ahead. Lagged variables it is.
+I inspected the relationship between y, x1 and x2 while running regressions with and without lag at the same time. Inspecting the plots we see that there is a linear relationship between the variables. The narrative (virus search) variable does well with 1 lag, while the behavioral (train ticket search) does better without a lag. But this will depend a lot on the data you get from your queries, and on the reliability of Google's black box of magic. So I stuck with the theory in order to be able to predict 1-step-ahead. Lagged variables it is.
 
-Next, we'll prepare the data for model fitting.
+Next, preparing the data for model fitting.
 ```
 val_weeks <- 15 #15 weeks for validating the models
 
@@ -142,10 +143,8 @@ tsibble_se_val <- tsibble_se %>%
 ```
 
 Let's compute both the TSLM and the ARIMAX (1,1,0) model to see if it makes sense to model the residuals as an ARIMA-process.
-The equation for the ARIMAX model is
-![](equation1.png) where ![](equation2.png) is the ARIMA error term.
+The equation for the ARIMAX model is $Y_t = B_1X_{1t} + B_{2t} + n_t$ where $n_t = \phi n_{t-1} + \epsilon _t$ is the ARIMA error term.
 Prime notations for differencing are missing here.
-
 ```
 fit_tslm <- tsibble_se_train %>% # fit the model on the training data
   model(TSLM(retail ~ hits_nar_lag + hits_beh_lag))
@@ -166,10 +165,10 @@ rmse_arimax <- round(accuracy(fit_arimax)[, 4], digits = 2) # extract RMSE
 fit_tslm %>% gg_tsresiduals() 
 ```
 
-The patterns at index > 18 or so don't look like a white noise-process to me. This shows up in the ACF plot as well, even though the spikes aren't significant. This will depend a lot on your data, so I will try fitting the ARIMAX model.
+The patterns at index > 18 or so didn't look like a white noise-process to me. This shows up in the ACF plot as well, even though the spikes aren't significant. This will depend a lot on your data, so I tried fitting the ARIMAX model.
 ![TSLM residuals](tslm_residuals_plot.png)
 
-Let's evaluate the same set of plots for ARIMAX. This looks more like a stationary white noise process. No significant spikes.
+Let's evaluate the same set of plots for ARIMAX. This looked more like a stationary white noise process. No significant spikes.
 
 ![ARIMAX residuals](arimax_residuals_plot.png)
 
@@ -205,9 +204,9 @@ grid.arrange(tslm_plot, arimax_plot, nrow = 2)
 ```
 ![](tslm_arimax_forecasts.png)
 
-I'm a bit surprised that the fitted TSLM model performed better than ARIMAX. I think this might vary a lot depending on the data you end up with. Both models do a decent job on the training data. But they both do a poor job at forecasting the sharp drop in movement that occurs at the end of the time series. I should point out that the ARIMAX model is forecasting the AR(1)-process recursively here, which means that there is a mean reversion where it looses its effect over time. 
+I'm a bit surprised that the fitted TSLM model performed in parity with the ARIMAX model. I think this might vary a lot depending on the data you end up with. Both models do a decent job on the training data. But they both do a poor job at forecasting the sharp drop in movement that occurs at the end of the time series. I should point out that the ARIMAX model is forecasting the AR(1)-process recursively here, which means that there is a mean reversion where it looses its effect over time. 
 
-Since we're interested in the 1-step-ahead forecast, I wrote the loop below to capture what that looks like on the validation data. I hope and think that's what I did at least! The point here is to capture the direct 1-step-ahead forecast instead of a recursive forecast. 
+Since I'm interested in the 1-step-ahead forecast, I wrote the loop below to capture what that looks like on the validation data. I hope and think that's what I did at least! The point here is to capture the direct 1-step-ahead forecast instead of a recursive forecast. 
 
 ```
 tsibble_se_loop <- data.frame()
@@ -266,6 +265,4 @@ grid.arrange(tslm_plot, arimax_plot, arimax_direct_plot,  nrow = 3)
 
 ![](tslm_arimax_direct_forecasts.png)
 
-It seems like the direct 1-step-ahead ARIMAX forecast does a little better than both the TSLM and the ARIMAX recursive forecast at self-correcting for the last drop off in movement. But still, it essentially fails to predict that last drop 1 week ahead. Leaving that aside, I'm a bit surprised at the level of predictive power in the model considering its simplicity.
-
-All in all, this was a fun experiment. 
+It seems like the direct 1-step-ahead ARIMAX forecast does a little better than both the TSLM and the ARIMAX recursive forecast at self-correcting for the last drop off in movement. But still, it essentially fails to predict that last drop 1 week ahead. Leaving that aside, I'm a bit surprised at the level of predictive power in the model considering its simplicity. All in all, this was a fun experiment. 

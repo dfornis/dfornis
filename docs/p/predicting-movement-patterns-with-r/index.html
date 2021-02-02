@@ -198,18 +198,19 @@
     <section class="article-content">
     <hr>
 <p>Economic forecasts have proven to be as unreliable as predictions on infection rates. Part of the difficulty lies in economics being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. In this context, complexity in modeling doesn&rsquo;t necessarily help.</p>
-<p>My idea was to circumnavigate the pandemic predictions in order to make 1-week-ahead forecasts of movement patterns with a slightly unconventional data source and a simple model. The underlying theory has been advocated for as &ldquo;narrative economics&rdquo; by Robert Shiller for some time now. But it has featured as a theme in many works without being mentioned by name, such as in Galbraith&rsquo;s &ldquo;The Great Crash of 1929&rdquo; from 1955. Tracing its origins takes us back as far as the 1930&rsquo;s when Keynes coined the phrase &ldquo;animal spirits&rdquo;, meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics.</p>
+<p>My idea was to circumnavigate the pandemic predictions in order to make 1-week-ahead forecasts of movement patterns with a slightly unconventional data source and a simple model. The underlying theory has been advocated for as Narrative Economics by Robert Shiller for some time now. But it has featured as a theme in many works without being mentioned by name, such as in Galbraith&rsquo;s <em>The Great Crash of 1929</em> from 1955. Tracing its origins takes us back as far as the 1930&rsquo;s when Keynes coined the phrase animal spirits, meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics.</p>
 <p>The underlying assumption is that economic outcomes, to some extent, is a function of the stories and ideas people spread. When these stories reach a wide and receptive audience they turn economic behavior into heard behavior.</p>
 <p>So what would be the utility of predicting changes in movement patterns? A sharp drop in movement can be categorized as a black swan event for affected parties, whether they are retail stores, public transport companies or government agencies. For public transport, even a 1-week-ahead forecast of a sharp drop or increase in commuting could be useful (I would think).</p>
 <h2 id="data">Data</h2>
 <p>To capture the narrative component I turned to tried and true Google Trends. It&rsquo;s convenient, free and there&rsquo;s a package for R called <code>gtrendsR</code> which does the API call for you so you don&rsquo;t have to cURL it. The data however is a bit wonky, in the sense that Google provides the amount of hits as an index which is calculated in a black box of unpredictable magic, as noted by Shiller in his 2019 book Narrative Economics (but not in those words).</p>
 <p>For data on movement patterns I used Google Mobility Report, one of the most interesting publicly available data sets on the internet. It was launched in the infancy of the Covid-19 pandemic to track changes in movement patterns all over the globe. It calculates changes from the same days baseline categorized by country, sub region and type of location/activity (retail and recreation, parks, homes etc).</p>
 <h2 id="model">Model</h2>
-<p>One of the problems with a simple linear regression model is that time series data are likely to be autocorrelated which will show up in the residuals and violate all kinds of fancy OLS assumptions. One way of resolving this is to model the residuals as an ARIMA-process. I ended up with a (1,1,0) process here. So the model used will be a linear regression with ARIMA errors. Sometimes referred to as ARIMAX, where the X denotes an external regressor.</p>
+<p>One of the problems with applying a simple linear regression model is that time series data are likely to be autocorrelated which will show up in the residuals and violate all kinds of fancy OLS assumptions. One way of resolving this is to model the residuals as an ARIMA-process. I ended up with a (1,1,0) process here. So the model used will be a linear regression with ARIMA errors. Sometimes referred to as ARIMAX, where the X denotes an external regressor.</p>
 <p>In the model, narratives are spread at time t and have an effect on economic behavior at time t+1. Having input variables lagged at t+1 allows us to use external regressors as fresh input for 1-step-ahead prediction in an ARIMAX model. My idea was to have 1 variable which is a proxy for to what extent people spread information about a virus.</p>
-<p>I ended up with <code>covid</code> and <code>virus</code>. In this case, as the word spreads about Covid-19, people go online to search for information which registers in the index from Google Trends. This variable should be negatively correlated with movement patterns.</p>
-<p>And then another variable that captures the behavioral change. For this variable my query in Google Trends was <code>snälltåget</code> and <code>sj</code> which are the main operators of long distance trains in Sweden. The assumption here is that people on average go online and search for train tickets 1 week ahead of departure. This variable should be positively correlated with movement patterns.</p>
+<p>My query in Google Trends was <code>covid</code> and <code>virus</code>. In this case, as the word spreads about Covid-19, people go online to search for information which registers in the index from Google Trends. This variable should be negatively correlated with movement patterns.</p>
+<p>And then another variable that captures the behavioral change. For this variable my query was <code>snälltåget</code> and <code>sj</code> which are the main operators of long distance trains in Sweden. The assumption here is that people on average go online and search for train tickets 1 week ahead of departure. This variable should be positively correlated with movement patterns.</p>
 <h2 id="r-code">R code</h2>
+<p>Libraries:</p>
 <pre><code>library(tidyverse)
 library(gtrendsR) # for Google Trends API calls.
 library(fable) # tidyverse compatible replacement of the forecast package.
@@ -255,8 +256,8 @@ gtrends_se &lt;- gtrends_nar %&gt;%
 		
 	</figure></p>
 <p>Hits for train travel drops sharply, as one would expect, and then rebounds over the summer. Hits for the virus jumps up but starts dropping surprisingly fast. Lower levels over the summer is in line with lower spread. Come autumn and the index jumps up again. This inverse relationship between narrative and behavioral predictors make intuitive sense and looks promising.</p>
-<p>Next we&rsquo;ll see how the predictors match with what we are trying to predict: movement patterns.</p>
-<p>For the movement data, go to <a href="https://www.google.com/covid19/mobility/">https://www.google.com/covid19/mobility/</a> and download a CSV-file. I went with global data and did the filtering in R.
+<p>Next up was seeing how the predictors match with what I was trying to predict: movement patterns.</p>
+<p>The movement data is available at <a href="https://www.google.com/covid19/mobility/">https://www.google.com/covid19/mobility/</a> I went with the .csv-file for global data and did the filtering in R.
 Once it&rsquo;s loaded, the following code will filter for the target country with <code>country_region_code</code>. I filtered for <code>sub_region_1 = &quot;&quot; </code> in order to capture data for all of Sweden. The data is then transformed into weeks. Note that I used the variable <code>retail_and_recreation_percent_change_from_baseline</code>.</p>
 <pre><code>gmr_se &lt;- gmr %&gt;%
   mutate(date = as_date(date)) %&gt;%
@@ -286,8 +287,8 @@ df_se$retail &lt;- df_se$retail + 100 # for potential differencing and log trans
 		</a>
 		
 	</figure>
-I inspected the relationship between y, x1 and x2 while running regressions with and without lag at the same time. Inspecting the plots we see that there is a linear relationship between the variables. The narrative (virus search) variable does well with 1 lag, while the behavioral (train ticket search) does better without a lag. But this will depend a lot on the data you get from your queries, and on the reliability of Google&rsquo;s black box of magic. So we will stick with the theory in order to be able to predict 1-step-ahead. Lagged variables it is.</p>
-<p>Next, we&rsquo;ll prepare the data for model fitting.</p>
+I inspected the relationship between y, x1 and x2 while running regressions with and without lag at the same time. Inspecting the plots we see that there is a linear relationship between the variables. The narrative (virus search) variable does well with 1 lag, while the behavioral (train ticket search) does better without a lag. But this will depend a lot on the data you get from your queries, and on the reliability of Google&rsquo;s black box of magic. So I stuck with the theory in order to be able to predict 1-step-ahead. Lagged variables it is.</p>
+<p>Next, preparing the data for model fitting.</p>
 <pre><code>val_weeks &lt;- 15 #15 weeks for validating the models
 
 df_se_index &lt;- df_se %&gt;%
@@ -305,26 +306,7 @@ tsibble_se_train &lt;- tsibble_se %&gt;%
 tsibble_se_val &lt;- tsibble_se %&gt;%
   filter(type == &quot;validation&quot;)
 </code></pre><p>Let&rsquo;s compute both the TSLM and the ARIMAX (1,1,0) model to see if it makes sense to model the residuals as an ARIMA-process.
-The equation for the ARIMAX model is
-<figure style="flex-grow: 681; flex-basis: 1635px">
-		<a href="/dfornis/p/predicting-movement-patterns-with-r/equation1.png" data-size="218x32"><img src="/dfornis/p/predicting-movement-patterns-with-r/equation1.png"
-				srcset="/dfornis/p/predicting-movement-patterns-with-r/equation1_hucbbbcf6729b23a841e61699523751e37_3683_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/equation1_hucbbbcf6729b23a841e61699523751e37_3683_1024x0_resize_box_2.png 1024w"
-				width="218"
-				height="32"
-				loading="lazy"
-				>
-		</a>
-		
-	</figure> where <figure style="flex-grow: 468; flex-basis: 1125px">
-		<a href="/dfornis/p/predicting-movement-patterns-with-r/equation2.png" data-size="136x29"><img src="/dfornis/p/predicting-movement-patterns-with-r/equation2.png"
-				srcset="/dfornis/p/predicting-movement-patterns-with-r/equation2_huac7059fcffb1dab1148c7dd04499295b_2828_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/equation2_huac7059fcffb1dab1148c7dd04499295b_2828_1024x0_resize_box_2.png 1024w"
-				width="136"
-				height="29"
-				loading="lazy"
-				>
-		</a>
-		
-	</figure> is the ARIMA error term.
+The equation for the ARIMAX model is $Y_t = B_1X_{1t} + B_{2t} + n_t$ where $n_t = \phi n_{t-1} + \epsilon _t$ is the ARIMA error term.
 Prime notations for differencing are missing here.</p>
 <pre><code>fit_tslm &lt;- tsibble_se_train %&gt;% # fit the model on the training data
   model(TSLM(retail ~ hits_nar_lag + hits_beh_lag))
@@ -343,7 +325,7 @@ rmse_tslm &lt;- round(accuracy(fit_tslm)[, 4], digits = 2) # extract RMSE
 rmse_arimax &lt;- round(accuracy(fit_arimax)[, 4], digits = 2) # extract RMSE
 
 fit_tslm %&gt;% gg_tsresiduals() 
-</code></pre><p>The patterns at index &gt; 18 or so don&rsquo;t look like a white noise-process to me. This shows up in the ACF plot as well, even though the spikes aren&rsquo;t significant. This will depend a lot on your data, so I will try fitting the ARIMAX model.
+</code></pre><p>The patterns at index &gt; 18 or so didn&rsquo;t look like a white noise-process to me. This shows up in the ACF plot as well, even though the spikes aren&rsquo;t significant. This will depend a lot on your data, so I tried fitting the ARIMAX model.
 <figure style="flex-grow: 107; flex-basis: 256px">
 		<a href="/dfornis/p/predicting-movement-patterns-with-r/tslm_residuals_plot.png" data-size="1916x1790"><img src="/dfornis/p/predicting-movement-patterns-with-r/tslm_residuals_plot.png"
 				srcset="/dfornis/p/predicting-movement-patterns-with-r/tslm_residuals_plot_hu655848a1b355c501c0d34ca27ceea49f_384107_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/tslm_residuals_plot_hu655848a1b355c501c0d34ca27ceea49f_384107_1024x0_resize_box_2.png 1024w"
@@ -356,7 +338,7 @@ fit_tslm %&gt;% gg_tsresiduals()
 		<figcaption>TSLM residuals</figcaption>
 		
 	</figure></p>
-<p>Let&rsquo;s evaluate the same set of plots for ARIMAX. This looks more like a stationary white noise process. No significant spikes.</p>
+<p>Let&rsquo;s evaluate the same set of plots for ARIMAX. This looked more like a stationary white noise process. No significant spikes.</p>
 <p><figure style="flex-grow: 123; flex-basis: 295px">
 		<a href="/dfornis/p/predicting-movement-patterns-with-r/arimax_residuals_plot.png" data-size="904x733"><img src="/dfornis/p/predicting-movement-patterns-with-r/arimax_residuals_plot.png"
 				srcset="/dfornis/p/predicting-movement-patterns-with-r/arimax_residuals_plot_hu4f5034fb73b254b14675345864cce34e_62048_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/arimax_residuals_plot_hu4f5034fb73b254b14675345864cce34e_62048_1024x0_resize_box_2.png 1024w"
@@ -407,8 +389,8 @@ grid.arrange(tslm_plot, arimax_plot, nrow = 2)
 		</a>
 		
 	</figure></p>
-<p>I&rsquo;m a bit surprised that the fitted TSLM model performed better than ARIMAX. I think this might vary a lot depending on the data you end up with. Both models do a decent job on the training data. But they both do a poor job at forecasting the sharp drop in movement that occurs at the end of the time series. I should point out that the ARIMAX model is forecasting the AR(1)-process recursively here, which means that there is a mean reversion where it looses its effect over time.</p>
-<p>Since we&rsquo;re interested in the 1-step-ahead forecast, I wrote the loop below to capture what that looks like on the validation data. I hope and think that&rsquo;s what I did at least! The point here is to capture the direct 1-step-ahead forecast instead of a recursive forecast.</p>
+<p>I&rsquo;m a bit surprised that the fitted TSLM model performed in parity with the ARIMAX model. I think this might vary a lot depending on the data you end up with. Both models do a decent job on the training data. But they both do a poor job at forecasting the sharp drop in movement that occurs at the end of the time series. I should point out that the ARIMAX model is forecasting the AR(1)-process recursively here, which means that there is a mean reversion where it looses its effect over time.</p>
+<p>Since I&rsquo;m interested in the 1-step-ahead forecast, I wrote the loop below to capture what that looks like on the validation data. I hope and think that&rsquo;s what I did at least! The point here is to capture the direct 1-step-ahead forecast instead of a recursive forecast.</p>
 <pre><code>tsibble_se_loop &lt;- data.frame()
 direct_pred &lt;- data.frame()
 index &lt;- 15:nrow(tsibble_se)
@@ -471,8 +453,7 @@ grid.arrange(tslm_plot, arimax_plot, arimax_direct_plot,  nrow = 3)
 		</a>
 		
 	</figure></p>
-<p>It seems like the direct 1-step-ahead ARIMAX forecast does a little better than both the TSLM and the ARIMAX recursive forecast at self-correcting for the last drop off in movement. But still, it essentially fails to predict that last drop 1 week ahead. Leaving that aside, I&rsquo;m a bit surprised at the level of predictive power in the model considering its simplicity.</p>
-<p>All in all, this was a fun experiment.</p>
+<p>It seems like the direct 1-step-ahead ARIMAX forecast does a little better than both the TSLM and the ARIMAX recursive forecast at self-correcting for the last drop off in movement. But still, it essentially fails to predict that last drop 1 week ahead. Leaving that aside, I&rsquo;m a bit surprised at the level of predictive power in the model considering its simplicity. All in all, this was a fun experiment.</p>
 
 </section>
 
@@ -506,6 +487,28 @@ grid.arrange(tslm_plot, arimax_plot, arimax_direct_plot,  nrow = 3)
     </section>
     </footer>
 
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+    integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+    integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+    onload="StackLaTeX()"></script>
+
+<script>
+    function StackLaTeX() {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });
+    }
+</script>
     
 </article>
 

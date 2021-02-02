@@ -40,7 +40,7 @@ params:
             src: img/avatar.png
 
     article:
-        math: false
+        math: true
         license:
             enabled: true
             default: Licensed under CC BY-NC-SA 4.0
