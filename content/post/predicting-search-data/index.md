@@ -2,7 +2,7 @@
 author = "Hugo Authors"
 title = "Predicting movement patterns with R"
 date = "2021-01-31"
-description = "The pandemic has rendered the standard tool set for making predictions less effective. So let's try something different. An unconventional theory and a simple model."
+description = "The pandemic has rendered the standard tool set for making predictions less effective. So let's try something different. Narrative economics, Google data and a simple model."
 
 tags = [
     "r",
