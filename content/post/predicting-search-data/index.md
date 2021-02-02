@@ -2,7 +2,8 @@
 author = "Hugo Authors"
 title = "Predicting movement patterns with R"
 date = "2021-01-31"
-description = "The pandemic has been a humbling reminder of our inability to make accurate predictions. So let's try something new."
+description = "The pandemic has rendered the standard tool set for making predictions less effective. So let's try something different. An unconventional theory and a simple model."
+
 tags = [
     "r",
     "narrative economics",
@@ -19,7 +20,7 @@ image = "nicolas-perondi--Ho_obgLFs4-unsplash.jpg"
 
 ---
 
-Economic forecasts have proven to be as unreliable as predictions on infection rates. Part of the difficulty lies in economics being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. In these cases, complexity in modeling doesn't necessarily help. 
+Economic forecasts have proven to be as unreliable as predictions on infection rates. Part of the difficulty lies in economics being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. In this context, complexity in modeling doesn't necessarily help. 
 
 My idea is to circumnavigate the pandemic predictions in order to make 1-week-ahead forecasts of movement patterns with a novel data source and a simple model. The underlying theory has been advocated for as "narrative economics" by Robert Shiller and George Akerlof for some time now. But it has featured as a theme in many works without being mentioned by name, such as in Galbraith's "The Great Crash of 1929" from 1955. Tracing its origins takes us back as far as the 1930's when Keynes coined the phrase "animal spirits", meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics. 
 
