@@ -328,7 +328,6 @@ rmse_arimax &lt;- round(accuracy(fit_arimax)[, 4], digits = 2) # extract RMSE
 
 fit_tslm %&gt;% gg_tsresiduals() 
 </code></pre><p>The patterns at index &gt; 18 or so didn&rsquo;t look like a white noise-process to me. This shows up in the ACF plot as well, even though the spikes aren&rsquo;t significant. This will depend a lot on the data retrieved from Google Trends.<br>
-Fitting the ARIMAX-model:
 <figure style="flex-grow: 107; flex-basis: 256px">
 		<a href="/dfornis/p/predicting-movement-patterns-with-r/tslm_residuals_plot.png" data-size="1916x1790"><img src="/dfornis/p/predicting-movement-patterns-with-r/tslm_residuals_plot.png"
 				srcset="/dfornis/p/predicting-movement-patterns-with-r/tslm_residuals_plot_hu655848a1b355c501c0d34ca27ceea49f_384107_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/tslm_residuals_plot_hu655848a1b355c501c0d34ca27ceea49f_384107_1024x0_resize_box_2.png 1024w"
@@ -341,7 +340,7 @@ Fitting the ARIMAX-model:
 		<figcaption>TSLM residuals</figcaption>
 		
 	</figure></p>
-<p>Evaluating the model, it looked more like a stationary white noise process. No significant spikes.</p>
+<p>Fitting the ARIMAX-model:</p>
 <p><figure style="flex-grow: 123; flex-basis: 295px">
 		<a href="/dfornis/p/predicting-movement-patterns-with-r/arimax_residuals_plot.png" data-size="904x733"><img src="/dfornis/p/predicting-movement-patterns-with-r/arimax_residuals_plot.png"
 				srcset="/dfornis/p/predicting-movement-patterns-with-r/arimax_residuals_plot_hu4f5034fb73b254b14675345864cce34e_62048_480x0_resize_box_2.png 480w, /dfornis/p/predicting-movement-patterns-with-r/arimax_residuals_plot_hu4f5034fb73b254b14675345864cce34e_62048_1024x0_resize_box_2.png 1024w"
@@ -353,7 +352,8 @@ Fitting the ARIMAX-model:
 		
 		<figcaption>ARIMAX residuals</figcaption>
 		
-	</figure></p>
+	</figure>
+Evaluating the ARIMAX-residuals, they looked more like a stationary white noise process. No significant spikes.</p>
 <p>For plotting models and forecasts produced with Fable, I went with this:</p>
 <pre><code>tslm_plot &lt;- 
   tsibble_se %&gt;%

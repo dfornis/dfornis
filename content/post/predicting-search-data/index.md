@@ -172,12 +172,12 @@ fit_tslm %>% gg_tsresiduals()
 ```
 
 The patterns at index > 18 or so didn't look like a white noise-process to me. This shows up in the ACF plot as well, even though the spikes aren't significant. This will depend a lot on the data retrieved from Google Trends.  
-Fitting the ARIMAX-model:
 ![TSLM residuals](tslm_residuals_plot.png)
 
-Evaluating the model, it looked more like a stationary white noise process. No significant spikes.
+Fitting the ARIMAX-model:  
 
 ![ARIMAX residuals](arimax_residuals_plot.png)
+Evaluating the ARIMAX-residuals, they looked more like a stationary white noise process. No significant spikes.  
 
 For plotting models and forecasts produced with Fable, I went with this:
 ```

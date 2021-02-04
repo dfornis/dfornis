@@ -144,7 +144,6 @@ rmse_arimax &amp;lt;- round(accuracy(fit_arimax)[, 4], digits = 2) # extract RMS
 
 fit_tslm %&amp;gt;% gg_tsresiduals() 
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The patterns at index &amp;gt; 18 or so didn&amp;rsquo;t look like a white noise-process to me. This shows up in the ACF plot as well, even though the spikes aren&amp;rsquo;t significant. This will depend a lot on the data retrieved from Google Trends.&lt;br&gt;
-Fitting the ARIMAX-model:
 &lt;figure style=&#34;flex-grow: 107; flex-basis: 256px&#34;&gt;
 		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_residuals_plot.png&#34; data-size=&#34;1916x1790&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_residuals_plot.png&#34;
 				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_residuals_plot_hu655848a1b355c501c0d34ca27ceea49f_384107_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/tslm_residuals_plot_hu655848a1b355c501c0d34ca27ceea49f_384107_1024x0_resize_box_2.png 1024w&#34;
@@ -157,7 +156,7 @@ Fitting the ARIMAX-model:
 		&lt;figcaption&gt;TSLM residuals&lt;/figcaption&gt;
 		
 	&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;Evaluating the model, it looked more like a stationary white noise process. No significant spikes.&lt;/p&gt;
+&lt;p&gt;Fitting the ARIMAX-model:&lt;/p&gt;
 &lt;p&gt;&lt;figure style=&#34;flex-grow: 123; flex-basis: 295px&#34;&gt;
 		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/arimax_residuals_plot.png&#34; data-size=&#34;904x733&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/arimax_residuals_plot.png&#34;
 				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/arimax_residuals_plot_hu4f5034fb73b254b14675345864cce34e_62048_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/predicting-movement-patterns-with-r/arimax_residuals_plot_hu4f5034fb73b254b14675345864cce34e_62048_1024x0_resize_box_2.png 1024w&#34;
@@ -169,7 +168,8 @@ Fitting the ARIMAX-model:
 		
 		&lt;figcaption&gt;ARIMAX residuals&lt;/figcaption&gt;
 		
-	&lt;/figure&gt;&lt;/p&gt;
+	&lt;/figure&gt;
+Evaluating the ARIMAX-residuals, they looked more like a stationary white noise process. No significant spikes.&lt;/p&gt;
 &lt;p&gt;For plotting models and forecasts produced with Fable, I went with this:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;tslm_plot &amp;lt;- 
   tsibble_se %&amp;gt;%
