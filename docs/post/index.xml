@@ -13,8 +13,7 @@
       <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
       
       <guid>https://dfornis.github.io/dfornis/p/predicting-movement-patterns-with-r/</guid>
-      <description>Economic forecasts have proven to be as unreliable as predictions on infection rates. Part of the difficulty lies in economics being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. In this context, complexity in modeling doesn&amp;rsquo;t necessarily help.
-My idea was to circumnavigate the pandemic predictions in order to make 1-week-ahead forecasts of movement patterns with a slightly unconventional data source and a simple model.</description>
+      <description>Economic forecasts have proven to be as unreliable as predictions on infection rates. Part of the difficulty lies in economic indicators being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. Macro economic indicators are also collected with a lag large enough to render them mote for making the kinds of short time horizon forecasts that are valuable in times of high uncertainty.</description>
     </item>
     
   </channel>

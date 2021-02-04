@@ -2,7 +2,7 @@
 author = "Hugo Authors"
 title = "Predicting movement patterns with R"
 date = "2021-01-31"
-description = "The pandemic has rendered the standard tool set for making predictions less effective. So let's try something different. Narrative economics, Google data and a simple model."
+description = "The Covid-19 pandemic has rendered the standard tool set for making economic forecasts less effective. Can high frequency Google Trends data be used as an alternative input in forecasts in times of high uncertainty?"
 
 tags = [
     "r",
@@ -20,27 +20,31 @@ image = "nicolas-perondi--Ho_obgLFs4-unsplash.jpg"
 
 ---
 
-Economic forecasts have proven to be as unreliable as predictions on infection rates. Part of the difficulty lies in economics being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. In this context, complexity in modeling doesn't necessarily help. 
+Economic forecasts have proven to be as unreliable as predictions on infection rates. Part of the difficulty lies in economic indicators being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. Macro economic indicators are also collected with a lag large enough to render them mote for making the kinds of short time horizon forecasts that are valuable in times of high uncertainty.
 
-My idea was to circumnavigate the pandemic predictions in order to make 1-week-ahead forecasts of movement patterns with a slightly unconventional data source and a simple model. The underlying theory has been advocated for as Narrative Economics by Robert Shiller for some time now. But it has featured as a theme in many works without being mentioned by name, such as in Galbraith's *The Great Crash of 1929* from 1955. Tracing its origins takes us back as far as the 1930's when Keynes coined the phrase animal spirits, meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics. 
+My idea was to circumnavigate this issue by making 1-week-ahead forecasts of movement patterns with an ARIMAX model where Google Trends data supply pro and countercyclical external variables. The underlying theory has been advocated for as Narrative Economics by Robert Shiller. But it has featured as a theme in many works without being mentioned by name, such as in Galbraith's *The Great Crash of 1929* from 1955. Tracing its origins takes us back as far as the 1930's when Keynes coined the phrase animal spirits, meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics. 
 
-The underlying assumption is that economic outcomes, to some extent, is a function of the stories and ideas people spread. When these stories reach a wide and receptive audience they turn economic behavior into heard behavior.
+The assumption is that economic outcomes, to some extent, are a function of the stories and ideas people spread. When these stories reach a wide and receptive audience they turn economic behavior into heard behavior.
 
-So what would be the utility of predicting changes in movement patterns? A sharp drop in movement can be categorized as a black swan event for affected parties, whether they are retail stores, public transport companies or government agencies. For public transport, even a 1-week-ahead forecast of a sharp drop or increase in commuting could be useful (I would think). 
+So what would be the utility of predicting changes in movement patterns? A sharp drop in movement can be categorized as a black swan event for affected parties, whether they are retail stores, public transport companies or government agencies. For public transport, even a 1-week-ahead forecast of a sharp drop or increase in commuting could be useful. And movement patterns is of course a kind of macro economic indicator in itself.
 
 ## Data
-To capture the narrative component I turned to tried and true Google Trends. It's convenient, free and there's a package for R called ```gtrendsR``` which does the API call for you so you don't have to cURL it. The data however is a bit wonky, in the sense that Google provides the amount of hits as an index which is calculated in a black box of unpredictable magic, as noted by Shiller in his 2019 book Narrative Economics (but not in those words).
+To capture the narrative component an R library called ```gtrendsR``` which does the API call to Google Trends for you so you don't have to cURL it. The data however is a bit wonky, in the sense that Google provides the amount of hits as an index which is calculated in a black box of unpredictable magic, as noted by Shiller in his 2019 book Narrative Economics (but not in those words).
+
+My query in Google Trends was ```covid``` and ```virus```. In this case, as the word spreads about Covid-19, people go online to search for information which registers in the index from Google Trends. This variable is countercyclical and should be negatively correlated with movement patterns.
+
+And then another variable that captures the behavioral change. For this variable my query was ```snälltåget``` and ```sj``` which are the main operators of long distance trains in Sweden. The assumption here is that people on average go online and search for train tickets 1 week ahead of departure. This variable is procyclical and should be positively correlated with movement patterns. 
 
 For data on movement patterns I used Google Mobility Report, one of the most interesting publicly available data sets on the internet. It was launched in the infancy of the Covid-19 pandemic to track changes in movement patterns all over the globe. It calculates changes from the same days baseline categorized by country, sub region and type of location/activity (retail and recreation, parks, homes etc). 
 
 ## Model
-One of the problems with applying a simple linear regression model is that time series data are likely to be autocorrelated which will show up in the residuals and violate all kinds of fancy OLS assumptions. One way of resolving this is to model the residuals as an ARIMA-process. I ended up with a (1,1,0) process here. So the model used will be a linear regression with ARIMA errors. Sometimes referred to as ARIMAX, where the X denotes an external regressor.
+One of the problems with applying a simple linear regression model is that time series data are likely to be autocorrelated which will show up in the residuals and violate important OLS assumptions. One way of resolving this is to model the residuals as an ARIMA-process. I ended up with a (1,1,0) process here. So the model used will be a linear regression with ARIMA errors. Sometimes referred to as ARIMAX, where the X denotes an external regressor.  
+
+The equation is:  
+$Y_t = B_1X_{1t} + B_{2t} + n_t$ where $n_t = \phi n_{t-1} + \epsilon _t$  
+is the ARIMA error term. Prime notations for differencing are missing here.
 
 In the model, narratives are spread at time t and have an effect on economic behavior at time t+1. Having input variables lagged at t+1 allows us to use external regressors as fresh input for 1-step-ahead prediction in an ARIMAX model. My idea was to have 1 variable which is a proxy for to what extent people spread information about a virus. 
-
-My query in Google Trends was ```covid``` and ```virus```. In this case, as the word spreads about Covid-19, people go online to search for information which registers in the index from Google Trends. This variable should be negatively correlated with movement patterns. 
-
-And then another variable that captures the behavioral change. For this variable my query was ```snälltåget``` and ```sj``` which are the main operators of long distance trains in Sweden. The assumption here is that people on average go online and search for train tickets 1 week ahead of departure. This variable should be positively correlated with movement patterns. 
 
 ## R code
 Libraries:
@@ -143,8 +147,7 @@ tsibble_se_val <- tsibble_se %>%
 ```
 
 Let's compute both the TSLM and the ARIMAX (1,1,0) model to see if it makes sense to model the residuals as an ARIMA-process.
-The equation for the ARIMAX model is $Y_t = B_1X_{1t} + B_{2t} + n_t$ where $n_t = \phi n_{t-1} + \epsilon _t$ is the ARIMA error term.
-Prime notations for differencing are missing here.
+
 ```
 fit_tslm <- tsibble_se_train %>% # fit the model on the training data
   model(TSLM(retail ~ hits_nar_lag + hits_beh_lag))
@@ -165,10 +168,11 @@ rmse_arimax <- round(accuracy(fit_arimax)[, 4], digits = 2) # extract RMSE
 fit_tslm %>% gg_tsresiduals() 
 ```
 
-The patterns at index > 18 or so didn't look like a white noise-process to me. This shows up in the ACF plot as well, even though the spikes aren't significant. This will depend a lot on your data, so I tried fitting the ARIMAX model.
+The patterns at index > 18 or so didn't look like a white noise-process to me. This shows up in the ACF plot as well, even though the spikes aren't significant. This will depend a lot on the data retrieved from Google Trends.  
+Fitting the ARIMAX-model:
 ![TSLM residuals](tslm_residuals_plot.png)
 
-Let's evaluate the same set of plots for ARIMAX. This looked more like a stationary white noise process. No significant spikes.
+Evaluating the model, it looked more like a stationary white noise process. No significant spikes.
 
 ![ARIMAX residuals](arimax_residuals_plot.png)
 
