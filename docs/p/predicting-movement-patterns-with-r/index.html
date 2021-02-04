@@ -290,8 +290,8 @@ df_se$retail &lt;- df_se$retail + 100 # for potential differencing and log trans
 				>
 		</a>
 		
-	</figure>
-I inspected the relationship between y, x1 and x2 while running regressions with and without lag at the same time. Inspecting the plots we see that there is a linear relationship between the variables. The narrative (virus search) variable does well with 1 lag, while the behavioral (train ticket search) does better without a lag. But this will depend a lot on the search queries used and on the reliability of Google&rsquo;s black box of magic. So for this experiment I stuck with the theory in order to be able to predict 1-step-ahead. Lagged variables it is.</p>
+	</figure></p>
+<p>I inspected the relationship between y, x1 and x2 while running regressions with and without lag at the same time. Inspecting the plots we see that there is a linear relationship between the variables. The narrative (virus search) variable does well with 1 lag, while the behavioral (train ticket search) does better without a lag. But this will depend a lot on the search queries used and on the reliability of Google&rsquo;s black box of magic. So for this experiment I stuck with the theory in order to be able to predict 1-step-ahead. Lagged variables it is.</p>
 <p>Next, preparing the data for model fitting.</p>
 <pre><code>val_weeks &lt;- 15 #15 weeks for validating the models
 
@@ -309,7 +309,7 @@ tsibble_se_train &lt;- tsibble_se %&gt;%
 
 tsibble_se_val &lt;- tsibble_se %&gt;%
   filter(type == &quot;validation&quot;)
-</code></pre><p>Here I&rsquo;m computing bot hthe TSLM and the ARIMAX (1,1,0) model to see if it makes sense to model the residuals as an ARIMA-process.</p>
+</code></pre><p>Here I&rsquo;m computing both the TSLM and the ARIMAX (1,1,0) model to see if it makes sense to model the residuals as an ARIMA-process.</p>
 <pre><code>fit_tslm &lt;- tsibble_se_train %&gt;% # fit the model on the training data
   model(TSLM(retail ~ hits_nar_lag + hits_beh_lag))
 

@@ -125,8 +125,9 @@ df_se$retail <- df_se$retail + 100 # for potential differencing and log transfor
 ``` 
 
 Regressions and scatter plots:
-![](hits_regressions_plot2.png)
-I inspected the relationship between y, x1 and x2 while running regressions with and without lag at the same time. Inspecting the plots we see that there is a linear relationship between the variables. The narrative (virus search) variable does well with 1 lag, while the behavioral (train ticket search) does better without a lag. But this will depend a lot on the search queries used and on the reliability of Google's black box of magic. So for this experiment I stuck with the theory in order to be able to predict 1-step-ahead. Lagged variables it is.
+![](hits_regressions_plot2.png)  
+
+I inspected the relationship between y, x1 and x2 while running regressions with and without lag at the same time. Inspecting the plots we see that there is a linear relationship between the variables. The narrative (virus search) variable does well with 1 lag, while the behavioral (train ticket search) does better without a lag. But this will depend a lot on the search queries used and on the reliability of Google's black box of magic. So for this experiment I stuck with the theory in order to be able to predict 1-step-ahead. Lagged variables it is.  
 
 Next, preparing the data for model fitting.
 ```
@@ -148,7 +149,7 @@ tsibble_se_val <- tsibble_se %>%
   filter(type == "validation")
 ```
 
-Here I'm computing bot hthe TSLM and the ARIMAX (1,1,0) model to see if it makes sense to model the residuals as an ARIMA-process.
+Here I'm computing both the TSLM and the ARIMAX (1,1,0) model to see if it makes sense to model the residuals as an ARIMA-process.
 
 ```
 fit_tslm <- tsibble_se_train %>% # fit the model on the training data
