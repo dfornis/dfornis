@@ -15,7 +15,7 @@ categories = [
 ]
 series = ["Themes Guide"]
 aliases = ["migrate-from-jekyl"]
-image = "nicolas-perondi--Ho_obgLFs4-unsplash.jpg"
+image = "cover_new.jpg"
 +++
 
 ---
