@@ -12,7 +12,7 @@
         <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
         
         <guid>https://dfornis.github.io/dfornis/p/predicting-movement-patterns-with-r/</guid>
-        <description>&lt;img src="https://dfornis.github.io/dfornis/p/predicting-movement-patterns-with-r/cover_new.jpg" alt="Featured image of post Predicting movement patterns with R" /&gt;&lt;hr&gt;
+        <description>&lt;img src="https://dfornis.github.io/dfornis/p/predicting-movement-patterns-with-r/cover_new4.jpg" alt="Featured image of post Predicting movement patterns with R" /&gt;&lt;hr&gt;
 &lt;p&gt;Economic forecasts have proven to be as unreliable as predictions on infection rates. Part of the difficulty lies in economic indicators being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. Macroeconomic indicators are also collected with a  large enough lag to make them unusable for making the kinds of short time horizon forecasts that are valuable in times of high uncertainty.&lt;/p&gt;
 &lt;p&gt;My idea was to circumnavigate this issue by making 1-week-ahead forecasts of movement patterns with an ARIMAX model where Google Trends data supply leading indicators as external variables in the model.&lt;/p&gt;
 &lt;p&gt;So what would be the utility of predicting changes in movement patterns? A sharp drop in movement can be categorized as a black swan event for affected parties, whether they are retail stores, public transport companies or government agencies. For public transport, even a 1-week-ahead forecast of a sharp drop or increase in commuting could be useful. And movement patterns is of course a kind of macroeconomic indicator in itself.&lt;/p&gt;
