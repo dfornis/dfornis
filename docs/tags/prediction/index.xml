@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>prediction on David Fornborg</title>
+    <title>prediction on dfornis</title>
     <link>https://dfornis.github.io/dfornis/tags/prediction/</link>
-    <description>Recent content in prediction on David Fornborg</description>
+    <description>Recent content in prediction on dfornis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 31 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://dfornis.github.io/dfornis/tags/prediction/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Predicting movement patterns with R</title>
-      <link>https://dfornis.github.io/dfornis/p/predicting-movement-patterns-with-r/</link>
+      <title>Forecasting movement patterns with R</title>
+      <link>https://dfornis.github.io/dfornis/p/forecasting-movement-patterns-with-r/</link>
       <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://dfornis.github.io/dfornis/p/predicting-movement-patterns-with-r/</guid>
-      <description>Economic forecasts have proven to be as unreliable as predictions on infection rates. Part of the difficulty lies in economic indicators being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. Macroeconomic indicators are also collected with a large enough lag to make them unusable for making the kinds of short time horizon forecasts that are valuable in times of high uncertainty.</description>
+      <guid>https://dfornis.github.io/dfornis/p/forecasting-movement-patterns-with-r/</guid>
+      <description>Part of the difficulty lies in economic indicators being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. Macroeconomic indicators are also collected with a large enough lag to make them unusable for making the kinds of short time horizon forecasts that are valuable in times of high uncertainty.
+My idea was to circumnavigate this issue by making 1-week-ahead forecasts of movement patterns with an ARIMAX model where Google Trends data supply leading indicators as external variables in the model.</description>
     </item>
     
   </channel>

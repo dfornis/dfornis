@@ -1,6 +1,6 @@
 +++
 author = "Hugo Authors"
-title = "Predicting movement patterns with R"
+title = "Forecasting movement patterns with R"
 date = "2021-01-31"
 description = "The Covid-19 pandemic has rendered the standard tool set for making economic forecasts less effective. Can high frequency Google Trends data be used as an alternative input in forecasts in times of high uncertainty?"
 
@@ -15,33 +15,33 @@ categories = [
 ]
 series = ["Themes Guide"]
 aliases = ["migrate-from-jekyl"]
-image = "cover_new4.jpg"
+image = "nicolas-perondi--Ho_obgLFs4-unsplash.jpg"
 +++
 
 ---
 
-Economic forecasts have proven to be as unreliable as predictions on infection rates. Part of the difficulty lies in economic indicators being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. Macroeconomic indicators are also collected with a  large enough lag to make them unusable for making the kinds of short time horizon forecasts that are valuable in times of high uncertainty.
+Part of the difficulty lies in economic indicators being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. Macroeconomic indicators are also collected with a large enough lag to make them unusable for making the kinds of short time horizon forecasts that are valuable in times of high uncertainty.
 
 My idea was to circumnavigate this issue by making 1-week-ahead forecasts of movement patterns with an ARIMAX model where Google Trends data supply leading indicators as external variables in the model. 
 
-So what would be the utility of predicting changes in movement patterns? A sharp drop in movement can be categorized as a black swan event for affected parties, whether they are retail stores, public transport companies or government agencies. For public transport, even a 1-week-ahead forecast of a sharp drop or increase in commuting could be useful. And movement patterns is of course a kind of macroeconomic indicator in itself.
+What would be the utility of predicting changes in movement patterns? A sharp drop in movement can be categorized as a black swan event for affected parties, whether they are retail stores, public transport companies or government agencies. For public transport, even a 1-week-ahead forecast of a sharp drop or increase in commuting could be useful. And movement patterns is of course a kind of macroeconomic indicator in itself.
 
 ## Theory
-The underlying theory has been advocated for as Narrative Economics by Robert Shiller. But it has featured as a theme in many works without being mentioned by name, such as in Galbraith's *The Great Crash of 1929* from 1955. Tracing its origins takes us back as far as the 1930's when Keynes coined the phrase animal spirits, meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics. 
+The underlying theory has been advocated for as Narrative Economics by Robert Shiller. But it has featured as a theme in many works without being mentioned by name. Tracing its origins takes us back as far as the 1930's when Keynes coined the phrase animal spirits, meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics. 
 
 The assumption is that economic outcomes, to some extent, are a function of the stories and ideas people spread. When these stories reach a wide and receptive audience they turn economic behavior into heard behavior.
 
 ## Data
-To capture the narrative component I used an R library called ```gtrendsR``` which does the API call to Google Trends for you so you don't have to cURL it. The data however is a bit unreliable, in the sense that Google provides the amount of hits as an index which is calculated in a black box of unpredictable magic, as noted by Shiller in his 2019 book Narrative Economics (but not in those words).
+To capture the narrative component I used an R library called ```gtrendsR``` which does the API call to Google Trends so you don't have to cURL it. The data however is a bit unreliable, in the sense that Google provides the amount of hits as an index which is calculated in a black box of unpredictable magic, as noted by Shiller in his 2019 book Narrative Economics (but not in those words).
 
 My query in Google Trends was ```covid``` and ```virus```. In this case, as the word spreads about Covid-19, people go online to search for information which registers in the index from Google Trends. This variable is countercyclical and should be negatively correlated with movement patterns.
 
 And then another variable that captures the behavioral change. For this variable my query was ```snälltåget``` and ```sj``` which are the main operators of long distance trains in Sweden. The assumption here is that people on average go online and search for train tickets 1 week ahead of departure. This variable is procyclical and should be positively correlated with movement patterns. 
 
-For data on movement patterns I used Google Mobility Report, one of the most interesting publicly available data sets on the internet. It was launched in the infancy of the Covid-19 pandemic to track changes in movement patterns all over the globe. It calculates changes from the same days baseline categorized by country, sub region and type of location/activity (retail and recreation, parks, homes etc). 
+For data on movement patterns I used Google Mobility Report. It was launched in the infancy of the Covid-19 pandemic to track changes in movement patterns all over the globe. It calculates changes from the same days baseline categorized by country, sub region and type of location/activity (retail and recreation, parks, homes etc). 
 
 ## Model
-One of the problems with applying a simple linear regression model is that time series data are likely to be autocorrelated which will show up in the residuals and violate important OLS assumptions. One way of resolving this is to model the residuals as an ARIMA-process. I ended up with a (1,1,0) process here. So the model used will be a linear regression with ARIMA errors. Sometimes referred to as ARIMAX, where the X denotes an external regressor.  
+One of the problems with applying a simple linear regression model is that time series data are likely to be autocorrelated which will show express itself as covariance between residuals. One way of resolving this is to model the residuals as an ARIMA-process. I ended up with a (1,1,0) process here. So the model used will be a linear regression with ARIMA errors. Sometimes referred to as ARIMAX, where the X denotes an external regressor. 
 
 The equation is:  
 $Y_t = B_1X_{1t} + B_2X_{2t} + n_t$ where $n_t = \phi n_{t-1} + \epsilon _t$ is the ARIMA error term. Notations for differencing are missing here.

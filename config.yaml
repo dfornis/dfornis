@@ -4,7 +4,7 @@ ignoreFiles: ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 languageCode: en-us
 theme: "hugo-theme-stack"
 paginate: 5
-title: David Fornborg
+title: dfornis
 
 # Change it to your Disqus shortname before using
 disqusShortname: hugo-theme-stack
@@ -34,7 +34,7 @@ params:
 
     sidebar:
         emoji: 
-        subtitle: "In retrospect, it was inevitable."
+        subtitle: ""
         avatar:
             local: true
             src: img/avatar.png
