@@ -4,7 +4,7 @@ ignoreFiles: ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 languageCode: en-us
 theme: "hugo-theme-stack"
 paginate: 5
-title: dfornis
+title: David Fornborg
 
 # Change it to your Disqus shortname before using
 disqusShortname: hugo-theme-stack
