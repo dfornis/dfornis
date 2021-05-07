@@ -2,7 +2,7 @@
 author = "David Fornborg"
 title = "Nowcasting a leading economic indicator in times of uncertainty - with R"
 date = "2021-01-31"
-description = "The standard tool set for making economic forecasts has had trouble keeping up with the sudden change in human behavior caused by the Covid-19 pandemic. In this experiment I explore if Google Trends data can be used to predict movement patterns week by week which in turn can be used as a high frequency leading economic indicator."
+description = "The standard tool set for making economic forecasts has had trouble keeping up with the sudden change in human behavior caused by the Covid-19 pandemic. In this experiment I explore if Google Trends data can be used to predict movement patterns week by week in times of high uncertainty. This prediction can in turn be used as a high frequency leading economic indicator."
 
 tags = [
     "r",
