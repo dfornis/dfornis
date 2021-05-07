@@ -13,7 +13,7 @@
       <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
       
       <guid>https://dfornis.github.io/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/</guid>
-      <description>Part of the difficulty lies in economic indicators being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. Macroeconomic indicators are traditionally collected with a large lag. This limits their utility in times of high uncertainty. In a pandemic for example, infection rates may accelerate non-linearly (as seen in SIR-models) and are likely to react to variables such as temperature and degree of immunity, many of which remain unknown at the beginning of a pandemic.</description>
+      <description>Macroeconomic indicators are traditionally collected with a large lag. This limits their utility in times of high uncertainty. In a pandemic for example, infection rates may accelerate non-linearly (as seen in SIR-models) and are likely to react to variables such as temperature and degree of immunity, many of which remain unknown at the beginning of a pandemic. Nowcasting has been suggested by the Swedish Riksbank (Andersson, Reijer 2015) among others as a tool to make predictions with higher frequency data.</description>
     </item>
     
   </channel>
