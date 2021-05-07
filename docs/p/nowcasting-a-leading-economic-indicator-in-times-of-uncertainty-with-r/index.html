@@ -339,7 +339,7 @@ fit_tslm %&gt;% gg_tsresiduals()
 		<figcaption>TSLM residuals</figcaption>
 		
 	</figure></p>
-<p>Fitting the ARIMAX-model:</p>
+<p>Fitting the ARIMAX-model below. Evaluating the residuals, they looked more like a stationary white noise process. No significant spikes.</p>
 <p><figure style="flex-grow: 123; flex-basis: 295px">
 		<a href="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/arimax_residuals_plot.png" data-size="904x733"><img src="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/arimax_residuals_plot.png"
 				srcset="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/arimax_residuals_plot_hu4f5034fb73b254b14675345864cce34e_62048_480x0_resize_box_2.png 480w, /dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/arimax_residuals_plot_hu4f5034fb73b254b14675345864cce34e_62048_1024x0_resize_box_2.png 1024w"
@@ -351,8 +351,7 @@ fit_tslm %&gt;% gg_tsresiduals()
 		
 		<figcaption>ARIMAX residuals</figcaption>
 		
-	</figure>
-Evaluating the ARIMAX-residuals, they looked more like a stationary white noise process. No significant spikes.</p>
+	</figure></p>
 <p>Plotting the models and forecasts produced with Fable:</p>
 <pre><code>tslm_plot &lt;- 
   tsibble_se %&gt;%

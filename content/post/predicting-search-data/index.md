@@ -171,10 +171,9 @@ fit_tslm %>% gg_tsresiduals()
 The patterns at index > 18 or so didn't look like a white noise-process. This shows up in the ACF plot as well, even though the spikes aren't significant. The takeaway is that modeling the residuals as an ARIMA-process might prove useful. 
 ![TSLM residuals](tslm_residuals_plot.png)
 
-Fitting the ARIMAX-model:  
+Fitting the ARIMAX-model below. Evaluating the residuals, they looked more like a stationary white noise process. No significant spikes.  
 
 ![ARIMAX residuals](arimax_residuals_plot.png)
-Evaluating the ARIMAX-residuals, they looked more like a stationary white noise process. No significant spikes.  
 
 Plotting the models and forecasts produced with Fable:
 ```

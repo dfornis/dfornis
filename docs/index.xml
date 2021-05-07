@@ -155,7 +155,7 @@ fit_tslm %&amp;gt;% gg_tsresiduals()
 		&lt;figcaption&gt;TSLM residuals&lt;/figcaption&gt;
 		
 	&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;Fitting the ARIMAX-model:&lt;/p&gt;
+&lt;p&gt;Fitting the ARIMAX-model below. Evaluating the residuals, they looked more like a stationary white noise process. No significant spikes.&lt;/p&gt;
 &lt;p&gt;&lt;figure style=&#34;flex-grow: 123; flex-basis: 295px&#34;&gt;
 		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/arimax_residuals_plot.png&#34; data-size=&#34;904x733&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/arimax_residuals_plot.png&#34;
 				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/arimax_residuals_plot_hu4f5034fb73b254b14675345864cce34e_62048_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/arimax_residuals_plot_hu4f5034fb73b254b14675345864cce34e_62048_1024x0_resize_box_2.png 1024w&#34;
@@ -167,8 +167,7 @@ fit_tslm %&amp;gt;% gg_tsresiduals()
 		
 		&lt;figcaption&gt;ARIMAX residuals&lt;/figcaption&gt;
 		
-	&lt;/figure&gt;
-Evaluating the ARIMAX-residuals, they looked more like a stationary white noise process. No significant spikes.&lt;/p&gt;
+	&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;Plotting the models and forecasts produced with Fable:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;tslm_plot &amp;lt;- 
   tsibble_se %&amp;gt;%
