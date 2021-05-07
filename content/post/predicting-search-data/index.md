@@ -94,7 +94,7 @@ Plotted together:
 
 ![](hits_plot.png)
 
-Hits for train travel drops sharply, as one would expect, and then rebounds over the summer. Hits for the virus jumps up but starts dropping surprisingly fast. Lower levels over the summer is in line with lower spread. The index jumps up again in the autumn of 2020. This inverse relationship between narrative and behavioral predictors made intuitive sense and looked promising.
+Hits for train travel dropped sharply, as one would expect, and then rebounded over the summer. Hits for the virus jumped up initially but dropped surprisingly fast. Lower levels over the summer was in line with a lower spread of the virus. The index jumped up again in the autumn of 2020, in line with a rising spread of the virus. This inverse relationship between narrative and behavioral predictors made intuitive sense and looked promising.
 
 The next step was to find out if the predictors had any explanatory power on the leading indicator: movement patterns.
 
@@ -124,7 +124,7 @@ df_se$retail <- df_se$retail + 100 # for potential differencing and log transfor
 Regressions and scatter plots:
 ![](hits_regressions_plot2.png)  
 
-Inspecting the plots reveals that there is a linear relationship between the variables. The virus search variable does well with 1 lag, while the train ticket search does better without a lag. This will likely depend a lot on the search queries used and on the reliability of Google's black box data. For the purpose of this experiment I stuck with the theory in order to be able to predict 1-step-ahead and continued with lagged variables.
+Inspecting the plots revealed that there was a linear relationship between the variables. The virus search variable did well with 1 lag, while the train ticket search did better without a lag. This will likely depend a lot on the search queries used and on the reliability of Google's black box data. For the purpose of this experiment I stuck with the theory in order to be able to predict 1-step-ahead and continued with lagged variables.
 
 Next, preparing the data for model fitting.
 ```

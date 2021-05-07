@@ -74,7 +74,7 @@ gtrends_se &amp;lt;- gtrends_nar %&amp;gt;%
 		&lt;/a&gt;
 		
 	&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;Hits for train travel drops sharply, as one would expect, and then rebounds over the summer. Hits for the virus jumps up but starts dropping surprisingly fast. Lower levels over the summer is in line with lower spread. The index jumps up again in the autumn of 2020. This inverse relationship between narrative and behavioral predictors made intuitive sense and looked promising.&lt;/p&gt;
+&lt;p&gt;Hits for train travel dropped sharply, as one would expect, and then rebounded over the summer. Hits for the virus jumped up initially but dropped surprisingly fast. Lower levels over the summer was in line with a lower spread of the virus. The index jumped up again in the autumn of 2020, in line with a rising spread of the virus. This inverse relationship between narrative and behavioral predictors made intuitive sense and looked promising.&lt;/p&gt;
 &lt;p&gt;The next step was to find out if the predictors had any explanatory power on the leading indicator: movement patterns.&lt;/p&gt;
 &lt;p&gt;The movement data is available at &lt;a href=&#34;https://www.google.com/covid19/mobility/&#34;&gt;https://www.google.com/covid19/mobility/&lt;/a&gt; I used  the .csv-file for global data and did the filtering for my region of interest in R.
 Once it&amp;rsquo;s loaded, the following code will filter for the target country with &lt;code&gt;country_region_code&lt;/code&gt;. I filtered for &lt;code&gt;sub_region_1 = &amp;quot;&amp;quot; &lt;/code&gt; in order to capture data for all of Sweden. The data is then transformed into weeks. Note that  data for &lt;code&gt;retail_and_recreation_percent_change_from_baseline&lt;/code&gt; was used. The movement patterns being predicted are in retail and recreation areas.&lt;/p&gt;
@@ -106,7 +106,7 @@ df_se$retail &amp;lt;- df_se$retail + 100 # for potential differencing and log t
 		&lt;/a&gt;
 		
 	&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;Inspecting the plots reveals that there is a linear relationship between the variables. The virus search variable does well with 1 lag, while the train ticket search does better without a lag. This will likely depend a lot on the search queries used and on the reliability of Google&amp;rsquo;s black box data. For the purpose of this experiment I stuck with the theory in order to be able to predict 1-step-ahead and continued with lagged variables.&lt;/p&gt;
+&lt;p&gt;Inspecting the plots revealed that there was a linear relationship between the variables. The virus search variable did well with 1 lag, while the train ticket search did better without a lag. This will likely depend a lot on the search queries used and on the reliability of Google&amp;rsquo;s black box data. For the purpose of this experiment I stuck with the theory in order to be able to predict 1-step-ahead and continued with lagged variables.&lt;/p&gt;
 &lt;p&gt;Next, preparing the data for model fitting.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;val_weeks &amp;lt;- 15 #15 weeks for validating the models
 
