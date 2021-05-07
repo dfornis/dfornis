@@ -25,7 +25,7 @@ Part of the difficulty lies in economic indicators being downstream from the dev
 In practical terms, what would the utility be of predicting changes in movement patterns? A sharp drop in movement in public spaces can be categorized as a black swan event for affected parties, whether they are retail stores, public transport companies or government agencies. Predicted movement patterns can also be used as a leading economic indicator.
 
 ## Theory
-The underlying theory has been advocated for as Narrative Economics by Robert Shiller (2019). But it has featured as a theme in many works without being mentioned by name. Its origins can be traced to the 1930's when Keynes coined the phrase animal spirits to capture a characteristic of human behavior beyond what was imagined in the classical models of economics. 
+The underlying theory has been advocated for as Narrative Economics by Robert Shiller (2017). But it has featured as a theme in many works without being mentioned by name. Its origins can be traced to the 1930's when Keynes coined the phrase animal spirits to capture a characteristic of human behavior beyond what was imagined in the classical models of economics. 
 
 The assumption is that economic outcomes, to some extent, are a function of the stories and ideas people tell themselves and others. When these stories reach a wide and receptive audience they turn economic behavior into heard behavior. If the narratives that occupy conversations and the minds of people can be measured, then they can theoretically be used to predict behavior. 
 
@@ -271,4 +271,9 @@ grid.arrange(tslm_plot, arimax_plot, arimax_direct_plot,  nrow = 3)
 
 The direct 1-step-ahead ARIMAX forecast does a little better than both the TSLM and the ARIMAX recursive forecast at self-correcting for the last drop off in movement. But still, it essentially fails to predict that last drop 1 week ahead. Leaving that aside, the level of predictive power in the model is surprising considering its simplicity. What I take away from this experiment is that with a bit of fine-tuning and perhaps added complexity it is possible to predict a leading economic indicator with high-frequency narrative data gathered  Google Trends. 
 
-Since it's a forecasting model, the highest requirements for statistical rigor does not necessarily apply. Given that, it would be interesting to apply a machine-learning technique for nowcasting with a larger and more varied narrative data input. 
+Since it's a forecasting model, the highest requirements for statistical rigor does not necessarily apply. Given that, it would be interesting to apply a machine-learning technique for nowcasting with a larger and more varied narrative data set. 
+
+##References
+Shiller, J.R. (2017) Narrative Economics. NBER Working Paper, No. 23075.
+
+Andersson, Michael K. and Reijer, Ard H.J. (2015), “Nowcasting”, Sveriges Riksbank Economic Review, 2015:1, Sveriges Riksbank, pp. 75-89.
