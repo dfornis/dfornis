@@ -274,8 +274,8 @@ grid.arrange(tslm_plot, arimax_plot, arimax_direct_plot,  nrow = 3)
 &lt;p&gt;The direct 1-step-ahead ARIMAX forecast does a little better than both the TSLM and the ARIMAX recursive forecast at self-correcting for the last drop off in movement. But still, it essentially fails to predict that last drop 1 week ahead. Leaving that aside, the level of predictive power in the model is surprising considering its simplicity. What I take away from this experiment is that with a bit of fine-tuning and perhaps added complexity it is possible to predict a leading economic indicator with high-frequency narrative data gathered  Google Trends.&lt;/p&gt;
 &lt;p&gt;The highest requirements for statistical rigor does not necessarily apply in a forecasting model, in the same way it does when exploring a casual relationship. Given that, it would be interesting to apply a machine-learning technique for nowcasting with a larger and more varied narrative data set.&lt;/p&gt;
 &lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
-&lt;p&gt;Shiller, J.R. (2017) Narrative Economics. NBER Working Paper, No. 23075.&lt;/p&gt;
 &lt;p&gt;Andersson, Michael K. and Reijer, Ard H.J. (2015), “Nowcasting”, Sveriges Riksbank Economic Review, 2015:1, Sveriges Riksbank, pp. 75-89.&lt;/p&gt;
+&lt;p&gt;Shiller, J.R. (2017) Narrative Economics. NBER Working Paper, No. 23075.&lt;/p&gt;
 </description>
         </item>
         

@@ -274,6 +274,7 @@ The direct 1-step-ahead ARIMAX forecast does a little better than both the TSLM 
 The highest requirements for statistical rigor does not necessarily apply in a forecasting model, in the same way it does when exploring a casual relationship. Given that, it would be interesting to apply a machine-learning technique for nowcasting with a larger and more varied narrative data set. 
 
 ## References
+Andersson, Michael K. and Reijer, Ard H.J. (2015), “Nowcasting”, Sveriges Riksbank Economic Review, 2015:1, Sveriges Riksbank, pp. 75-89.
+
 Shiller, J.R. (2017) Narrative Economics. NBER Working Paper, No. 23075.
 
-Andersson, Michael K. and Reijer, Ard H.J. (2015), “Nowcasting”, Sveriges Riksbank Economic Review, 2015:1, Sveriges Riksbank, pp. 75-89.
