@@ -64,11 +64,11 @@ gtrends_beh &amp;lt;- search_se_mean(query2)
 gtrends_se &amp;lt;- gtrends_nar %&amp;gt;%
   full_join(gtrends_beh, by = &amp;quot;week&amp;quot;, suffix = c(&amp;quot;_nar&amp;quot;, &amp;quot;_beh&amp;quot;))
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Plotted together:&lt;/p&gt;
-&lt;p&gt;&lt;figure style=&#34;flex-grow: 200; flex-basis: 480px&#34;&gt;
-		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_plot.png&#34; data-size=&#34;1800x900&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_plot.png&#34;
-				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_plot_hu5a943b98a0f0edf4753164ba2038e85d_150578_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_plot_hu5a943b98a0f0edf4753164ba2038e85d_150578_1024x0_resize_box_2.png 1024w&#34;
+&lt;p&gt;&lt;figure style=&#34;flex-grow: 175; flex-basis: 420px&#34;&gt;
+		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_plot.png&#34; data-size=&#34;1800x1027&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_plot.png&#34;
+				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_plot_hua7ab39595330142847324b445def8aed_103848_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_plot_hua7ab39595330142847324b445def8aed_103848_1024x0_resize_box_2.png 1024w&#34;
 				width=&#34;1800&#34;
-				height=&#34;900&#34;
+				height=&#34;1027&#34;
 				loading=&#34;lazy&#34;
 				&gt;
 		&lt;/a&gt;
