@@ -1,8 +1,8 @@
 +++
-author = "Hugo Authors"
-title = "Forecasting movement patterns with R"
+author = "David Fornborg"
+title = "Nowcasting a leading economic indicator in times of uncertainty - with R"
 date = "2021-01-31"
-description = "The Covid-19 pandemic has rendered the standard tool set for making economic forecasts less effective. Can high frequency Google Trends data be used as an alternative input in forecasts in times of high uncertainty?"
+description = "The standard tool set for making economic forecasts has had trouble keeping up with the sudden change in human behavior caused by the Covid-19 pandemic. In this experiment I explore if Google Trends data can be used to predict movement patterns week by week which in turn can be used as a high frequency leading economic indicator."
 
 tags = [
     "r",
@@ -20,33 +20,31 @@ image = "nicolas-perondi--Ho_obgLFs4-unsplash.jpg"
 
 ---
 
-Part of the difficulty lies in economic indicators being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. Macroeconomic indicators are also collected with a large enough lag to make them unusable for making the kinds of short time horizon forecasts that are valuable in times of high uncertainty.
+Part of the difficulty lies in economic indicators being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. Macroeconomic indicators are traditionally collected with a large lag. This limits their utility in times of high uncertainty. In a pandemic for example, infection rates may accelerate non-linearly (as seen in SIR-models) and are likely to react to variables such as temperature and degree of immunity, many of which remain unknown at the beginning of a pandemic. Nowcasting has been suggested by the Swedish Riksbank (Andersson, Reijer 2015) among others as a tool to make predictions with higher-frequency data. Andersson and Reijer use monthly data from surveys, financial markets and more in their nowcasting models to predict Swedish GDP. In this experiment I turned to Google Trends search data to predict movement patterns 1-week-ahead. This time horizon has proven to be relevant in the fast changing landscape that a pandemic presents.
 
-My idea was to circumnavigate this issue by making 1-week-ahead forecasts of movement patterns with an ARIMAX model where Google Trends data supply leading indicators as external variables in the model. 
-
-What would be the utility of predicting changes in movement patterns? A sharp drop in movement can be categorized as a black swan event for affected parties, whether they are retail stores, public transport companies or government agencies. For public transport, even a 1-week-ahead forecast of a sharp drop or increase in commuting could be useful. And movement patterns is of course a kind of macroeconomic indicator in itself.
+In practical terms, what would the utility be of predicting changes in movement patterns? A sharp drop in movement in public spaces can be categorized as a black swan event for affected parties, whether they are retail stores, public transport companies or government agencies. Predicted movement patterns can also be used as a leading economic indicator.
 
 ## Theory
-The underlying theory has been advocated for as Narrative Economics by Robert Shiller. But it has featured as a theme in many works without being mentioned by name. Tracing its origins takes us back as far as the 1930's when Keynes coined the phrase animal spirits, meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics. 
+The underlying theory has been advocated for as Narrative Economics by Robert Shiller (2019). But it has featured as a theme in many works without being mentioned by name. Its origins can be traced to the 1930's when Keynes coined the phrase animal spirits to capture a characteristic of human behavior beyond what was imagined in the classical models of economics. 
 
-The assumption is that economic outcomes, to some extent, are a function of the stories and ideas people spread. When these stories reach a wide and receptive audience they turn economic behavior into heard behavior.
+The assumption is that economic outcomes, to some extent, are a function of the stories and ideas people tell themselves and others. When these stories reach a wide and receptive audience they turn economic behavior into heard behavior. If the narratives that occupy conversations and the minds of people can be measured, then they can theoretically be used to predict behavior. 
 
 ## Data
-To capture the narrative component I used an R library called ```gtrendsR``` which does the API call to Google Trends so you don't have to cURL it. The data however is a bit unreliable, in the sense that Google provides the amount of hits as an index which is calculated in a black box of unpredictable magic, as noted by Shiller in his 2019 book Narrative Economics (but not in those words).
+To capture the narrative component I used an R library called ```gtrendsR``` which runs the API call to Google Trends so you don't have to cURL it manually. The data is slightly unreliablein the sense that Google provides the amount of hits as an index which is calculated in an unknown black box of magic. The index does however  seem  to measure change in search trends over a shorter time horizon reasonably well.
 
-My query in Google Trends was ```covid``` and ```virus```. In this case, as the word spreads about Covid-19, people go online to search for information which registers in the index from Google Trends. This variable is countercyclical and should be negatively correlated with movement patterns.
+The query used in Google Trends was ```covid``` and ```virus```. As the interest in Covid-19 rises, people are expected to go online to search for information about the virus or the situation which registers in the index. This variable is countercyclical and should be negatively correlated with movement patterns.
 
-And then another variable that captures the behavioral change. For this variable my query was ```snälltåget``` and ```sj``` which are the main operators of long distance trains in Sweden. The assumption here is that people on average go online and search for train tickets 1 week ahead of departure. This variable is procyclical and should be positively correlated with movement patterns. 
+A different and procyclical variable was used as well. For this variable my query was ```snälltåget``` and ```sj``` which are the main operators of long distance trains in Sweden. The assumption here is that people on average go online and search for train tickets 1 week ahead of departure. This variable should be positively correlated with movement patterns. 
 
-For data on movement patterns I used Google Mobility Report. It was launched in the infancy of the Covid-19 pandemic to track changes in movement patterns all over the globe. It calculates changes from the same days baseline categorized by country, sub region and type of location/activity (retail and recreation, parks, homes etc). 
+For data on movement patterns I used Google Mobility Report. It was launched in the infancy of the Covid-19 pandemic to track changes in movement patterns. It calculates changes from the same days baseline categorized by country, sub region and type of location/activity (retail and recreation, parks, homes etc). 
 
 ## Model
-One of the problems with applying a simple linear regression model is that time series data are likely to be autocorrelated which will show express itself as covariance between residuals. One way of resolving this is to model the residuals as an ARIMA-process. I ended up with a (1,1,0) process here. So the model used will be a linear regression with ARIMA errors. Sometimes referred to as ARIMAX, where the X denotes an external regressor. 
+One of the problems with applying a simple linear regression model is that time series data are likely to be autocorrelated which will express itself as covariance between residuals. One way of resolving this is to model the residuals as an ARIMA-process. I ended up with a (1,1,0) process here. So the model used will be a linear regression with ARIMA errors. Sometimes referred to as ARIMAX, where the X denotes an external regressor. 
 
-The equation is:  
-$Y_t = B_1X_{1t} + B_2X_{2t} + n_t$ where $n_t = \phi n_{t-1} + \epsilon _t$ is the ARIMA error term. Notations for differencing are missing here.
+The equation:  
+$Y_t = B_1X_{1t} + B_2X_{2t} + n_t$ where $n_t = \phi n_{t-1} + \epsilon _t$ is the ARIMA error term. Notations for differencing are missing.
 
-In the model, narratives are spread at time t and have an effect on economic behavior at time t+1. Having input variables lagged at t+1 allows us to use external regressors as fresh input for 1-step-ahead prediction in an ARIMAX model.
+In the model, narratives are spread at time t and have an effect on economic behavior at time t+1. Having input variables lagged at t+1 allows the use of an external regressor as fresh input for 1-step-ahead predictions in an ARIMAX model.
 
 ## R code
 Libraries:
@@ -59,13 +57,13 @@ library(tsibble)
 library(lubridate) # to help with some weekly time series strangeness.
 ```
 
-These were the inputs I went with for the Google Trends API call. 
+These were the inputs in the Google Trends API call. 
 ```
 query <- c("covid", "virus")
 query2 <- c("snälltåget", "sj")
 date <- c("2020-03-01 2021-01-15")
 ``` 
-I wrote a function which loops along the query vectors and outputs the mean of hits (index of times searched) in a data frame. This way it's easy to experiment with different search queries and do some explorative data analysis.
+I wrote a function which loops along the query vectors and outputs the mean of hits (index of times searched) in a data frame. This allows for easy experimentation with different search queries and explorative data analysis.
 
 ```
 search_se <- data.frame()
@@ -92,17 +90,16 @@ gtrends_se <- gtrends_nar %>%
   full_join(gtrends_beh, by = "week", suffix = c("_nar", "_beh"))
 ```
 
-Let's plot them together. 
+Plotted together: 
 
 ![](hits_plot.png)
 
-Hits for train travel drops sharply, as one would expect, and then rebounds over the summer. Hits for the virus jumps up but starts dropping surprisingly fast. Lower levels over the summer is in line with lower spread. Come autumn and the index jumps up again. This inverse relationship between narrative and behavioral predictors make intuitive sense and looks promising.
+Hits for train travel drops sharply, as one would expect, and then rebounds over the summer. Hits for the virus jumps up but starts dropping surprisingly fast. Lower levels over the summer is in line with lower spread. The index jumps up again in the autumn of 2020. This inverse relationship between narrative and behavioral predictors made intuitive sense and looked promising.
 
+The next step was to find out if the predictors had any explanatory power on the leading indicator: movement patterns.
 
-Next up was seeing how the predictors match with what I was trying to predict: movement patterns.
-
-The movement data is available at https://www.google.com/covid19/mobility/ I went with the .csv-file for global data and did the filtering in R.
-Once it's loaded, the following code will filter for the target country with ```country_region_code```. I filtered for ```sub_region_1 = "" ``` in order to capture data for all of Sweden. The data is then transformed into weeks. Note that I used the variable ```retail_and_recreation_percent_change_from_baseline```.
+The movement data is available at https://www.google.com/covid19/mobility/ I used  the .csv-file for global data and did the filtering for my region of interest in R.
+Once it's loaded, the following code will filter for the target country with ```country_region_code```. I filtered for ```sub_region_1 = "" ``` in order to capture data for all of Sweden. The data is then transformed into weeks. Note that  data for ```retail_and_recreation_percent_change_from_baseline``` was used. The movement patterns being predicted are in retail and recreation areas.
 
 ``` 
 gmr_se <- gmr %>%
@@ -127,7 +124,7 @@ df_se$retail <- df_se$retail + 100 # for potential differencing and log transfor
 Regressions and scatter plots:
 ![](hits_regressions_plot2.png)  
 
-I inspected the relationship between y, x1 and x2 while running regressions with and without lag at the same time. Inspecting the plots we see that there is a linear relationship between the variables. The narrative (virus search) variable does well with 1 lag, while the behavioral (train ticket search) does better without a lag. But this will depend a lot on the search queries used and on the reliability of Google's black box of magic. So for this experiment I stuck with the theory in order to be able to predict 1-step-ahead. Lagged variables it is.  
+Inspecting the plots reveals that there is a linear relationship between the variables. The virus search variable does well with 1 lag, while the train ticket search does better without a lag. This will likely depend a lot on the search queries used and on the reliability of Google's black box data. For the purpose of this experiment I stuck with the theory in order to be able to predict 1-step-ahead and continued with lagged variables.
 
 Next, preparing the data for model fitting.
 ```
@@ -149,7 +146,7 @@ tsibble_se_val <- tsibble_se %>%
   filter(type == "validation")
 ```
 
-Here I'm computing both the TSLM and the ARIMAX (1,1,0) model to see if it makes sense to model the residuals as an ARIMA-process.
+Computing both the TSLM and the ARIMAX (1,1,0) model to see if it makes sense to model the residuals as an ARIMA-process.
 
 ```
 fit_tslm <- tsibble_se_train %>% # fit the model on the training data
@@ -171,7 +168,7 @@ rmse_arimax <- round(accuracy(fit_arimax)[, 4], digits = 2) # extract RMSE
 fit_tslm %>% gg_tsresiduals() 
 ```
 
-The patterns at index > 18 or so didn't look like a white noise-process to me. This shows up in the ACF plot as well, even though the spikes aren't significant. This will depend a lot on the data retrieved from Google Trends.  
+The patterns at index > 18 or so didn't look like a white noise-process. This shows up in the ACF plot as well, even though the spikes aren't significant. The takeaway is that modeling the residuals as an ARIMA-process might prove useful. 
 ![TSLM residuals](tslm_residuals_plot.png)
 
 Fitting the ARIMAX-model:  
@@ -179,7 +176,7 @@ Fitting the ARIMAX-model:
 ![ARIMAX residuals](arimax_residuals_plot.png)
 Evaluating the ARIMAX-residuals, they looked more like a stationary white noise process. No significant spikes.  
 
-For plotting models and forecasts produced with Fable, I went with this:
+Plotting the models and forecasts produced with Fable:
 ```
 tslm_plot <- 
   tsibble_se %>%
@@ -211,9 +208,9 @@ grid.arrange(tslm_plot, arimax_plot, nrow = 2)
 ```
 ![](tslm_arimax_forecasts.png)
 
-I'm a bit surprised that the fitted TSLM model performed in parity with the ARIMAX model. I think this might vary a lot depending on the data you end up with. Both models do a decent job on the training data. But they both do a poor job at forecasting the sharp drop in movement that occurs at the end of the time series. I should point out that the ARIMAX model is forecasting the AR(1)-process recursively here, which means that there is a mean reversion where it looses its effect over time. 
+I'm a bit surprised that the fitted TSLM model performed in parity with the ARIMAX model. I think this might vary a lot depending on the data you end up with. Both models do a decent job on the training data. But they both do a poor job at forecasting the sharp drop in movement that occurs at the end of the time series. I should point out that the ARIMAX model is forecasting the AR(1)-process recursively here. Consequently, there is a mean reversion and it looses its effect over time. 
 
-Since I'm interested in the 1-step-ahead forecast, I wrote the loop below to capture what that looks like on the validation data. I hope and think that's what I did at least! The point here is to capture the direct 1-step-ahead forecast instead of a recursive forecast. 
+Since I'm interested in the 1-step-ahead forecast, I wrote the loop below to capture what that looks like on the validation data. The point here is to capture the direct 1-step-ahead forecast instead of a recursive forecast, and thereby utilize the full potential of the ARIMAX-model.
 
 ```
 tsibble_se_loop <- data.frame()
@@ -272,4 +269,6 @@ grid.arrange(tslm_plot, arimax_plot, arimax_direct_plot,  nrow = 3)
 
 ![](tslm_arimax_direct_forecasts.png)
 
-It seems like the direct 1-step-ahead ARIMAX forecast does a little better than both the TSLM and the ARIMAX recursive forecast at self-correcting for the last drop off in movement. But still, it essentially fails to predict that last drop 1 week ahead. Leaving that aside, I'm a bit surprised at the level of predictive power in the model considering its simplicity. My take away from this experiment is that a leading narrative indicator gathered from Google Trends, or even better a social media platform, can be used to forecast outcomes in the real economy.
+The direct 1-step-ahead ARIMAX forecast does a little better than both the TSLM and the ARIMAX recursive forecast at self-correcting for the last drop off in movement. But still, it essentially fails to predict that last drop 1 week ahead. Leaving that aside, the level of predictive power in the model is surprising considering its simplicity. What I take away from this experiment is that with a bit of fine-tuning and perhaps added complexity it is possible to predict a leading economic indicator with high-frequency narrative data gathered  Google Trends. 
+
+Since it's a forecasting model, the highest requirements for statistical rigor does not necessarily apply. Given that, it would be interesting to apply a machine-learning technique for nowcasting with a larger and more varied narrative data input. 

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='The standard tool set for making economic forecasts has had trouble keeping up with the sudden change in human behavior caused by the Covid-19 pandemic. In this experiment I explore if Google Trends data can be used to predict movement patterns week by week which in turn can be used as a high frequency leading economic indicator.'><title>Nowcasting a leading economic indicator in times of uncertainty - with R</title>
+
+<link rel='canonical' href='https://dfornis.github.io/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/'>
+
+<link rel="stylesheet" href="/dfornis/scss/style.min.css"><meta property='og:title' content='Nowcasting a leading economic indicator in times of uncertainty - with R'>
+<meta property='og:description' content='The standard tool set for making economic forecasts has had trouble keeping up with the sudden change in human behavior caused by the Covid-19 pandemic. In this experiment I explore if Google Trends data can be used to predict movement patterns week by week which in turn can be used as a high frequency leading economic indicator.'>
+<meta property='og:url' content='https://dfornis.github.io/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/'>
+<meta property='og:site_name' content='David Fornborg'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='r' /><meta property='article:tag' content='narrative economics' /><meta property='article:tag' content='prediction' /><meta property='article:tag' content='gtrends' /><meta property='article:published_time' content='2021-01-31T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2021-01-31T00:00:00&#43;00:00'/><meta property='og:image' content='https://dfornis.github.io/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/nicolas-perondi--Ho_obgLFs4-unsplash.jpg' />
+<meta name="twitter:title" content="Nowcasting a leading economic indicator in times of uncertainty - with R">
+<meta name="twitter:description" content="The standard tool set for making economic forecasts has had trouble keeping up with the sudden change in human behavior caused by the Covid-19 pandemic. In this experiment I explore if Google Trends data can be used to predict movement patterns week by week which in turn can be used as a high frequency leading economic indicator."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://dfornis.github.io/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/nicolas-perondi--Ho_obgLFs4-unsplash.jpg' /><style>
+		
+    :root {
+        --article-font-family: "Merriweather", var(--base-font-family);
+    }
+</style>
+
+<script>
+		(function () {
+		    const customFont = document.createElement('link');
+		    customFont.href = "<https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap>";
+		
+		    customFont.type = "text/css";
+		    customFont.rel = "stylesheet";
+		
+		    document.head.appendChild(customFont);
+		}());
+</script>
+    </head>
+    <body class="">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script><div class="container main-container flex on-phone--column extended article-page with-toolbar">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/dfornis/img/avatar_huad2d60a4d96d9de4b8e64fc571ba201c_676_300x0_resize_box_2.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://dfornis.github.io/dfornis/">David Fornborg</a></h1>
+        <h2 class="site-description"></h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/dfornis/about'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About me</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/dfornis/archives'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/dfornis/search'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+    </ol>
+</aside>
+
+            <main class="main full-width">
+    <div id="article-toolbar">
+        <a href="https://dfornis.github.io/dfornis/" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/">
+                <img src="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/nicolas-perondi--Ho_obgLFs4-unsplash_hudba9150e16cdf60946dabab36cfea944_1220069_800x0_resize_q75_box.jpg"
+                        srcset="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/nicolas-perondi--Ho_obgLFs4-unsplash_hudba9150e16cdf60946dabab36cfea944_1220069_800x0_resize_q75_box.jpg 800w, /dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/nicolas-perondi--Ho_obgLFs4-unsplash_hudba9150e16cdf60946dabab36cfea944_1220069_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="600" 
+                        loading="lazy"
+                        alt="Featured image of post Nowcasting a leading economic indicator in times of uncertainty - with R" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <h2 class="article-title">
+        <a href="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/">Nowcasting a leading economic indicator in times of uncertainty - with R</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        The standard tool set for making economic forecasts has had trouble keeping up with the sudden change in human behavior caused by the Covid-19 pandemic. In this experiment I explore if Google Trends data can be used to predict movement patterns week by week which in turn can be used as a high frequency leading economic indicator.
+    </h3>
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Jan 31, 2021</time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <hr>
+<p>Part of the difficulty lies in economic indicators being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. Macroeconomic indicators are traditionally collected with a large lag. This limits their utility in times of high uncertainty. In a pandemic for example, infection rates may accelerate non-linearly (as seen in SIR-models) and are likely to react to variables such as temperature and degree of immunity, many of which remain unknown at the beginning of a pandemic. Nowcasting has been suggested by the Swedish Riksbank (Andersson, Reijer 2015) among others as a tool to make predictions with higher-frequency data. Andersson and Reijer use monthly data from surveys, financial markets and more in their nowcasting models to predict Swedish GDP. In this experiment I turned to Google Trends search data to predict movement patterns 1-week-ahead. This time horizon has proven to be relevant in the fast changing landscape that a pandemic presents.</p>
+<p>In practical terms, what would the utility be of predicting changes in movement patterns? A sharp drop in movement in public spaces can be categorized as a black swan event for affected parties, whether they are retail stores, public transport companies or government agencies. Predicted movement patterns can also be used as a leading economic indicator.</p>
+<h2 id="theory">Theory</h2>
+<p>The underlying theory has been advocated for as Narrative Economics by Robert Shiller (2019). But it has featured as a theme in many works without being mentioned by name. Its origins can be traced to the 1930&rsquo;s when Keynes coined the phrase animal spirits to capture a characteristic of human behavior beyond what was imagined in the classical models of economics.</p>
+<p>The assumption is that economic outcomes, to some extent, are a function of the stories and ideas people tell themselves and others. When these stories reach a wide and receptive audience they turn economic behavior into heard behavior. If the narratives that occupy conversations and the minds of people can be measured, then they can theoretically be used to predict behavior.</p>
+<h2 id="data">Data</h2>
+<p>To capture the narrative component I used an R library called <code>gtrendsR</code> which runs the API call to Google Trends so you don&rsquo;t have to cURL it manually. The data is slightly unreliablein the sense that Google provides the amount of hits as an index which is calculated in an unknown black box of magic. The index does however  seem  to measure change in search trends over a shorter time horizon reasonably well.</p>
+<p>The query used in Google Trends was <code>covid</code> and <code>virus</code>. As the interest in Covid-19 rises, people are expected to go online to search for information about the virus or the situation which registers in the index. This variable is countercyclical and should be negatively correlated with movement patterns.</p>
+<p>A different and procyclical variable was used as well. For this variable my query was <code>snälltåget</code> and <code>sj</code> which are the main operators of long distance trains in Sweden. The assumption here is that people on average go online and search for train tickets 1 week ahead of departure. This variable should be positively correlated with movement patterns.</p>
+<p>For data on movement patterns I used Google Mobility Report. It was launched in the infancy of the Covid-19 pandemic to track changes in movement patterns. It calculates changes from the same days baseline categorized by country, sub region and type of location/activity (retail and recreation, parks, homes etc).</p>
+<h2 id="model">Model</h2>
+<p>One of the problems with applying a simple linear regression model is that time series data are likely to be autocorrelated which will express itself as covariance between residuals. One way of resolving this is to model the residuals as an ARIMA-process. I ended up with a (1,1,0) process here. So the model used will be a linear regression with ARIMA errors. Sometimes referred to as ARIMAX, where the X denotes an external regressor.</p>
+<p>The equation:<br>
+$Y_t = B_1X_{1t} + B_2X_{2t} + n_t$ where $n_t = \phi n_{t-1} + \epsilon _t$ is the ARIMA error term. Notations for differencing are missing.</p>
+<p>In the model, narratives are spread at time t and have an effect on economic behavior at time t+1. Having input variables lagged at t+1 allows the use of an external regressor as fresh input for 1-step-ahead predictions in an ARIMAX model.</p>
+<h2 id="r-code">R code</h2>
+<p>Libraries:</p>
+<pre><code>library(tidyverse)
+library(gtrendsR) # for Google Trends API calls.
+library(fable) # tidyverse compatible replacement of the forecast package.
+library(feasts)
+library(tsibble)
+library(lubridate) # to help with some weekly time series strangeness.
+</code></pre><p>These were the inputs in the Google Trends API call.</p>
+<pre><code>query &lt;- c(&quot;covid&quot;, &quot;virus&quot;)
+query2 &lt;- c(&quot;snälltåget&quot;, &quot;sj&quot;)
+date &lt;- c(&quot;2020-03-01 2021-01-15&quot;)
+</code></pre><p>I wrote a function which loops along the query vectors and outputs the mean of hits (index of times searched) in a data frame. This allows for easy experimentation with different search queries and explorative data analysis.</p>
+<pre><code>search_se &lt;- data.frame()
+
+search_se_mean &lt;- function(query) {
+  for(i in seq_along(search)) {
+    print(search[i])
+    search_se &lt;- rbind(covid_se,
+                      gtrends(keyword = search[i],
+                              geo = &quot;SE&quot;,
+                              time = date)[[1]])
+  }
+
+search_se_mean &lt;- search_se %&gt;%
+  mutate(week = yearweek(date, week_start = 1)) %&gt;%
+  group_by(week) %&gt;%
+  summarise(hits = mean(hits))
+}
+
+gtrends_nar &lt;- search_se_mean(query)
+gtrends_beh &lt;- search_se_mean(query2)
+
+gtrends_se &lt;- gtrends_nar %&gt;%
+  full_join(gtrends_beh, by = &quot;week&quot;, suffix = c(&quot;_nar&quot;, &quot;_beh&quot;))
+</code></pre><p>Plotted together:</p>
+<p><figure style="flex-grow: 200; flex-basis: 480px">
+		<a href="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_plot.png" data-size="1800x900"><img src="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_plot.png"
+				srcset="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_plot_hu5a943b98a0f0edf4753164ba2038e85d_150578_480x0_resize_box_2.png 480w, /dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_plot_hu5a943b98a0f0edf4753164ba2038e85d_150578_1024x0_resize_box_2.png 1024w"
+				width="1800"
+				height="900"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure></p>
+<p>Hits for train travel drops sharply, as one would expect, and then rebounds over the summer. Hits for the virus jumps up but starts dropping surprisingly fast. Lower levels over the summer is in line with lower spread. The index jumps up again in the autumn of 2020. This inverse relationship between narrative and behavioral predictors made intuitive sense and looked promising.</p>
+<p>The next step was to find out if the predictors had any explanatory power on the leading indicator: movement patterns.</p>
+<p>The movement data is available at <a href="https://www.google.com/covid19/mobility/">https://www.google.com/covid19/mobility/</a> I used  the .csv-file for global data and did the filtering for my region of interest in R.
+Once it&rsquo;s loaded, the following code will filter for the target country with <code>country_region_code</code>. I filtered for <code>sub_region_1 = &quot;&quot; </code> in order to capture data for all of Sweden. The data is then transformed into weeks. Note that  data for <code>retail_and_recreation_percent_change_from_baseline</code> was used. The movement patterns being predicted are in retail and recreation areas.</p>
+<pre><code>gmr_se &lt;- gmr %&gt;%
+  mutate(date = as_date(date)) %&gt;%
+  filter(country_region_code == &quot;SE&quot;,
+         sub_region_1 == &quot;&quot;,
+         date &gt;= &quot;2020-03-01&quot; &amp; date &lt;= &quot;2021-01-17&quot;) %&gt;%
+  select(date, retail_and_recreation_percent_change_from_baseline) %&gt;%
+  mutate(week = yearweek(date, week_start = 1)) %&gt;%
+  group_by(week) %&gt;%
+  summarise(across(everything(), list(mean))) %&gt;%
+  rename(
+    &quot;retail&quot; = retail_and_recreation_percent_change_from_baseline_1) %&gt;%
+  select(week, retail)
+
+df_se &lt;- gtrends_se %&gt;% # join data sets together
+  left_join(gmr_se)
+
+df_se$retail &lt;- df_se$retail + 100 # for potential differencing and log transformations
+</code></pre><p>Regressions and scatter plots:
+<figure style="flex-grow: 155; flex-basis: 373px">
+		<a href="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_regressions_plot2.png" data-size="2100x1350"><img src="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_regressions_plot2.png"
+				srcset="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_regressions_plot2_hua328f663b5bd7ed38e00c602276479d8_332050_480x0_resize_box_2.png 480w, /dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_regressions_plot2_hua328f663b5bd7ed38e00c602276479d8_332050_1024x0_resize_box_2.png 1024w"
+				width="2100"
+				height="1350"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure></p>
+<p>Inspecting the plots reveals that there is a linear relationship between the variables. The virus search variable does well with 1 lag, while the train ticket search does better without a lag. This will likely depend a lot on the search queries used and on the reliability of Google&rsquo;s black box data. For the purpose of this experiment I stuck with the theory in order to be able to predict 1-step-ahead and continued with lagged variables.</p>
+<p>Next, preparing the data for model fitting.</p>
+<pre><code>val_weeks &lt;- 15 #15 weeks for validating the models
+
+df_se_index &lt;- df_se %&gt;%
+  mutate(index = seq_along(1:nrow(.)),
+    type = if_else(index &gt; max(index) - val_weeks,
+    &quot;validation&quot;, &quot;training&quot;),
+    hits_nar_lag = lag(hits_nar),
+    hits_beh_lag = lag(hits_beh))
+
+tsibble_se &lt;- as_tsibble(df_se_index, index = index) # as time series tibble
+
+tsibble_se_train &lt;- tsibble_se %&gt;%
+  filter(type == &quot;training&quot;)
+
+tsibble_se_val &lt;- tsibble_se %&gt;%
+  filter(type == &quot;validation&quot;)
+</code></pre><p>Computing both the TSLM and the ARIMAX (1,1,0) model to see if it makes sense to model the residuals as an ARIMA-process.</p>
+<pre><code>fit_tslm &lt;- tsibble_se_train %&gt;% # fit the model on the training data
+  model(TSLM(retail ~ hits_nar_lag + hits_beh_lag))
+
+fc_tslm &lt;- fit_tslm %&gt;% # forecast with the validation data
+  forecast(new_data = tsibble_se_val)
+
+fit_arimax &lt;- tsibble_se_train %&gt;%
+  model(ARIMA(retail ~ hits_nar_lag + hits_beh_lag + pdq(1, 1, 0)))
+
+fc_arimax &lt;- fit_arimax %&gt;%
+  forecast(new_data = tsibble_se_val)
+
+rmse_tslm &lt;- round(accuracy(fit_tslm)[, 4], digits = 2) # extract RMSE
+
+rmse_arimax &lt;- round(accuracy(fit_arimax)[, 4], digits = 2) # extract RMSE
+
+fit_tslm %&gt;% gg_tsresiduals() 
+</code></pre><p>The patterns at index &gt; 18 or so didn&rsquo;t look like a white noise-process. This shows up in the ACF plot as well, even though the spikes aren&rsquo;t significant. The takeaway is that modeling the residuals as an ARIMA-process might prove useful.
+<figure style="flex-grow: 107; flex-basis: 256px">
+		<a href="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_residuals_plot.png" data-size="1916x1790"><img src="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_residuals_plot.png"
+				srcset="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_residuals_plot_hu655848a1b355c501c0d34ca27ceea49f_384107_480x0_resize_box_2.png 480w, /dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_residuals_plot_hu655848a1b355c501c0d34ca27ceea49f_384107_1024x0_resize_box_2.png 1024w"
+				width="1916"
+				height="1790"
+				loading="lazy"
+				alt="TSLM residuals">
+		</a>
+		
+		<figcaption>TSLM residuals</figcaption>
+		
+	</figure></p>
+<p>Fitting the ARIMAX-model:</p>
+<p><figure style="flex-grow: 123; flex-basis: 295px">
+		<a href="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/arimax_residuals_plot.png" data-size="904x733"><img src="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/arimax_residuals_plot.png"
+				srcset="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/arimax_residuals_plot_hu4f5034fb73b254b14675345864cce34e_62048_480x0_resize_box_2.png 480w, /dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/arimax_residuals_plot_hu4f5034fb73b254b14675345864cce34e_62048_1024x0_resize_box_2.png 1024w"
+				width="904"
+				height="733"
+				loading="lazy"
+				alt="ARIMAX residuals">
+		</a>
+		
+		<figcaption>ARIMAX residuals</figcaption>
+		
+	</figure>
+Evaluating the ARIMAX-residuals, they looked more like a stationary white noise process. No significant spikes.</p>
+<p>Plotting the models and forecasts produced with Fable:</p>
+<pre><code>tslm_plot &lt;- 
+  tsibble_se %&gt;%
+  mutate(color = if_else(type == &quot;training&quot;, &quot;#7e828c&quot;, &quot;#7e828c&quot;)) %&gt;%
+  ggplot(aes(x = index, y = retail)) +
+  geom_line() +
+  autolayer(fc_tslm, alpha = 0.5, color = &quot;#aa332c&quot;) +
+  geom_line(aes(color = color), alpha = 0.8) +
+  geom_line(aes(y = .fitted, color = &quot;#aa332c&quot;), data = augment(fit_tslm)) +
+  labs(
+    title = &quot;TSLM model&quot;,
+    subtitle = paste0(&quot;RMSE = &quot;, rmse_tslm)) +
+  scale_color_identity() 
+  
+arimax_plot &lt;- 
+  tsibble_se %&gt;%
+  mutate(color = if_else(type == &quot;training&quot;, &quot;#7e828c&quot;, &quot;#7e828c&quot;)) %&gt;%
+  ggplot(aes(x = index, y = retail)) +
+  geom_line() +
+  autolayer(fc_arimax, alpha = 0.5, color = &quot;#aa332c&quot;) +
+  geom_line(aes(color = color), alpha = 0.8) +
+  geom_line(aes(y = .fitted, color = &quot;#aa332c&quot;), data = augment(fit_arimax)) +
+  labs(
+    title = &quot;ARIMAX model&quot;,
+    subtitle = paste0(&quot;RMSE = &quot;, rmse_arimax)) +
+  scale_color_identity() 
+  
+grid.arrange(tslm_plot, arimax_plot, nrow = 2)
+</code></pre><p><figure style="flex-grow: 100; flex-basis: 240px">
+		<a href="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_arimax_forecasts.png" data-size="2100x2100"><img src="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_arimax_forecasts.png"
+				srcset="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_arimax_forecasts_hu4346fcd9ca4674303bb43313d3e76666_400552_480x0_resize_box_2.png 480w, /dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_arimax_forecasts_hu4346fcd9ca4674303bb43313d3e76666_400552_1024x0_resize_box_2.png 1024w"
+				width="2100"
+				height="2100"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure></p>
+<p>I&rsquo;m a bit surprised that the fitted TSLM model performed in parity with the ARIMAX model. I think this might vary a lot depending on the data you end up with. Both models do a decent job on the training data. But they both do a poor job at forecasting the sharp drop in movement that occurs at the end of the time series. I should point out that the ARIMAX model is forecasting the AR(1)-process recursively here. Consequently, there is a mean reversion and it looses its effect over time.</p>
+<p>Since I&rsquo;m interested in the 1-step-ahead forecast, I wrote the loop below to capture what that looks like on the validation data. The point here is to capture the direct 1-step-ahead forecast instead of a recursive forecast, and thereby utilize the full potential of the ARIMAX-model.</p>
+<pre><code>tsibble_se_loop &lt;- data.frame()
+direct_pred &lt;- data.frame()
+index &lt;- 15:nrow(tsibble_se)
+val_weeks = 1
+
+for(i in index) {
+  tsibble_se_loop &lt;- df_se %&gt;%
+    mutate(index = seq_along(1:nrow(.)),
+           hits_nar_lag = lag(hits_nar),
+           hits_beh_lag = lag(hits_beh)) %&gt;%
+    as_tsibble(., index = index) %&gt;%
+    filter(index &lt; index[i]) %&gt;%
+    mutate(type = if_else(index &gt; max(index) - val_weeks,
+                          &quot;validation&quot;, &quot;training&quot;))
+  
+  # Save the training data
+  tibble_train_loop &lt;- tsibble_se_loop %&gt;%
+    filter(type == &quot;training&quot;)
+  
+  # Save the validation data
+  tibble_val_loop &lt;- tsibble_se_loop %&gt;%
+    filter(type == &quot;validation&quot;)
+  
+  fit_arimax &lt;- tibble_train_loop %&gt;%
+    model(ARIMA(retail ~ hits_nar_lag + hits_beh_lag + pdq(1, 1, 0)))
+  fc_arimax &lt;- fit_arimax %&gt;%
+    forecast(new_data = tibble_val_loop)
+  
+  fc_arimax &lt;- as_tibble(fc_arimax) %&gt;%
+    select(index, .mean)
+  
+  direct_pred &lt;- rbind(direct_pred, fc_arimax)
+}
+
+direct_pred &lt;- as_tsibble(direct_pred, index = index)
+
+arimax_direct_plot &lt;- 
+  tsibble_se %&gt;%
+  mutate(color = if_else(type == &quot;training&quot;, &quot;#7e828c&quot;, &quot;#7e828c&quot;)) %&gt;%
+  ggplot(aes(x = index, y = retail)) +
+  geom_line() +
+  geom_point(aes(x = index, y = .mean), color = &quot;#aa332c&quot;, fill = &quot;#aa332c&quot;, size = 2, alpha = .8, data = direct_pred) +
+  autolayer(direct_pred, alpha = 0.8, color = &quot;#aa332c&quot;)  +
+  labs(
+    title = &quot;ARIMAX model&quot;,
+    subtitle = &quot;with 1-step-ahead direct forecast&quot;) +
+  scale_color_identity() +
+  theme(
+    axis.title.x = element_blank()
+  )
+
+grid.arrange(tslm_plot, arimax_plot, arimax_direct_plot,  nrow = 3)
+</code></pre><p><figure style="flex-grow: 100; flex-basis: 240px">
+		<a href="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_arimax_direct_forecasts.png" data-size="2100x2100"><img src="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_arimax_direct_forecasts.png"
+				srcset="/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_arimax_direct_forecasts_hu4346fcd9ca4674303bb43313d3e76666_449833_480x0_resize_box_2.png 480w, /dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_arimax_direct_forecasts_hu4346fcd9ca4674303bb43313d3e76666_449833_1024x0_resize_box_2.png 1024w"
+				width="2100"
+				height="2100"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure></p>
+<p>The direct 1-step-ahead ARIMAX forecast does a little better than both the TSLM and the ARIMAX recursive forecast at self-correcting for the last drop off in movement. But still, it essentially fails to predict that last drop 1 week ahead. Leaving that aside, the level of predictive power in the model is surprising considering its simplicity. What I take away from this experiment is that with a bit of fine-tuning and perhaps added complexity it is possible to predict a leading economic indicator with high-frequency narrative data gathered  Google Trends.</p>
+<p>Since it&rsquo;s a forecasting model, the highest requirements for statistical rigor does not necessarily apply. Given that, it would be interesting to apply a machine-learning technique for nowcasting with a larger and more varied narrative data input.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/dfornis/tags/r/">r</a>
+        
+            <a href="/dfornis/tags/narrative-economics/">narrative economics</a>
+        
+            <a href="/dfornis/tags/prediction/">prediction</a>
+        
+            <a href="/dfornis/tags/gtrends/">gtrends</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+    integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+    integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+    onload="StackLaTeX()"></script>
+
+<script>
+    function StackLaTeX() {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });
+    }
+</script>
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+</aside>
+
+
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (DISQUS) {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2021 David Fornborg
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.0.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+            </main>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"
+    integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin="anonymous"></script><script type="text/javascript" src="/dfornis/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

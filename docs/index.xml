@@ -7,28 +7,27 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <lastBuildDate>Sun, 31 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://dfornis.github.io/dfornis/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Forecasting movement patterns with R</title>
-        <link>https://dfornis.github.io/dfornis/p/forecasting-movement-patterns-with-r/</link>
+        <title>Nowcasting a leading economic indicator in times of uncertainty - with R</title>
+        <link>https://dfornis.github.io/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/</link>
         <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
         
-        <guid>https://dfornis.github.io/dfornis/p/forecasting-movement-patterns-with-r/</guid>
-        <description>&lt;img src="https://dfornis.github.io/dfornis/p/forecasting-movement-patterns-with-r/nicolas-perondi--Ho_obgLFs4-unsplash.jpg" alt="Featured image of post Forecasting movement patterns with R" /&gt;&lt;hr&gt;
-&lt;p&gt;Part of the difficulty lies in economic indicators being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. Macroeconomic indicators are also collected with a large enough lag to make them unusable for making the kinds of short time horizon forecasts that are valuable in times of high uncertainty.&lt;/p&gt;
-&lt;p&gt;My idea was to circumnavigate this issue by making 1-week-ahead forecasts of movement patterns with an ARIMAX model where Google Trends data supply leading indicators as external variables in the model.&lt;/p&gt;
-&lt;p&gt;What would be the utility of predicting changes in movement patterns? A sharp drop in movement can be categorized as a black swan event for affected parties, whether they are retail stores, public transport companies or government agencies. For public transport, even a 1-week-ahead forecast of a sharp drop or increase in commuting could be useful. And movement patterns is of course a kind of macroeconomic indicator in itself.&lt;/p&gt;
+        <guid>https://dfornis.github.io/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/</guid>
+        <description>&lt;img src="https://dfornis.github.io/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/nicolas-perondi--Ho_obgLFs4-unsplash.jpg" alt="Featured image of post Nowcasting a leading economic indicator in times of uncertainty - with R" /&gt;&lt;hr&gt;
+&lt;p&gt;Part of the difficulty lies in economic indicators being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. Macroeconomic indicators are traditionally collected with a large lag. This limits their utility in times of high uncertainty. In a pandemic for example, infection rates may accelerate non-linearly (as seen in SIR-models) and are likely to react to variables such as temperature and degree of immunity, many of which remain unknown at the beginning of a pandemic. Nowcasting has been suggested by the Swedish Riksbank (Andersson, Reijer 2015) among others as a tool to make predictions with higher-frequency data. Andersson and Reijer use monthly data from surveys, financial markets and more in their nowcasting models to predict Swedish GDP. In this experiment I turned to Google Trends search data to predict movement patterns 1-week-ahead. This time horizon has proven to be relevant in the fast changing landscape that a pandemic presents.&lt;/p&gt;
+&lt;p&gt;In practical terms, what would the utility be of predicting changes in movement patterns? A sharp drop in movement in public spaces can be categorized as a black swan event for affected parties, whether they are retail stores, public transport companies or government agencies. Predicted movement patterns can also be used as a leading economic indicator.&lt;/p&gt;
 &lt;h2 id=&#34;theory&#34;&gt;Theory&lt;/h2&gt;
-&lt;p&gt;The underlying theory has been advocated for as Narrative Economics by Robert Shiller. But it has featured as a theme in many works without being mentioned by name. Tracing its origins takes us back as far as the 1930&amp;rsquo;s when Keynes coined the phrase animal spirits, meant to capture a characteristic of human behavior beyond what was imagined in the classical models of economics.&lt;/p&gt;
-&lt;p&gt;The assumption is that economic outcomes, to some extent, are a function of the stories and ideas people spread. When these stories reach a wide and receptive audience they turn economic behavior into heard behavior.&lt;/p&gt;
+&lt;p&gt;The underlying theory has been advocated for as Narrative Economics by Robert Shiller (2019). But it has featured as a theme in many works without being mentioned by name. Its origins can be traced to the 1930&amp;rsquo;s when Keynes coined the phrase animal spirits to capture a characteristic of human behavior beyond what was imagined in the classical models of economics.&lt;/p&gt;
+&lt;p&gt;The assumption is that economic outcomes, to some extent, are a function of the stories and ideas people tell themselves and others. When these stories reach a wide and receptive audience they turn economic behavior into heard behavior. If the narratives that occupy conversations and the minds of people can be measured, then they can theoretically be used to predict behavior.&lt;/p&gt;
 &lt;h2 id=&#34;data&#34;&gt;Data&lt;/h2&gt;
-&lt;p&gt;To capture the narrative component I used an R library called &lt;code&gt;gtrendsR&lt;/code&gt; which does the API call to Google Trends so you don&amp;rsquo;t have to cURL it. The data however is a bit unreliable, in the sense that Google provides the amount of hits as an index which is calculated in a black box of unpredictable magic, as noted by Shiller in his 2019 book Narrative Economics (but not in those words).&lt;/p&gt;
-&lt;p&gt;My query in Google Trends was &lt;code&gt;covid&lt;/code&gt; and &lt;code&gt;virus&lt;/code&gt;. In this case, as the word spreads about Covid-19, people go online to search for information which registers in the index from Google Trends. This variable is countercyclical and should be negatively correlated with movement patterns.&lt;/p&gt;
-&lt;p&gt;And then another variable that captures the behavioral change. For this variable my query was &lt;code&gt;snälltåget&lt;/code&gt; and &lt;code&gt;sj&lt;/code&gt; which are the main operators of long distance trains in Sweden. The assumption here is that people on average go online and search for train tickets 1 week ahead of departure. This variable is procyclical and should be positively correlated with movement patterns.&lt;/p&gt;
-&lt;p&gt;For data on movement patterns I used Google Mobility Report. It was launched in the infancy of the Covid-19 pandemic to track changes in movement patterns all over the globe. It calculates changes from the same days baseline categorized by country, sub region and type of location/activity (retail and recreation, parks, homes etc).&lt;/p&gt;
+&lt;p&gt;To capture the narrative component I used an R library called &lt;code&gt;gtrendsR&lt;/code&gt; which runs the API call to Google Trends so you don&amp;rsquo;t have to cURL it manually. The data is slightly unreliablein the sense that Google provides the amount of hits as an index which is calculated in an unknown black box of magic. The index does however  seem  to measure change in search trends over a shorter time horizon reasonably well.&lt;/p&gt;
+&lt;p&gt;The query used in Google Trends was &lt;code&gt;covid&lt;/code&gt; and &lt;code&gt;virus&lt;/code&gt;. As the interest in Covid-19 rises, people are expected to go online to search for information about the virus or the situation which registers in the index. This variable is countercyclical and should be negatively correlated with movement patterns.&lt;/p&gt;
+&lt;p&gt;A different and procyclical variable was used as well. For this variable my query was &lt;code&gt;snälltåget&lt;/code&gt; and &lt;code&gt;sj&lt;/code&gt; which are the main operators of long distance trains in Sweden. The assumption here is that people on average go online and search for train tickets 1 week ahead of departure. This variable should be positively correlated with movement patterns.&lt;/p&gt;
+&lt;p&gt;For data on movement patterns I used Google Mobility Report. It was launched in the infancy of the Covid-19 pandemic to track changes in movement patterns. It calculates changes from the same days baseline categorized by country, sub region and type of location/activity (retail and recreation, parks, homes etc).&lt;/p&gt;
 &lt;h2 id=&#34;model&#34;&gt;Model&lt;/h2&gt;
-&lt;p&gt;One of the problems with applying a simple linear regression model is that time series data are likely to be autocorrelated which will show express itself as covariance between residuals. One way of resolving this is to model the residuals as an ARIMA-process. I ended up with a (1,1,0) process here. So the model used will be a linear regression with ARIMA errors. Sometimes referred to as ARIMAX, where the X denotes an external regressor.&lt;/p&gt;
-&lt;p&gt;The equation is:&lt;br&gt;
-$Y_t = B_1X_{1t} + B_2X_{2t} + n_t$ where $n_t = \phi n_{t-1} + \epsilon _t$ is the ARIMA error term. Notations for differencing are missing here.&lt;/p&gt;
-&lt;p&gt;In the model, narratives are spread at time t and have an effect on economic behavior at time t+1. Having input variables lagged at t+1 allows us to use external regressors as fresh input for 1-step-ahead prediction in an ARIMAX model.&lt;/p&gt;
+&lt;p&gt;One of the problems with applying a simple linear regression model is that time series data are likely to be autocorrelated which will express itself as covariance between residuals. One way of resolving this is to model the residuals as an ARIMA-process. I ended up with a (1,1,0) process here. So the model used will be a linear regression with ARIMA errors. Sometimes referred to as ARIMAX, where the X denotes an external regressor.&lt;/p&gt;
+&lt;p&gt;The equation:&lt;br&gt;
+$Y_t = B_1X_{1t} + B_2X_{2t} + n_t$ where $n_t = \phi n_{t-1} + \epsilon _t$ is the ARIMA error term. Notations for differencing are missing.&lt;/p&gt;
+&lt;p&gt;In the model, narratives are spread at time t and have an effect on economic behavior at time t+1. Having input variables lagged at t+1 allows the use of an external regressor as fresh input for 1-step-ahead predictions in an ARIMAX model.&lt;/p&gt;
 &lt;h2 id=&#34;r-code&#34;&gt;R code&lt;/h2&gt;
 &lt;p&gt;Libraries:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;library(tidyverse)
@@ -37,11 +36,11 @@ library(fable) # tidyverse compatible replacement of the forecast package.
 library(feasts)
 library(tsibble)
 library(lubridate) # to help with some weekly time series strangeness.
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;These were the inputs I went with for the Google Trends API call.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;These were the inputs in the Google Trends API call.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;query &amp;lt;- c(&amp;quot;covid&amp;quot;, &amp;quot;virus&amp;quot;)
 query2 &amp;lt;- c(&amp;quot;snälltåget&amp;quot;, &amp;quot;sj&amp;quot;)
 date &amp;lt;- c(&amp;quot;2020-03-01 2021-01-15&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I wrote a function which loops along the query vectors and outputs the mean of hits (index of times searched) in a data frame. This way it&amp;rsquo;s easy to experiment with different search queries and do some explorative data analysis.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I wrote a function which loops along the query vectors and outputs the mean of hits (index of times searched) in a data frame. This allows for easy experimentation with different search queries and explorative data analysis.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;search_se &amp;lt;- data.frame()
 
 search_se_mean &amp;lt;- function(query) {
@@ -64,10 +63,10 @@ gtrends_beh &amp;lt;- search_se_mean(query2)
 
 gtrends_se &amp;lt;- gtrends_nar %&amp;gt;%
   full_join(gtrends_beh, by = &amp;quot;week&amp;quot;, suffix = c(&amp;quot;_nar&amp;quot;, &amp;quot;_beh&amp;quot;))
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Let&amp;rsquo;s plot them together.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Plotted together:&lt;/p&gt;
 &lt;p&gt;&lt;figure style=&#34;flex-grow: 200; flex-basis: 480px&#34;&gt;
-		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/hits_plot.png&#34; data-size=&#34;1800x900&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/hits_plot.png&#34;
-				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/hits_plot_hu5a943b98a0f0edf4753164ba2038e85d_150578_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/hits_plot_hu5a943b98a0f0edf4753164ba2038e85d_150578_1024x0_resize_box_2.png 1024w&#34;
+		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_plot.png&#34; data-size=&#34;1800x900&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_plot.png&#34;
+				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_plot_hu5a943b98a0f0edf4753164ba2038e85d_150578_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_plot_hu5a943b98a0f0edf4753164ba2038e85d_150578_1024x0_resize_box_2.png 1024w&#34;
 				width=&#34;1800&#34;
 				height=&#34;900&#34;
 				loading=&#34;lazy&#34;
@@ -75,10 +74,10 @@ gtrends_se &amp;lt;- gtrends_nar %&amp;gt;%
 		&lt;/a&gt;
 		
 	&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;Hits for train travel drops sharply, as one would expect, and then rebounds over the summer. Hits for the virus jumps up but starts dropping surprisingly fast. Lower levels over the summer is in line with lower spread. Come autumn and the index jumps up again. This inverse relationship between narrative and behavioral predictors make intuitive sense and looks promising.&lt;/p&gt;
-&lt;p&gt;Next up was seeing how the predictors match with what I was trying to predict: movement patterns.&lt;/p&gt;
-&lt;p&gt;The movement data is available at &lt;a href=&#34;https://www.google.com/covid19/mobility/&#34;&gt;https://www.google.com/covid19/mobility/&lt;/a&gt; I went with the .csv-file for global data and did the filtering in R.
-Once it&amp;rsquo;s loaded, the following code will filter for the target country with &lt;code&gt;country_region_code&lt;/code&gt;. I filtered for &lt;code&gt;sub_region_1 = &amp;quot;&amp;quot; &lt;/code&gt; in order to capture data for all of Sweden. The data is then transformed into weeks. Note that I used the variable &lt;code&gt;retail_and_recreation_percent_change_from_baseline&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Hits for train travel drops sharply, as one would expect, and then rebounds over the summer. Hits for the virus jumps up but starts dropping surprisingly fast. Lower levels over the summer is in line with lower spread. The index jumps up again in the autumn of 2020. This inverse relationship between narrative and behavioral predictors made intuitive sense and looked promising.&lt;/p&gt;
+&lt;p&gt;The next step was to find out if the predictors had any explanatory power on the leading indicator: movement patterns.&lt;/p&gt;
+&lt;p&gt;The movement data is available at &lt;a href=&#34;https://www.google.com/covid19/mobility/&#34;&gt;https://www.google.com/covid19/mobility/&lt;/a&gt; I used  the .csv-file for global data and did the filtering for my region of interest in R.
+Once it&amp;rsquo;s loaded, the following code will filter for the target country with &lt;code&gt;country_region_code&lt;/code&gt;. I filtered for &lt;code&gt;sub_region_1 = &amp;quot;&amp;quot; &lt;/code&gt; in order to capture data for all of Sweden. The data is then transformed into weeks. Note that  data for &lt;code&gt;retail_and_recreation_percent_change_from_baseline&lt;/code&gt; was used. The movement patterns being predicted are in retail and recreation areas.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;gmr_se &amp;lt;- gmr %&amp;gt;%
   mutate(date = as_date(date)) %&amp;gt;%
   filter(country_region_code == &amp;quot;SE&amp;quot;,
@@ -98,8 +97,8 @@ df_se &amp;lt;- gtrends_se %&amp;gt;% # join data sets together
 df_se$retail &amp;lt;- df_se$retail + 100 # for potential differencing and log transformations
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Regressions and scatter plots:
 &lt;figure style=&#34;flex-grow: 155; flex-basis: 373px&#34;&gt;
-		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/hits_regressions_plot2.png&#34; data-size=&#34;2100x1350&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/hits_regressions_plot2.png&#34;
-				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/hits_regressions_plot2_hua328f663b5bd7ed38e00c602276479d8_332050_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/hits_regressions_plot2_hua328f663b5bd7ed38e00c602276479d8_332050_1024x0_resize_box_2.png 1024w&#34;
+		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_regressions_plot2.png&#34; data-size=&#34;2100x1350&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_regressions_plot2.png&#34;
+				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_regressions_plot2_hua328f663b5bd7ed38e00c602276479d8_332050_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/hits_regressions_plot2_hua328f663b5bd7ed38e00c602276479d8_332050_1024x0_resize_box_2.png 1024w&#34;
 				width=&#34;2100&#34;
 				height=&#34;1350&#34;
 				loading=&#34;lazy&#34;
@@ -107,7 +106,7 @@ df_se$retail &amp;lt;- df_se$retail + 100 # for potential differencing and log t
 		&lt;/a&gt;
 		
 	&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;I inspected the relationship between y, x1 and x2 while running regressions with and without lag at the same time. Inspecting the plots we see that there is a linear relationship between the variables. The narrative (virus search) variable does well with 1 lag, while the behavioral (train ticket search) does better without a lag. But this will depend a lot on the search queries used and on the reliability of Google&amp;rsquo;s black box of magic. So for this experiment I stuck with the theory in order to be able to predict 1-step-ahead. Lagged variables it is.&lt;/p&gt;
+&lt;p&gt;Inspecting the plots reveals that there is a linear relationship between the variables. The virus search variable does well with 1 lag, while the train ticket search does better without a lag. This will likely depend a lot on the search queries used and on the reliability of Google&amp;rsquo;s black box data. For the purpose of this experiment I stuck with the theory in order to be able to predict 1-step-ahead and continued with lagged variables.&lt;/p&gt;
 &lt;p&gt;Next, preparing the data for model fitting.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;val_weeks &amp;lt;- 15 #15 weeks for validating the models
 
@@ -125,7 +124,7 @@ tsibble_se_train &amp;lt;- tsibble_se %&amp;gt;%
 
 tsibble_se_val &amp;lt;- tsibble_se %&amp;gt;%
   filter(type == &amp;quot;validation&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Here I&amp;rsquo;m computing both the TSLM and the ARIMAX (1,1,0) model to see if it makes sense to model the residuals as an ARIMA-process.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Computing both the TSLM and the ARIMAX (1,1,0) model to see if it makes sense to model the residuals as an ARIMA-process.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;fit_tslm &amp;lt;- tsibble_se_train %&amp;gt;% # fit the model on the training data
   model(TSLM(retail ~ hits_nar_lag + hits_beh_lag))
 
@@ -143,10 +142,10 @@ rmse_tslm &amp;lt;- round(accuracy(fit_tslm)[, 4], digits = 2) # extract RMSE
 rmse_arimax &amp;lt;- round(accuracy(fit_arimax)[, 4], digits = 2) # extract RMSE
 
 fit_tslm %&amp;gt;% gg_tsresiduals() 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The patterns at index &amp;gt; 18 or so didn&amp;rsquo;t look like a white noise-process to me. This shows up in the ACF plot as well, even though the spikes aren&amp;rsquo;t significant. This will depend a lot on the data retrieved from Google Trends.&lt;br&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The patterns at index &amp;gt; 18 or so didn&amp;rsquo;t look like a white noise-process. This shows up in the ACF plot as well, even though the spikes aren&amp;rsquo;t significant. The takeaway is that modeling the residuals as an ARIMA-process might prove useful.
 &lt;figure style=&#34;flex-grow: 107; flex-basis: 256px&#34;&gt;
-		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/tslm_residuals_plot.png&#34; data-size=&#34;1916x1790&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/tslm_residuals_plot.png&#34;
-				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/tslm_residuals_plot_hu655848a1b355c501c0d34ca27ceea49f_384107_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/tslm_residuals_plot_hu655848a1b355c501c0d34ca27ceea49f_384107_1024x0_resize_box_2.png 1024w&#34;
+		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_residuals_plot.png&#34; data-size=&#34;1916x1790&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_residuals_plot.png&#34;
+				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_residuals_plot_hu655848a1b355c501c0d34ca27ceea49f_384107_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_residuals_plot_hu655848a1b355c501c0d34ca27ceea49f_384107_1024x0_resize_box_2.png 1024w&#34;
 				width=&#34;1916&#34;
 				height=&#34;1790&#34;
 				loading=&#34;lazy&#34;
@@ -158,8 +157,8 @@ fit_tslm %&amp;gt;% gg_tsresiduals()
 	&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;Fitting the ARIMAX-model:&lt;/p&gt;
 &lt;p&gt;&lt;figure style=&#34;flex-grow: 123; flex-basis: 295px&#34;&gt;
-		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/arimax_residuals_plot.png&#34; data-size=&#34;904x733&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/arimax_residuals_plot.png&#34;
-				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/arimax_residuals_plot_hu4f5034fb73b254b14675345864cce34e_62048_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/arimax_residuals_plot_hu4f5034fb73b254b14675345864cce34e_62048_1024x0_resize_box_2.png 1024w&#34;
+		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/arimax_residuals_plot.png&#34; data-size=&#34;904x733&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/arimax_residuals_plot.png&#34;
+				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/arimax_residuals_plot_hu4f5034fb73b254b14675345864cce34e_62048_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/arimax_residuals_plot_hu4f5034fb73b254b14675345864cce34e_62048_1024x0_resize_box_2.png 1024w&#34;
 				width=&#34;904&#34;
 				height=&#34;733&#34;
 				loading=&#34;lazy&#34;
@@ -170,7 +169,7 @@ fit_tslm %&amp;gt;% gg_tsresiduals()
 		
 	&lt;/figure&gt;
 Evaluating the ARIMAX-residuals, they looked more like a stationary white noise process. No significant spikes.&lt;/p&gt;
-&lt;p&gt;For plotting models and forecasts produced with Fable, I went with this:&lt;/p&gt;
+&lt;p&gt;Plotting the models and forecasts produced with Fable:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;tslm_plot &amp;lt;- 
   tsibble_se %&amp;gt;%
   mutate(color = if_else(type == &amp;quot;training&amp;quot;, &amp;quot;#7e828c&amp;quot;, &amp;quot;#7e828c&amp;quot;)) %&amp;gt;%
@@ -199,8 +198,8 @@ arimax_plot &amp;lt;-
   
 grid.arrange(tslm_plot, arimax_plot, nrow = 2)
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;figure style=&#34;flex-grow: 100; flex-basis: 240px&#34;&gt;
-		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/tslm_arimax_forecasts.png&#34; data-size=&#34;2100x2100&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/tslm_arimax_forecasts.png&#34;
-				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/tslm_arimax_forecasts_hu4346fcd9ca4674303bb43313d3e76666_400552_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/tslm_arimax_forecasts_hu4346fcd9ca4674303bb43313d3e76666_400552_1024x0_resize_box_2.png 1024w&#34;
+		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_arimax_forecasts.png&#34; data-size=&#34;2100x2100&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_arimax_forecasts.png&#34;
+				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_arimax_forecasts_hu4346fcd9ca4674303bb43313d3e76666_400552_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_arimax_forecasts_hu4346fcd9ca4674303bb43313d3e76666_400552_1024x0_resize_box_2.png 1024w&#34;
 				width=&#34;2100&#34;
 				height=&#34;2100&#34;
 				loading=&#34;lazy&#34;
@@ -208,8 +207,8 @@ grid.arrange(tslm_plot, arimax_plot, nrow = 2)
 		&lt;/a&gt;
 		
 	&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;m a bit surprised that the fitted TSLM model performed in parity with the ARIMAX model. I think this might vary a lot depending on the data you end up with. Both models do a decent job on the training data. But they both do a poor job at forecasting the sharp drop in movement that occurs at the end of the time series. I should point out that the ARIMAX model is forecasting the AR(1)-process recursively here, which means that there is a mean reversion where it looses its effect over time.&lt;/p&gt;
-&lt;p&gt;Since I&amp;rsquo;m interested in the 1-step-ahead forecast, I wrote the loop below to capture what that looks like on the validation data. I hope and think that&amp;rsquo;s what I did at least! The point here is to capture the direct 1-step-ahead forecast instead of a recursive forecast.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m a bit surprised that the fitted TSLM model performed in parity with the ARIMAX model. I think this might vary a lot depending on the data you end up with. Both models do a decent job on the training data. But they both do a poor job at forecasting the sharp drop in movement that occurs at the end of the time series. I should point out that the ARIMAX model is forecasting the AR(1)-process recursively here. Consequently, there is a mean reversion and it looses its effect over time.&lt;/p&gt;
+&lt;p&gt;Since I&amp;rsquo;m interested in the 1-step-ahead forecast, I wrote the loop below to capture what that looks like on the validation data. The point here is to capture the direct 1-step-ahead forecast instead of a recursive forecast, and thereby utilize the full potential of the ARIMAX-model.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;tsibble_se_loop &amp;lt;- data.frame()
 direct_pred &amp;lt;- data.frame()
 index &amp;lt;- 15:nrow(tsibble_se)
@@ -263,8 +262,8 @@ arimax_direct_plot &amp;lt;-
 
 grid.arrange(tslm_plot, arimax_plot, arimax_direct_plot,  nrow = 3)
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;figure style=&#34;flex-grow: 100; flex-basis: 240px&#34;&gt;
-		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/tslm_arimax_direct_forecasts.png&#34; data-size=&#34;2100x2100&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/tslm_arimax_direct_forecasts.png&#34;
-				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/tslm_arimax_direct_forecasts_hu4346fcd9ca4674303bb43313d3e76666_449833_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/forecasting-movement-patterns-with-r/tslm_arimax_direct_forecasts_hu4346fcd9ca4674303bb43313d3e76666_449833_1024x0_resize_box_2.png 1024w&#34;
+		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_arimax_direct_forecasts.png&#34; data-size=&#34;2100x2100&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_arimax_direct_forecasts.png&#34;
+				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_arimax_direct_forecasts_hu4346fcd9ca4674303bb43313d3e76666_449833_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/tslm_arimax_direct_forecasts_hu4346fcd9ca4674303bb43313d3e76666_449833_1024x0_resize_box_2.png 1024w&#34;
 				width=&#34;2100&#34;
 				height=&#34;2100&#34;
 				loading=&#34;lazy&#34;
@@ -272,7 +271,8 @@ grid.arrange(tslm_plot, arimax_plot, arimax_direct_plot,  nrow = 3)
 		&lt;/a&gt;
 		
 	&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;It seems like the direct 1-step-ahead ARIMAX forecast does a little better than both the TSLM and the ARIMAX recursive forecast at self-correcting for the last drop off in movement. But still, it essentially fails to predict that last drop 1 week ahead. Leaving that aside, I&amp;rsquo;m a bit surprised at the level of predictive power in the model considering its simplicity. My take away from this experiment is that a leading narrative indicator gathered from Google Trends, or even better a social media platform, can be used to forecast outcomes in the real economy.&lt;/p&gt;
+&lt;p&gt;The direct 1-step-ahead ARIMAX forecast does a little better than both the TSLM and the ARIMAX recursive forecast at self-correcting for the last drop off in movement. But still, it essentially fails to predict that last drop 1 week ahead. Leaving that aside, the level of predictive power in the model is surprising considering its simplicity. What I take away from this experiment is that with a bit of fine-tuning and perhaps added complexity it is possible to predict a leading economic indicator with high-frequency narrative data gathered  Google Trends.&lt;/p&gt;
+&lt;p&gt;Since it&amp;rsquo;s a forecasting model, the highest requirements for statistical rigor does not necessarily apply. Given that, it would be interesting to apply a machine-learning technique for nowcasting with a larger and more varied narrative data input.&lt;/p&gt;
 </description>
         </item>
         

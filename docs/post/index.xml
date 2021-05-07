@@ -8,13 +8,12 @@
     <language>en-us</language>
     <lastBuildDate>Sun, 31 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://dfornis.github.io/dfornis/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Forecasting movement patterns with R</title>
-      <link>https://dfornis.github.io/dfornis/p/forecasting-movement-patterns-with-r/</link>
+      <title>Nowcasting a leading economic indicator in times of uncertainty - with R</title>
+      <link>https://dfornis.github.io/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/</link>
       <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://dfornis.github.io/dfornis/p/forecasting-movement-patterns-with-r/</guid>
-      <description>Part of the difficulty lies in economic indicators being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. Macroeconomic indicators are also collected with a large enough lag to make them unusable for making the kinds of short time horizon forecasts that are valuable in times of high uncertainty.
-My idea was to circumnavigate this issue by making 1-week-ahead forecasts of movement patterns with an ARIMAX model where Google Trends data supply leading indicators as external variables in the model.</description>
+      <guid>https://dfornis.github.io/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/</guid>
+      <description>Part of the difficulty lies in economic indicators being downstream from the development of the pandemic. Higher infection rates leads to lower mobility which leads to lower economic activity. Macroeconomic indicators are traditionally collected with a large lag. This limits their utility in times of high uncertainty. In a pandemic for example, infection rates may accelerate non-linearly (as seen in SIR-models) and are likely to react to variables such as temperature and degree of immunity, many of which remain unknown at the beginning of a pandemic.</description>
     </item>
     
   </channel>
