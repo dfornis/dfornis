@@ -94,7 +94,7 @@ Plotted together:
 
 ![](hits_plot.png)
 
-Hits for train travel dropped sharply, as one would expect, and then rebounded over the summer. Hits for the virus jumped up initially but dropped surprisingly fast. Lower levels over the summer was in line with a lower spread of the virus. The index jumped up again in the autumn of 2020, in line with a rising spread of the virus. This inverse relationship between narrative and behavioral predictors made intuitive sense and looked promising.
+Hits for train travel dropped sharply, as one would expect, and then rebounded over the summer. Hits for the virus jumped up initially but dropped surprisingly fast. Lower levels over the summer was in line with a lower spread of the virus. The index jumped up again in the autumn of 2020, in line with a rising spread of the virus. This inverse relationship between the train travel and virus narrative predictors made intuitive sense and looked promising.
 
 The next step was to find out if the predictors had any explanatory power on the leading indicator: movement patterns.
 
