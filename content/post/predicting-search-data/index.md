@@ -268,9 +268,12 @@ grid.arrange(tslm_plot, arimax_plot, arimax_direct_plot,  nrow = 3)
 
 ![](tslm_arimax_direct_forecasts.png)
 
+## Conclusion
 The direct 1-step-ahead ARIMAX forecast does a little better than both the TSLM and the ARIMAX recursive forecast at self-correcting for the last drop off in movement. But still, it essentially fails to predict that last drop 1 week ahead. Leaving that aside, the level of predictive power in the model is surprising considering its simplicity. What I take away from this experiment is that with a bit of fine-tuning and perhaps added complexity it is possible to predict a leading economic indicator with high-frequency narrative data. 
 
-The highest requirements for statistical rigor does not necessarily apply in a forecasting model in the same way it does when exploring a casual relationship. With that in mind, it would be interesting to apply a machine-learning technique for nowcasting with a larger and more varied narrative data set in the future.
+The fact that the virus search variable did better with 1 lag as predicted while the train ticket search variable did worse is interesting. It might indicate that people don't plan ahead when traveling by train or that train travel has an added element of spontaneity in times of high uncertainty when there is already a pent up demand for travel. 
+
+For future experiments it would be interesting to explore a machine learning technique with a larger and more varied narrative data set. The statistical rigor offered by conventional techniques are not as relevant in a forecasting model as they are when exploring a casual relationship.
 
 ## References
 Andersson, Michael K. and Reijer, Ard H.J. (2015), “Nowcasting”, Sveriges Riksbank Economic Review, 2015:1, Sveriges Riksbank, pp. 75-89.
