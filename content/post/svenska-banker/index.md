@@ -2,7 +2,7 @@
 author = "David Fornborg"
 title = "Behövs de svenska storbankerna?"
 date = "2021-01-31"
-description = "De vanligaste berättelserna jag hör om de svenska storbankerna, och deras framtid, kan delas in i tre breda kategorier. Tre idéer om vilken roll de har och kommer att ha i framtiden. Om någon."
+description = "De vanligaste berättelserna jag hör om de svenska storbankerna, och deras framtid, kan delas in i tre kategorier. Tre idéer om vilken roll de har och kommer att ha i framtiden. Om någon."
 
 tags = [
     "r",
