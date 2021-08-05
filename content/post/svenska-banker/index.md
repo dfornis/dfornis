@@ -2,7 +2,7 @@
 author = "David Fornborg"
 title = "Behövs de svenska storbankerna?"
 date = "2021-01-31"
-description = "De vanligaste berättelserna jag hör om de svenska storbankerna, och deras framtid, kan delas upp i tre breda kategorier. Tre idéer om vilken roll de har och kommer att ha i framtiden. Om någon."
+description = "De vanligaste berättelserna jag hör om de svenska storbankerna, och deras framtid, kan delas in i tre breda kategorier. Tre idéer om vilken roll de har och kommer att ha i framtiden. Om någon."
 
 tags = [
     "r",
@@ -60,7 +60,7 @@ I takt med att reglerna i Basel III implementeras så kommer storbankernas avtry
 
 Sammantaget bådar det illa för de svenska storbankerna. Den horisontella tillväxten i Baltikum hade kunnat bli ett par av storbankernas undergång om inte staten hade klivit in. Och den vertikala tillväxten har till  viss del uteblivit. Teknologi, att göra något nytt, är ett direkt hot mot storbankernas oligopolliknande ställning på bolånemarknaden. När något nytt kommer så lär det ske utanför storbankernas paraply. En marknad med så höga marginaler skapar starka incitament för outsiders. Det hänger till viss del på politiken och byråkratin att inte reglera bort konkurrensen. Sannolikheten för det minskar i takt med att det politiska och byråkratiska välviljan till storbankerna tryter.
 
-Anledningen till att finanskrisen inte blev samma impetus till förändring för banksektorn som Covid 19-pandemin blev för hur vi arbetar - kan ha varit att teknologin och byråkratin inte var redo. Berättelse 2, där den nya ekonomin ersätter den gamla, kan förverkligas först nu. Eftersom att bankernas nuvarande affärsmodell är att sila en inte oansenlig del av den svenska ekonomin genom sitt finmaskiga barder i sin relativt osofistikerade funktion som bostadsmarknaden grindvakter, så är incitamenten starka att utmana status quo. Tillsammans med den trytande politiska välviljan mot storbankerna så finns det mycket som tyder på att de kommer att förlora sin särställning i svensk ekonomi. 
+Anledningen till att finanskrisen inte blev samma impetus till förändring för banksektorn som Covid 19-pandemin blev för hur vi arbetar - kan ha varit att teknologin och byråkratin inte var redo. Berättelse 2, där den nya ekonomin ersätter den gamla, kan förverkligas först nu. Eftersom att bankernas nuvarande affärsmodell är att sila en inte oansenlig del av den svenska ekonomin genom sitt finmaskiga barder i sin funktion som bostadsmarknaden grindvakter, så är incitamenten starka att utmana status quo. Tillsammans med den trytande politiska välviljan mot storbankerna så finns det mycket som tyder på att de kommer att förlora sin särställning i svensk ekonomi. 
 
 ## Källor:
 
