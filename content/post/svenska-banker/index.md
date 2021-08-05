@@ -22,7 +22,7 @@ image = "nicolas-perondi--Ho_obgLFs4-unsplash.jpg"
 
 Berättelserna är att:
 
-1. Svenska banker är slimmade och välskötta företag. Deras centrala plats i ekonomin reflekteras i hälsosamma vinster, hög kundnöjdhet och god kapitaltäckningsgrad. De fyller en viktig roll i ekonomins kapitalförsörjning, en förutsättning för entreprenörskap och företagande. 
+1. Svenska banker är slimmade och välskötta företag. Deras centrala plats i ekonomin speglas i hälsosamma vinster, hög kundnöjdhet och god kapitaltäckningsgrad. De fyller en viktig roll i ekonomins kapitalförsörjning. En förutsättning för entreprenörskap och företagande. 
 2. Svenska banker är krympande och förlegade institutioner som tillhör den gamla ekonomin. De ersätts allt mer av fintech-bolag, oberoende kapitalförvaltare, artificiell intelligens för effektivare låneprövning och e-kronor eller fristående tjänster för transaktionskonton.
 3. Svenska banker har en oligpolliknande ställning på bostadsmarknaden. En ställning som de utnyttjar för att generera höga vinster. De lärdomar de inte drog av finanskrisen 2008 kunde ha stoppat framväxten av den bostadsbubbla som kommer att utlösa nästa finanskris.
 
