@@ -8,6 +8,16 @@
     <language>en-us</language>
     <lastBuildDate>Sun, 31 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://dfornis.github.io/dfornis/tags/r/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Behövs de svenska storbankerna?</title>
+      <link>https://dfornis.github.io/dfornis/p/beh%C3%B6vs-de-svenska-storbankerna/</link>
+      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://dfornis.github.io/dfornis/p/beh%C3%B6vs-de-svenska-storbankerna/</guid>
+      <description>Berättelserna är att:
+ Svenska banker är slimmade och välskötta företag. Deras centrala plats i ekonomin reflekteras i hälsosamma vinster, hög kundnöjdhet och god kapitaltäckningsgrad. De fyller en viktig roll i ekonomins kapitalförsörjning, en förutsättning för entreprenörskap och företagande. Svenska banker är krympande och förlegade institutioner som tillhör den gamla ekonomin. De ersätts allt mer av fintech-bolag, oberoende kapitalförvaltare, artificiell intelligens för effektivare låneprövning och e-kronor eller fristående tjänster för transaktionskonton.</description>
+    </item>
+    
+    <item>
       <title>Nowcasting a leading economic indicator in times of uncertainty - with R</title>
       <link>https://dfornis.github.io/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/</link>
       <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
