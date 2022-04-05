@@ -1,76 +1,43 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
-  <url>
-    <loc>https://dfornis.github.io/dfornis/svenska-banker/</loc>
-    <lastmod>2021-01-31T00:00:00+00:00</lastmod>
-  </url>
-  
   <url>
     <loc>https://dfornis.github.io/dfornis/</loc>
     <lastmod>2021-01-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://dfornis.github.io/dfornis/tags/gtrends/</loc>
     <lastmod>2021-01-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://dfornis.github.io/dfornis/tags/narrative-economics/</loc>
     <lastmod>2021-01-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://dfornis.github.io/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/</loc>
     <lastmod>2021-01-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://dfornis.github.io/dfornis/post/</loc>
     <lastmod>2021-01-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://dfornis.github.io/dfornis/tags/prediction/</loc>
     <lastmod>2021-01-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://dfornis.github.io/dfornis/tags/r/</loc>
     <lastmod>2021-01-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://dfornis.github.io/dfornis/tags/</loc>
     <lastmod>2021-01-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://dfornis.github.io/dfornis/archives/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://dfornis.github.io/dfornis/page/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://dfornis.github.io/dfornis/about/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://dfornis.github.io/dfornis/categories/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://dfornis.github.io/dfornis/search/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://dfornis.github.io/dfornis/categories/test/</loc>
   </url>
-  
 </urlset>
