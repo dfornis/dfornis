@@ -15,7 +15,8 @@
       <guid>https://dfornis.github.io/dfornis/p/data-visualizations-of-2021/</guid>
       <description>While initially hesitant, owing to a sense that I would rather be involved in actual research, visualizing data turned out to be a creative outlet in the midst of other more theoretical work.
 All visualizations were made in R with ggplot2.
-Climate adaption   This simple line graph of aggregated values by region was complemented by a facet of all organizations, maintaning some overview and comparability while displaying a lot of data in one visualization.</description>
+Climate adaption  
+This simple line graph of aggregated values by region was complemented by a facet of all organizations, maintaning some overview and comparability while displaying a lot of data in one visualization.</description>
     </item>
     
     <item>
