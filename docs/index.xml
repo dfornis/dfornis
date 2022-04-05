@@ -25,7 +25,7 @@
 		&lt;/a&gt;
 		
 	&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;This simple line graph of aggregated values by region was complemented by a facet of all organizations, maintaning some overview and comparability while displaying a lot of data in one visualization.&lt;/p&gt;
+&lt;p&gt;This simple line graph of aggregated values by region was complemented by a facet of all organizations, maintaining some overview and comparability while displaying a lot of data in one visualization.&lt;/p&gt;
 &lt;p&gt;&lt;figure style=&#34;flex-grow: 129; flex-basis: 311px&#34;&gt;
 		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/data-visualizations-of-2021/CCA_facet.png&#34; data-size=&#34;2000x1539&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/data-visualizations-of-2021/CCA_facet.png&#34;
 				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/data-visualizations-of-2021/CCA_facet_hu2aabd817aa257b326d3fabad859e5f0e_750273_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/data-visualizations-of-2021/CCA_facet_hu2aabd817aa257b326d3fabad859e5f0e_750273_1024x0_resize_box_2.png 1024w&#34;
@@ -36,7 +36,7 @@
 		&lt;/a&gt;
 		
 	&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;Finally I tapped into the animated graph craze with a gif. I didn&amp;rsquo;t managed to iron out all the kinks before time was better invested in other projects.&lt;/p&gt;
+&lt;p&gt;Finally I tapped into the animated graph craze with a gif. I didn&amp;rsquo;t manage to iron out all the kinks before time was better invested in other projects.&lt;/p&gt;
 &lt;p&gt;&lt;figure style=&#34;flex-grow: 123; flex-basis: 295px&#34;&gt;
 		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/data-visualizations-of-2021/CCA_beeswarm_8_sans.gif&#34; data-size=&#34;1000x813&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/data-visualizations-of-2021/CCA_beeswarm_8_sans.gif&#34;
 				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/data-visualizations-of-2021/CCA_beeswarm_8_sans_hu4f16fbe9a22d5660749c98d383c9ce8d_3117411_480x0_resize_box.gif 480w, https://dfornis.github.io/dfornis/dfornis/p/data-visualizations-of-2021/CCA_beeswarm_8_sans_hu4f16fbe9a22d5660749c98d383c9ce8d_3117411_1024x0_resize_box.gif 1024w&#34;
@@ -71,7 +71,7 @@
 		&lt;/a&gt;
 		
 	&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;It&amp;rsquo;s challenging to communicate findings from panel data, along a uniform y or x-scale. Here I used a dot plot and averaged the values with the year 2000 as a divider. This was for book project by Lisa Dellmuth on inequalities within EU regions.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s challenging to communicate findings from panel data along a uniform y or x-scale. Here I used a dot plot and averaged the values with the year 2000 as a divider. This was for book project by Lisa Dellmuth on inequalities within EU regions.&lt;/p&gt;
 </description>
         </item>
         <item>
