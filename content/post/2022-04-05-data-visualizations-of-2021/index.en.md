@@ -12,7 +12,7 @@ aliases = ["migrate-from-jekyl"]
 image = "CCA_line_header.png"
 +++
 
-While initially hesitant, owing to a sense that I would rather be involved in actual research, visualizing data turned out to be a creative outlet in the midst of other more theoretical work. 
+While initially hesitant, owing to a sense that I would rather be involved in actual research, visualizing data turned out to be a creative outlet in the midst of more heavy data wrangling and theoretical work. 
 
 All visualizations were made in R with ggplot2.
 
