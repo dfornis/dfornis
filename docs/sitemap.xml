@@ -2,8 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://dfornis.github.io/dfornis/p/data-visualizations-of-2021/</loc>
+    <lastmod>2022-04-05T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://dfornis.github.io/dfornis/</loc>
-    <lastmod>2021-01-31T00:00:00+00:00</lastmod>
+    <lastmod>2022-04-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://dfornis.github.io/dfornis/post/</loc>
+    <lastmod>2022-04-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://dfornis.github.io/dfornis/tags/gtrends/</loc>
     <lastmod>2021-01-31T00:00:00+00:00</lastmod>
@@ -12,9 +18,6 @@
     <lastmod>2021-01-31T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://dfornis.github.io/dfornis/p/nowcasting-a-leading-economic-indicator-in-times-of-uncertainty-with-r/</loc>
-    <lastmod>2021-01-31T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://dfornis.github.io/dfornis/post/</loc>
     <lastmod>2021-01-31T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://dfornis.github.io/dfornis/tags/prediction/</loc>
@@ -37,5 +40,7 @@
     <loc>https://dfornis.github.io/dfornis/categories/</loc>
   </url><url>
     <loc>https://dfornis.github.io/dfornis/search/</loc>
+  </url><url>
+    <loc>https://dfornis.github.io/dfornis/categories/test/</loc>
   </url>
 </urlset>
