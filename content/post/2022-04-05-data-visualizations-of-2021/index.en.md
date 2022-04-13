@@ -37,6 +37,7 @@ Along the way I made a few simple visualizations thematically close to those com
 
 ## Other
 
+It's challenging to communicate findings for multiple variables from panel data along a uniform y or x-scale. Here I used a dot plot and averaged the values with the year 2000 as a divider. This was for book project by Lisa Dellmuth on inequalities within EU regions. 
+
 ![](dotplot_unemp_ineq.png)
 
-It's challenging to communicate findings for multiple variables from panel data along a uniform y or x-scale. Here I used a dot plot and averaged the values with the year 2000 as a divider. This was for book project by Lisa Dellmuth on inequalities within EU regions. 
