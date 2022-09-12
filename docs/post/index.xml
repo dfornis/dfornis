@@ -6,7 +6,27 @@
     <description>Recent content in Posts on David Fornborg</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 05 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://dfornis.github.io/dfornis/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 17 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://dfornis.github.io/dfornis/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>What makes a plot go (semi)-viral?</title>
+      <link>https://dfornis.github.io/dfornis/p/what-makes-a-plot-go-semi-viral/</link>
+      <pubDate>Sun, 17 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://dfornis.github.io/dfornis/p/what-makes-a-plot-go-semi-viral/</guid>
+      <description>Background How long is the wait for a rental apartment in Stockholm? In light of a recent surge in news articles about how young swedes struggle to enter the housing market, it&amp;rsquo;s an engaging question in the spotlight of both politics and daily life in the Swedish capital. I stumbled upon the data a year ago on the website of Stockholms Bostadskö - Stockholm&amp;rsquo;s sole distributor of rental apartments. It told a story about a deteriorating rental market with a rapidly growing wait time for apartments (Swedes queue for apartments: Soviet style).</description>
+    </item>
+    
+    <item>
+      <title>Data visualizations of 2021</title>
+      <link>https://dfornis.github.io/dfornis/p/data-visualizations-of-2021/</link>
+      <pubDate>Tue, 05 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://dfornis.github.io/dfornis/p/data-visualizations-of-2021/</guid>
+      <description>While initially hesitant, owing to a sense that I would rather be involved in actual research, visualizing data turned out to be a creative outlet in the midst of more heavy data wrangling and theoretical work.
+All visualizations were made in R with ggplot2.
+Climate adaption The first set of visualizations were made from a large panel dataset on the climate adaption activities of international organizations, developed for a PHD thesis by Ece Kural.</description>
+    </item>
+    
     <item>
       <title>Data visualizations of 2021</title>
       <link>https://dfornis.github.io/dfornis/p/data-visualizations-of-2021/</link>
