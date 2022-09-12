@@ -10,7 +10,7 @@ image = "bostadsmarknad_en_bw.png"
 +++
 
 ### Background
-How long is the wait for a rental apartment in Stockholm? It's an engaging question in the spotlight of both politics and daily life in the Swedish capital. In light of a recent surge in news articles about how young swedes struggle to enter the housing market, I took a look at data provided by Stockholms Bostadskö - Stockholm's sole distributor of rental apartments. It told a story about a deteriorating rental market with a rapidly growing wait time for apartments (Swedes queue for apartments: Soviet style). I recently found the time to send them an email and request data going back 10 years.
+How long is the wait for a rental apartment in Stockholm? It's an engaging question in the spotlight of both politics and daily life in the Swedish capital. In light of a recent surge in news articles about how young swedes struggle to enter the housing market, I took a look at data provided by Stockholms Bostadskö - Stockholm's sole distributor of rental apartments. It tells a story about a deteriorating rental market with a rapidly growing wait time for apartments (Swedes queue for apartments: Soviet style). I recently found the time to send them an email and request data going back 10 years.
 
 ### The plot
 ![](bostadsmarknad_en_bw.png)
@@ -26,7 +26,7 @@ As is often the case in a different subreddit, r/dataisbeautiful, a visualizatio
 To summarize, these are ingredients that I believe helps a more technical plot garner a large audience:
 * Data that connects with the viewer on a personal level
 * Data that confirms (or contradicts (both are probably engaging)) the lived experience
-* Data that signals that someones status should decrease (politicians in this case) or increase. This is a Tyler Cowen-esque speculation
+* Data that signals that someone's status should decrease (politicians in this case) or increase. This is a Tyler Cowen-esque speculation
 * Effectively communicates a shift in time or a discrepancy between groups
 * Delivered with a story or a striking fact that is deducible from the visualized data
 
