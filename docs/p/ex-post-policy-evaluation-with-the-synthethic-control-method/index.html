@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en-us">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='The European commission has asked Sweden to evaluate its excise tax exemption for biofuels. Here, I show the research plan we suggested, and test it empirically on observational data.'><title>Ex-post policy evaluation with the synthethic control method</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='The European commission has asked Sweden to evaluate its excise tax exemption for biofuels. Here, I show the research plan we suggested, and test it empirically with a counterfactual method on observational data.'><title>Ex-post policy evaluation with the synthethic control method</title>
 
 <link rel='canonical' href='https://dfornis.github.io/dfornis/p/ex-post-policy-evaluation-with-the-synthethic-control-method/'>
 
 <link rel="stylesheet" href="/dfornis/scss/style.min.css"><meta property='og:title' content='Ex-post policy evaluation with the synthethic control method'>
-<meta property='og:description' content='The European commission has asked Sweden to evaluate its excise tax exemption for biofuels. Here, I show the research plan we suggested, and test it empirically on observational data.'>
+<meta property='og:description' content='The European commission has asked Sweden to evaluate its excise tax exemption for biofuels. Here, I show the research plan we suggested, and test it empirically with a counterfactual method on observational data.'>
 <meta property='og:url' content='https://dfornis.github.io/dfornis/p/ex-post-policy-evaluation-with-the-synthethic-control-method/'>
 <meta property='og:site_name' content='David Fornborg'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2023-06-14T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-06-14T00:00:00&#43;00:00'/><meta property='og:image' content='https://dfornis.github.io/dfornis/bostadsmarknad_en_bw.png' />
 <meta name="twitter:title" content="Ex-post policy evaluation with the synthethic control method">
-<meta name="twitter:description" content="The European commission has asked Sweden to evaluate its excise tax exemption for biofuels. Here, I show the research plan we suggested, and test it empirically on observational data."><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="The European commission has asked Sweden to evaluate its excise tax exemption for biofuels. Here, I show the research plan we suggested, and test it empirically with a counterfactual method on observational data."><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://dfornis.github.io/dfornis/bostadsmarknad_en_bw.png' /><style>
 		
     :root {
@@ -176,7 +176,7 @@
 
     
     <h3 class="article-subtitle">
-        The European commission has asked Sweden to evaluate its excise tax exemption for biofuels. Here, I show the research plan we suggested, and test it empirically on observational data.
+        The European commission has asked Sweden to evaluate its excise tax exemption for biofuels. Here, I show the research plan we suggested, and test it empirically with a counterfactual method on observational data.
     </h3>
     <footer class="article-time">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -192,7 +192,8 @@
 </header>
 
     <section class="article-content">
-    <h3 id="introduction">Introduction</h3>
+    <p>s</p>
+<h3 id="introduction">Introduction</h3>
 <p>Randomly assigned controlled experiments are, naturally, a favored tool by scientists who want to make claims about causality in research. They are however expensive, impractical and often ethically dubious to run in a social science or policy context. Consider the country that randomly assigns its regions into a treatment and control group when implementing criminal justice reform, in order to find out if it has the intended effect, all else equal. Such an exercise would result in a few excited scientists and a lot of angry citizens. Until recently, quantitative social scientists have made do with running simple OLS regressions on observational data - reporting correlations as the primary result. This has changed for with the introduction of a set of methods that help researchers identify random assignment of treatment in existing data that, with a bit of creativity, makes it possible to construct artificial treatment and control groups without running an actual experiment. Collectively, the introduction of these models has resulted in what has been dubbed a &lsquo;credibility revolution&rsquo; in economics, and a shared Nobel prize. Guido Imbens, one of the main forces behind these methods, has described a late comer to the group - the synthethic control method - as “arguably the most important innovation in the policy evaluation literature in the last 15 years” (Athey &amp; Imbens, 2017). In this text, I will provide a practical example of how this method can be applied on a real and current policy case from the energy policy sector. The text is concise write up of the evaluation plan I helped develop for Sweden&rsquo;s evaluation of its excise tax exemption for high-blended biofuels, as requested by the European Commission. It also provides an implementation on actual data with preliminary results.</p>
 <h3 id="the-synthethic-control-method">The synthethic control method</h3>
 <p>The method was developed in a series of papers (Abadie and Gardeazabal 2003, and Abadie, Diamond and Hainmueller 2010) and has become an established method for policy evaluations in case studies with one treated unit. It&rsquo;s first policy application was on proposition 99 - an increase of the excise tax on tobacco products in California - by testing its impact on smoking.  Politics are not designed around the conditions of a randomly controlled trial, meaning that there were no &ldquo;control California&rdquo; available that didn&rsquo;t get the treatment while sharing California&rsquo;s other characteristics. As such, there was no obvious way to estimate the effect of the legislation, all else equal. The syntethic control method solves this rather elegantly. It offers an algorithmic approach to constructing control groups. For the unit that receives treatment, the control is a weighted average of the untreated units that best predicts the outcome variable in the pre-treatment period for the treated unit. In the post-treatment period, it provides a synthetic counterfactual for the treated unit. In the case of tobacco legislation, the synthetic control weighs the predictors of smoking (drinking, demographic variables, etc.) from a panel dataset of states, and creates a synthethic control of various states that best matches the rate of smoking of California, for the years that precede the excise tax change.</p>

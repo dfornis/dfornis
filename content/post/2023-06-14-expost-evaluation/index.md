@@ -2,13 +2,13 @@
 author = "David Fornborg"
 title = "Ex-post policy evaluation with the synthethic control method"
 date = "2023-06-14"
-description = "The European commission has asked Sweden to evaluate its excise tax exemption for biofuels. Here, I show the research plan we suggested, and test it empirically on observational data."
+description = "The European commission has asked Sweden to evaluate its excise tax exemption for biofuels. Here, I show the research plan we suggested, and test it empirically with a counterfactual method on observational data."
 
 series = ["Themes Guide"]
 aliases = ["migrate-from-jekyl"]
 image = "bostadsmarknad_en_bw.png"
 +++
-
+s
 ### Introduction
 Randomly assigned controlled experiments are, naturally, a favored tool by scientists who want to make claims about causality in research. They are however expensive, impractical and often ethically dubious to run in a social science or policy context. Consider the country that randomly assigns its regions into a treatment and control group when implementing criminal justice reform, in order to find out if it has the intended effect, all else equal. Such an exercise would result in a few excited scientists and a lot of angry citizens. Until recently, quantitative social scientists have made do with running simple OLS regressions on observational data - reporting correlations as the primary result. This has changed for with the introduction of a set of methods that help researchers identify random assignment of treatment in existing data that, with a bit of creativity, makes it possible to construct artificial treatment and control groups without running an actual experiment. Collectively, the introduction of these models has resulted in what has been dubbed a 'credibility revolution' in economics, and a shared Nobel prize. Guido Imbens, one of the main forces behind these methods, has described a late comer to the group - the synthethic control method - as “arguably the most important innovation in the policy evaluation literature in the last 15 years” (Athey & Imbens, 2017). In this text, I will provide a practical example of how this method can be applied on a real and current policy case from the energy policy sector. The text is concise write up of the evaluation plan I helped develop for Sweden's evaluation of its excise tax exemption for high-blended biofuels, as requested by the European Commission. It also provides an implementation on actual data with preliminary results. 
 
