@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='The European Commission has asked Sweden to evaluate its excise tax exemption for biofuels. Here, I show the research plan we submitted, and test it empirically with a counterfactual method on observational data.'><title>Ex-post policy evaluation with the synthetic control method</title>
+
+<link rel='canonical' href='https://dfornis.github.io/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/'>
+
+<link rel="stylesheet" href="/dfornis/scss/style.min.css"><meta property='og:title' content='Ex-post policy evaluation with the synthetic control method'>
+<meta property='og:description' content='The European Commission has asked Sweden to evaluate its excise tax exemption for biofuels. Here, I show the research plan we submitted, and test it empirically with a counterfactual method on observational data.'>
+<meta property='og:url' content='https://dfornis.github.io/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/'>
+<meta property='og:site_name' content='David Fornborg'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2023-06-14T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-06-14T00:00:00&#43;00:00'/><meta property='og:image' content='https://dfornis.github.io/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/background.png' />
+<meta name="twitter:title" content="Ex-post policy evaluation with the synthetic control method">
+<meta name="twitter:description" content="The European Commission has asked Sweden to evaluate its excise tax exemption for biofuels. Here, I show the research plan we submitted, and test it empirically with a counterfactual method on observational data."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://dfornis.github.io/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/background.png' /><style>
+		
+    :root {
+        --article-font-family: "Merriweather", var(--base-font-family);
+    }
+</style>
+
+<script>
+		(function () {
+		    const customFont = document.createElement('link');
+		    customFont.href = "<https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap>";
+		
+		    customFont.type = "text/css";
+		    customFont.rel = "stylesheet";
+		
+		    document.head.appendChild(customFont);
+		}());
+</script>
+    </head>
+    <body class="">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script><div class="container main-container flex on-phone--column extended article-page with-toolbar">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/dfornis/img/avatar_huad2d60a4d96d9de4b8e64fc571ba201c_676_300x0_resize_box_2.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://dfornis.github.io/dfornis/">David Fornborg</a></h1>
+        <h2 class="site-description"></h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/dfornis/about'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About me</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/dfornis/archives'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/dfornis/search'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+    </ol>
+</aside>
+
+            <main class="main full-width">
+    <div id="article-toolbar">
+        <a href="https://dfornis.github.io/dfornis/" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/">
+                <img src="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/background_hu52029d49fd37a8ac8a9facd10a587a5d_1092055_800x0_resize_box_2.png"
+                        srcset="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/background_hu52029d49fd37a8ac8a9facd10a587a5d_1092055_800x0_resize_box_2.png 800w, /dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/background_hu52029d49fd37a8ac8a9facd10a587a5d_1092055_1600x0_resize_box_2.png 1600w"
+                        width="800" 
+                        height="270" 
+                        loading="lazy"
+                        alt="Featured image of post Ex-post policy evaluation with the synthetic control method" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <h2 class="article-title">
+        <a href="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/">Ex-post policy evaluation with the synthetic control method</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        The European Commission has asked Sweden to evaluate its excise tax exemption for biofuels. Here, I show the research plan we submitted, and test it empirically with a counterfactual method on observational data.
+    </h3>
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Jun 14, 2023</time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <h3 id="introduction">Introduction</h3>
+<p>Randomly assigned controlled experiments are, naturally, a favored tool by scientists who want to make claims about causality in research. They are however expensive, impractical and often ethically dubious to run in a social science or policy context. Consider the country that randomly assigns its regions into a treatment and control group when implementing criminal justice reform, in order to find out if it has the intended effect, all else equal. Such an exercise would result in a few excited scientists and a lot of angry citizens. Until recently, quantitative social scientists made do with running simple OLS regressions on observational data - reporting correlations as the primary result. This has changed for with the introduction of a set of methods that help researchers identify random assignment of treatment in existing data that, with a bit of creativity, makes it possible to construct artificial treatment and control groups without running an actual experiment.</p>
+<p>Collectively, the introduction of these models has resulted in what has been dubbed a &lsquo;credibility revolution&rsquo; in economics, and a shared Nobel prize. Guido Imbens, one of the main forces behind these methods, has described a late comer to the group - the synthethic control method - as “arguably the most important innovation in the policy evaluation literature in the last 15 years” (Athey &amp; Imbens, 2017). In this text, I will provide a practical example of how this method can be applied on a real and current policy case from the energy policy sector. The text is concise write up of the evaluation plan I helped develop for Sweden&rsquo;s evaluation of its excise tax exemption for high-blended biofuels, as requested by the European Commission. It also provides an implementation on actual data with preliminary results.</p>
+<h3 id="the-synthethic-control-method">The synthethic control method</h3>
+<p>The method was developed in a series of papers (Abadie and Gardeazabal 2003, and Abadie, Diamond and Hainmueller 2010) and has become an established method for policy evaluations in case studies with one treated unit. Its first policy application was on proposition 99 - an increase of the excise tax on tobacco products in California - by testing its impact on smoking.  Politics are not designed around the conditions of randomly controlled trials, meaning that there were no &ldquo;control California&rdquo; available that didn&rsquo;t get the treatment while also sharing California&rsquo;s other characteristics. As such, there was no obvious way to estimate the effect of the legislation, all else equal. The synthetic control method solves this rather elegantly. It offers an algorithmic approach to constructing control groups. For the unit that receives treatment, the control is a weighted average of the untreated units that best predicts the outcome variable in the pre-treatment period for the treated unit. In the post-treatment period, it provides a synthetic counterfactual for the treated unit. In the case of tobacco legislation, the synthetic control weighs the predictors of smoking (drinking, demographic variables, etc.) from a panel dataset of states, and creates a synthetic control from donor states that best match the rate of smoking of California, for the years that precede the excise tax change.</p>
+<p><figure style="flex-grow: 117; flex-basis: 281px">
+		<a href="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/prop99_scm1.png" data-size="856x730"><img src="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/prop99_scm1.png"
+				srcset="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/prop99_scm1_hucbcf3913f067f33e646c80f8b59e3f64_68309_480x0_resize_box_2.png 480w, /dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/prop99_scm1_hucbcf3913f067f33e646c80f8b59e3f64_68309_1024x0_resize_box_2.png 1024w"
+				width="856"
+				height="730"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure></p>
+<p>After the policy intervention (post-treatment), the rate of smoking is allowed to deviate, given that there is an effect. The difference between the rate of smoking in actual California and the synthetic California, in the post-treatment period, is the estimated effect of an excise tax increase on smoking.</p>
+<h3 id="the-case-of-swedens-excise-tax-exemption">The case of Sweden&rsquo;s excise tax exemption</h3>
+<p>Sweden introduced an excise tax exemption for high-blended and pure biofuels in two steps, first by removing the energy tax in 2003 and then the carbon tax in 2008. High-blended biofuels include bioethanol based fuels such as E85 and bio/synthethic diesels such as FAME and HVO. The price at pump is often higher for these fuels than their fossil equivelants, even without excise taxes. This limits the impact on fuels used in the passenger fleet, but is enough to incentivize transport and public transit companies into switching by providing them with the value of environmental signaling and ability to meet carbon emission targets. Ultimately, the goal of incentivizing biofuel use is to reduce carbon emissions from transport.</p>
+<h3 id="preparations">Preparations</h3>
+<p>So how should we go about constructing the synthetic control? First, we need to know what countries, in the EU, that are untreated, i.e. had no excise tax exemption in place, during the studied period.</p>
+<p><figure style="flex-grow: 103; flex-basis: 249px">
+		<a href="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm2_binarycoding.png" data-size="1042x1002"><img src="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm2_binarycoding.png"
+				srcset="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm2_binarycoding_hu3f78cacd98ba6b3efcbffa752746b5cf_115773_480x0_resize_box_2.png 480w, /dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm2_binarycoding_hu3f78cacd98ba6b3efcbffa752746b5cf_115773_1024x0_resize_box_2.png 1024w"
+				width="1042"
+				height="1002"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure></p>
+<p>I did a binary coding of EU country&rsquo;s excise tax policies instructed by state aid case documents in the European Commission&rsquo;s state aid database. This provided us with a set of untreated countries, that can be used as donors for the synthetic control. Now, the model needs data on predictors for, in this case, carbon emissions from transport per capita as well as the actual outcome variable in order to estimate its weights. We were instructed in choosing predictor variables by Andersson (2019) who uses a synthetic control model to estimate the effect of the original introduction of a carbon tax on transport fuels in 1990. The actual data on predictors was obtained from The World Bank database, and for the outcome variable, we obtained panel data for a large selection of countries for  1990 through 2019 from the Climate Watch carbon emissions database.
+First, let&rsquo;s consider what would happen if we used the average of carbon emissions from transport from relevant countries as a control group, without weights.</p>
+<p><figure style="flex-grow: 107; flex-basis: 258px">
+		<a href="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm3_noweights.png" data-size="1252x1164"><img src="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm3_noweights.png"
+				srcset="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm3_noweights_hu5076d4304f6c23db482684e008eae8d2_250685_480x0_resize_box_2.png 480w, /dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm3_noweights_hu5076d4304f6c23db482684e008eae8d2_250685_1024x0_resize_box_2.png 1024w"
+				width="1252"
+				height="1164"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure></p>
+<p>It&rsquo;s clear that other, but not all, countries in this group experienced falling carbon emissions from transport in the late 2000&rsquo;s and on. A simple explanation is that all countries follow the EU Renewable Energy Directive and similar directives that preceded it with biofuel targets for the transport sectors, pursuing different policy tools for this purpose. Some applied obligatory blending quotas for biofuels in gasoline and diesel. The discrepancy is quiet large, both in absolute terms and in rate of change. It seems like there are confounding factors that muddle our ability to single out the effect of a single policy intervention, such as an excise tax change. Further, underlying factors such as road networks, GDP, fuel taxes and more are making it hard to find a suitable control country, similar to Sweden but without the excise tax change, and with all else equal. Using the average co2 emissions from transport of all countries, as a control, wouldn&rsquo;t help control for confounders.</p>
+<p><figure style="flex-grow: 182; flex-basis: 437px">
+		<a href="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm4_average.png" data-size="1320x724"><img src="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm4_average.png"
+				srcset="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm4_average_huf3398b14a6c00885d7db211100c97582_98448_480x0_resize_box_2.png 480w, /dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm4_average_huf3398b14a6c00885d7db211100c97582_98448_1024x0_resize_box_2.png 1024w"
+				width="1320"
+				height="724"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure></p>
+<p>But what if, instead of an average, we could estimate weights for these countries, as determined by outcome and predictor variables, in order to create a synthetic control with a better fit. Having the lines fit, in the pre-treatment period, would indicate that both observed and unobserved confounding variables are controlled for.</p>
+<h3 id="estimating-the-weights">Estimating the weights</h3>
+<p>The synthetic control is constructed by optimizing two set of weights. It&rsquo;s an optimization problem that seeks to minimize the sum of the absolute differences between the outcome variable for the treated unit (Sweden) and the donor countries.</p>
+<p>The first component is a vector of the average of the predictor variables for the treated unit over the pre-intervention period given by:
+$(X1 = (1/T0) * Σ_{t=1}^{T0} x1(t))$</p>
+<p>The second component is a matrix of the average of the predictor variables for each potential control unit over the pre-intervention period given by:
+$(X1 = (1/T0) * Σ_{t=1}^{T0} x1(t))$</p>
+<p>And the optimization problem can be defined as:
+$(\min_W \quad || X_1 - X_0 W || \text{subject to } W \geq 0, \quad \sum_{j=1}^{J} W_j = 1)$</p>
+<p>Here, W is a vector of weights for the control units that minimizes the difference between the treated unit and the synthetic control unit in the pre-intervention period. Each weight in W corresponds to one control unit (one country in this case). The constraints that W ≥ 0 and Σ W = 1 ensure that the weights are non-negative and sum to 1.</p>
+<p>The predictor variable weights are implicitly and recursively determined in this process, so as to minimize the difference between the outcome variable for Sweden and the synthetic control.</p>
+<p>Here are the predictor values that I obtained:</p>
+<p><figure style="flex-grow: 420; flex-basis: 1008px">
+		<a href="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm5_weights_predictors.png" data-size="924x220"><img src="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm5_weights_predictors.png"
+				srcset="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm5_weights_predictors_hu35b0e37afd63f8e0dd0cb8444f1c6f3f_61160_480x0_resize_box_2.png 480w, /dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm5_weights_predictors_hu35b0e37afd63f8e0dd0cb8444f1c6f3f_61160_1024x0_resize_box_2.png 1024w"
+				width="924"
+				height="220"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure></p>
+<p>We can see that it optimized for a close match between Sweden (Treated) and the synthetic control in terms of diesel price, passenger cars per 1000 inhabitants and previous carbon emissions from transport, indicative of that these were strong predictors of the outcome variable.</p>
+<p>In terms of country weights, I obtained the following:</p>
+<p><figure style="flex-grow: 114; flex-basis: 275px">
+		<a href="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm6_weights_units.png" data-size="372x324"><img src="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm6_weights_units.png"
+				srcset="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm6_weights_units_hu5319b6abe03509fae6521491a90d9609_48789_480x0_resize_box_2.png 480w, /dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm6_weights_units_hu5319b6abe03509fae6521491a90d9609_48789_1024x0_resize_box_2.png 1024w"
+				width="372"
+				height="324"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure></p>
+<p>The algorithm determined that France, Finland and Norway were the most suitable donor countries.</p>
+<h3 id="results">Results</h3>
+<p>After the synthetic control is constructed, we compare the outcome variable for the treated unit and the synthetic control during the post-intervention period. Any difference between these two could be attributed to the treatment. Granted that the synthetic control has a good fit with the actual outcome for Sweden, chances are that it&rsquo;s a good counterfactual.</p>
+<p>In terms of fit, we went from the average of all countries to the weighted synthetic control:</p>
+<p><figure style="flex-grow: 182; flex-basis: 437px">
+		<a href="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm4_average.png" data-size="1320x724"><img src="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm4_average.png"
+				srcset="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm4_average_huf3398b14a6c00885d7db211100c97582_98448_480x0_resize_box_2.png 480w, /dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm4_average_huf3398b14a6c00885d7db211100c97582_98448_1024x0_resize_box_2.png 1024w"
+				width="1320"
+				height="724"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure>
+<figure style="flex-grow: 179; flex-basis: 430px">
+		<a href="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm7_estimate.png" data-size="1240x692"><img src="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm7_estimate.png"
+				srcset="/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm7_estimate_hu799727e383a5b4b7f9f1666b4188e2e2_73603_480x0_resize_box_2.png 480w, /dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm7_estimate_hu799727e383a5b4b7f9f1666b4188e2e2_73603_1024x0_resize_box_2.png 1024w"
+				width="1240"
+				height="692"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure></p>
+<p>We can see that the pre-treatment period provides a decent but not perfect fit, at least controlling for parts of the variation that stems from covariates such as GDP, diesel price, and passenger car density, as well as unobserved covariates. In the pst-treatment period, we observe a gradual divergence between the actual carbon emissions for Sweden and the synthetic control which provides us with a counterfactual scenario where Sweden did not implement an excise tax policy change.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+    integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+    integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+    onload="StackLaTeX()"></script>
+
+<script>
+    function StackLaTeX() {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });
+    }
+</script>
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+</aside>
+
+
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2023 David Fornborg
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.0.1">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
+            </main>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"
+    integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin="anonymous"></script><script type="text/javascript" src="/dfornis/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

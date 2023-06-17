@@ -1,14 +1,14 @@
 +++
 author = "David Fornborg"
-title = "Ex-post policy evaluation with the synthethic control method"
+title = "Ex-post policy evaluation with the synthetic control method"
 date = "2023-06-14"
-description = "The European Commission has asked Sweden to evaluate its excise tax exemption for biofuels. Here, I show the research plan we suggested, and test it empirically with a counterfactual method on observational data."
+description = "The European Commission has asked Sweden to evaluate its excise tax exemption for biofuels. Here, I show the research plan we submitted, and test it empirically with a counterfactual method on observational data."
 
 series = ["Themes Guide"]
 aliases = ["migrate-from-jekyl"]
 image = "background.png"
 +++
-s
+
 ### Introduction
 Randomly assigned controlled experiments are, naturally, a favored tool by scientists who want to make claims about causality in research. They are however expensive, impractical and often ethically dubious to run in a social science or policy context. Consider the country that randomly assigns its regions into a treatment and control group when implementing criminal justice reform, in order to find out if it has the intended effect, all else equal. Such an exercise would result in a few excited scientists and a lot of angry citizens. Until recently, quantitative social scientists made do with running simple OLS regressions on observational data - reporting correlations as the primary result. This has changed for with the introduction of a set of methods that help researchers identify random assignment of treatment in existing data that, with a bit of creativity, makes it possible to construct artificial treatment and control groups without running an actual experiment. 
 
@@ -71,9 +71,9 @@ The algorithm determined that France, Finland and Norway were the most suitable 
 ### Results
 After the synthetic control is constructed, we compare the outcome variable for the treated unit and the synthetic control during the post-intervention period. Any difference between these two could be attributed to the treatment. Granted that the synthetic control has a good fit with the actual outcome for Sweden, chances are that it's a good counterfactual. 
 
-In terms of fit, we went from the average of all countries:
+In terms of fit, we went from the average of all countries to the weighted synthetic control:
+
 ![](scm4_average.png)
-to the weighted synthetic control:
 ![](scm7_estimate.png)
 
 We can see that the pre-treatment period provides a decent but not perfect fit, at least controlling for parts of the variation that stems from covariates such as GDP, diesel price, and passenger car density, as well as unobserved covariates. In the pst-treatment period, we observe a gradual divergence between the actual carbon emissions for Sweden and the synthetic control which provides us with a counterfactual scenario where Sweden did not implement an excise tax policy change.
