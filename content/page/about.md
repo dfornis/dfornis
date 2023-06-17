@@ -7,4 +7,4 @@ author = ""
 license = "CC BY-NC-ND"
 lastmod = ""
 +++
-I have recently completed a master's degree in Economic History at Stockholm University. I currently work as a research assistant within the resarch project GlocalClim at the department of Economic History and International Relations at Stockholm University. I also do freelance work as a quantitative analyst. My main areas of interest are econometric inference, globalization and values as well as the history of information technology.
+I’m an analyst currently working at the policy unit at the Swedish Energy Agency. I also do freelance work as a quantitative analyst. My educational background is in economics, economic history and international relations. I enjoy econometrics, modelling and data visualizations, which is most of what I publish here.
