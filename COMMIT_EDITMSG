@@ -1,0 +1,18 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Committer: David Fornborg <david.fornborg@MacBook-Air-som-tillhor-David.local>
+#
+# On branch master
+# Changes to be committed:
+#	modified:   .DS_Store
+#	modified:   content/page/about.md
+#	modified:   content/post/.DS_Store
+#	deleted:    content/post/2023-06-14-expost-evaluation/bostadsmarknad_en_bw.png
+#	deleted:    content/post/2023-06-14-expost-evaluation/bostadsmarknad_en_bw_old.png
+#	modified:   content/post/2023-06-14-expost-evaluation/index.md
+#
+# Untracked files:
+#	COMMIT_EDITMSG
+#
