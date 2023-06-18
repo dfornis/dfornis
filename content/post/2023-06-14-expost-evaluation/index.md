@@ -2,7 +2,7 @@
 author = "David Fornborg"
 title = "Ex-post policy evaluation with the synthetic control method"
 date = "2023-06-14"
-description = "The European Commission has asked Sweden to evaluate its excise tax exemption for biofuels. Here, I condense parts of the research plan we submitted, and test it empirically with a counterfactual method on observational data."
+description = "The European Commission has asked Sweden to evaluate its excise tax exemption for biofuels. Here, I condense parts of the evaluation plan we submitted, and test it empirically with a counterfactual method on observational data."
 
 series = ["Themes Guide"]
 aliases = ["migrate-from-jekyl"]
@@ -25,7 +25,7 @@ After the policy intervention (post-treatment), the rate of smoking is allowed t
 Sweden introduced an excise tax exemption for high-blended and pure biofuels in two steps, first by removing the energy tax in 2003 and then the carbon tax in 2008. High-blended biofuels include bioethanol based fuels such as E85 and bio/synthethic diesels such as FAME and HVO. The price at pump is often higher for these fuels than their fossil equivalents, even without excise taxes. This limits the impact on fuels used in the passenger fleet, but makes a large enough difference to incentivize transport and public transit companies into switching. Unlike private drivers, they benefit from the utility of of environmental signaling and the ability to meet carbon emission targets. Ultimately, the goal of incentivizing biofuel use is to reduce carbon emissions from the transport sector.
 
 ### Preparations
-So how should we go about constructing the synthetic control? First, we need to know what countries, in the EU, that are untreated, i.e. that had no excise tax exemption in place, during the studied period.
+So how should we go about constructing the synthetic control? First, we need to know what comparable countries that are untreated, i.e. that had no excise tax exemption in place, during the studied period.
 
 ![](scm2_binarycoding.png)
 
