@@ -2,7 +2,7 @@
 author = "David Fornborg"
 title = "Ex-post policy evaluation with the synthetic control method"
 date = "2023-06-14"
-description = "The European Commission has asked Sweden to evaluate its excise tax exemption for biofuels. Here, I condense parts of the evaluation plan we submitted, and test it empirically with a counterfactual method on observational data."
+description = "The European Commission has asked Sweden to evaluate its excise tax exemption for high-blended biofuels. Here, I condense parts of the evaluation plan we submitted, and test it empirically with a counterfactual method on observational data."
 
 series = ["Themes Guide"]
 aliases = ["migrate-from-jekyl"]
@@ -10,7 +10,7 @@ image = "background.png"
 +++
 
 ### Introduction
-The randomized controlled experiment is a powerful tool for researchers who want to make claims about causality when testing for  relationships between interventions and outcomes. They are however expensive, impractical and often ethically dubious to run in a social science or policy context. Consider the country that randomly assigns its regions into a treatment and control group when implementing criminal justice reform, in order to find out if it has the intended effect, all else equal. Such an exercise would result in a few excited scientists and a lot of angry citizens. Until recently, quantitative social scientists made do with running simple OLS regressions on observational data - reporting correlations as the primary result. This has changed with the introduction of a category of methods that help researchers identify random assignment of treatment in existing data that, with a bit of creativity, makes it possible to construct artificial treatment and control groups without running an actual experiment. 
+The randomized controlled experiment is a powerful tool for researchers seeking to establish causal relationships between interventions and outcomes. However, inte context of social science and policy research, these epxeriments can be expensive, impractical, and often ethically questionable to run. Imagine, for example, a country that randomly assigns its regions into treatment and control groups when implementing criminal justice reform, aiming to determine the effectiveness of the change, all else equal. While such an approach might intrigue a few scientists, it would rightly incite outrage among the general population. Up until recently, quantitative social scientists resorted to running simple OLS regressions on observational data - reporting correlations as the primary result. This has changed with the introduction of methods that allow researchers identify random assignment of treatment in existing data that. Through a bit of creativity, these techniques enable the construction of artificial treatment and control groups without running an actual experiment. 
 
 The collective effect of the introduction of these models has been dubbed a 'credibility revolution' in economics, and has motivated a shared Nobel prize. Guido Imbens, one of the main forces behind these methods, has described a late comer to the group - the synthetic control method - as “arguably the most important innovation in the policy evaluation literature in the last 15 years” (Athey & Imbens, 2017). In this text, I will provide a practical example of how this method can be applied on a real and current policy case from the energy policy sector. The text is concise write up of parts of the evaluation plan I helped develop for Sweden's evaluation of its excise tax exemption for high-blended biofuels, as requested by the European Commission. It also provides an implementation on actual data with preliminary results. 
 
@@ -85,3 +85,10 @@ We can see that the pre-treatment period provides a decent but not perfect fit, 
 ### Discussion
 
 ### References
+Abadie A, Diamond A, and Hainmueller J. 2010. Synthetic Control Methods for Comparative Case Studies: Estimating the Effect of California’s Tobacco Control Program. *Journal of the American Statistical Association*, 105 (490): 493.
+
+Abadie A, and Gardeazabal J. 2003. The Economic Costs of Conflict: A Case Study of the Basque Country. *American Economic Review*, 93 (1):113–32.
+
+Andersson, J. 2019. Carbon Taxes and CO2 Emissions: Sweden as a Case Study. *American Economic Journal: Economic Policy*, 11 (4): 1-30.
+
+Athey, S, and Guido, I. 2017. The State of Applied Econometrics: Causality and Policy Evaluation. *Journal of Economic Perspectives*, 31 (2): 3-32. 
