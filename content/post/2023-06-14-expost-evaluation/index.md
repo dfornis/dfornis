@@ -29,31 +29,32 @@ So how should we go about constructing the synthetic control? First, we need to 
 
 ![](scm2_binarycoding.png)
 
-We did a binary coding of EU country's excise tax policies instructed by state aid case documents in the European Commission's state aid database. This provided us with a set of untreated countries, that can be used as donors for the synthetic control. Now, the model needs data on predictors for, in this case, carbon emissions from transport per capita as well as the actual outcome variable in order to estimate its weights. We were instructed in choosing predictor variables by Andersson (2019) who uses a synthetic control model to estimate the effect of the original introduction of a carbon tax on transport fuels in 1990. The actual data on predictors was obtained from The World Bank database, and for the outcome variable, we obtained panel data for a large selection of countries for  1990 through 2019 from the Climate Watch carbon emissions database. 
-First, let's compare Sweden's carbon emissions from transport to other country's emissions in our dataset.
+We did a binary coding of EU country's excise tax policies instructed by state aid case documents in the European Commission's state aid database. This provided us with a set of untreated countries, that can be used as donors for the synthetic control. The green squares indicate years with treatment. For the next step, the model needs data on predictors for, in this case, carbon emissions from transport per capita as well as the actual outcome variable. We were instructed in choosing predictor variables by Andersson (2019) who uses a synthetic control model to estimate the effect of the original introduction of a carbon tax on transport fuels in 1990. The actual data on predictors was obtained from The World Bank database, and for the outcome variable, we obtained panel data for a large selection of countries for  1990 through 2019 from the Climate Watch carbon emissions database.
+
+First, let's compare Sweden's carbon emissions from transport to that of other country's emissions in our dataset.
 
 ![](scm3_noweights.png)
 
-It's clear that other, but not all, countries in this group experienced falling carbon emissions from transport in the late 2000's and on. A simple explanation is that all countries follow the EU Renewable Energy Directive and similar directives that preceded it and their dictated biofuel targets for the transport sectors, pursuing different policy tools for this purpose. For example, some applied obligatory blending quotas for biofuels in gasoline and diesel. The discrepancy is quiet large, both in absolute terms and in rate of change. It seems like there are confounding factors that muddle our ability to single out the effect of a single policy intervention, such as an excise tax change. Further, underlying factors such as road networks, GDP, fuel taxes and more are making it hard to find a suitable control country, similar to Sweden but without the excise tax change, and with all else equal. Using the average carbon emissions from transport of all untreated countries, as a control, wouldn't help control for confounders and serves as a poor counterfactual to Sweden.
+It's clear that other, but not all, countries in this group experienced falling carbon emissions from transport in the late 2000's and on. A simple explanation is that all countries follow the EU Renewable Energy Directive and similar directives that preceded it and their dictated biofuel targets for the transport sectors, pursuing different policy tools for this purpose. For example, some applied obligatory blending quotas for biofuels in gasoline and diesel. The discrepancy in emissions is quiet large, both in absolute terms and in rate of change. It seems like there are confounding factors that muddle our ability to single out the effect of a single policy intervention, such as an excise tax change. Further, underlying factors such as road networks, GDP, fuel taxes and more make it hard to find a suitable control country, similar to Sweden but without the excise tax change, and with all else equal. Using the average carbon emissions from transport of all untreated countries, as a control, wouldn't help control for confounders and serves as a poor counterfactual to Sweden.
 
 ![](scm4_average.png)
 
-But what if, instead of an average, we could estimate weights for these countries, as determined by outcome and predictor variables, in order to create a synthetic control with a better fit. Having the lines fit, in the pre-treatment period, would indicate that both observed and unobserved confounding variables are controlled for. 
+But what if, instead of an average, we could apply weights to these countries, as determined by outcome and predictor variables, in order to create a synthetic control with a better fit. Having the lines fit, in the pre-treatment period, would indicate that both observed and unobserved confounding variables are controlled for. 
 
 ### Estimating the weights
 The synthetic control is constructed by solving an optimization problem, resulting in a set of weights. It's an optimization problem that seeks to minimize the sum of the absolute differences between the outcome variable for the treated unit (Sweden) and the donor countries. 
 
-The first component is a vector of the average of the predictor variables for the treated unit over the pre-intervention period given by:
+The first component is a vector of the average of the predictor variables for the treated unit over the pre-intervention periods $T_0$ given by:
 
-$(X1 = (1/T0) * Σ_{t=1}^{T0} x1(t))$
+$$X_1 = \frac{1}{T_0}   \sum_{t=1}^{T_0} x_1(t)$$
 
-The second component is a matrix of the average of the predictor variables for each potential control unit over the pre-intervention period given by:
+The second component is a matrix of the average of the predictor variables for each potential control unit over the pre-intervention periods:
 
-$(X1 = (1/T0) * Σ_{t=1}^{T0} x1(t))$
+$$X_0 = \frac{1}{T_0} \sum_{t=1}^{T_0} x_{0}(t)$$
 
 And the optimization problem can be defined as:
 
-$(\min_W \quad || X_1 - X_0 W || \text{subject to } W \geq 0, \quad \sum_{j=1}^{J} W_j = 1)$
+$$\min_W \quad || X_1 - X_0 W ||$$ $$ \text{subject to } W \geq 0, \quad \sum_{j=1}^{J} W_j = 1$$
 
 Here, W is a vector of weights for the control units that minimizes the difference between the treated unit and the synthetic control unit in the pre-intervention period. Each weight in W corresponds to one control unit (one country in this case). The constraints that W ≥ 0 and Σ W = 1 ensure that the weights are non-negative and sum to 1.
 
