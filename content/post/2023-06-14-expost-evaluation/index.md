@@ -2,7 +2,7 @@
 author = "David Fornborg"
 title = "Ex-post policy evaluation with the synthetic control method"
 date = "2023-06-14"
-description = "The European Commission has requested Sweden to evaluate the effects of its excise tax exemption for high-blended biofuels. In response, we submitted an evaluation plan, a condensed version of which I will present here, where I also test it empirically using a counterfactual method on observational data."
+description = "The European Commission has requested Sweden to evaluate the effects of its excise tax exemption for high-blended biofuels. In response, we submitted an evaluation plan, a condensed version of which I will present here, where I also test it empirically using a counterfactual method with observational data."
 
 series = ["Themes Guide"]
 aliases = ["migrate-from-jekyl"]
