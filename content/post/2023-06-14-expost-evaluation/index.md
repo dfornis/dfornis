@@ -83,7 +83,7 @@ In terms of fit, we went from the average of all countries to the weighted synth
 ### Discussion
 We can see that the pre-treatment period provides a decent but not perfect fit. While imperfect, it does a better job than the average at controlling for parts of the variation that stems from covariates such as GDP, diesel price, and passenger car density, as well as unobserved variables. In the post-treatment period, we observe a gradual divergence between the actual carbon emissions for Sweden and the synthetic control which provides us with a counterfactual scenario for the development of carbon emissions from transport had Sweden not implemented an excise tax policy change.
 
-This post has provided a quick and dirty implementation of a synthetic control model on on a real and current policy case. While flawed in its implementation, it should provide provide an understanding of the potential of the model and its applicability in future policy research.
+This post offers a basic implementation of a synthetic control model applied to a real and timely policy case. Despite its imperfect execution, the post aims to demonstrate the model's potential and its relevance for future policy research.
 
 Note: this implementation was done in R, primarily with the Synth library.
 
