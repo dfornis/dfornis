@@ -17,7 +17,7 @@ The collective effect of the introduction of these models has been dubbed a 'cre
 ### The synthethic control method
 The method was developed in a series of papers (Abadie & Gardeazabal 2003, and Abadie, Diamond & Hainmueller 2010) and has become an established method for policy evaluations in case studies with one treated unit. Its first policy application was on proposition 99 - an increase of the excise tax on tobacco products in California - by testing its impact on smoking.  Politics are not designed around the conditions of randomly controlled trials, meaning that there were no "control California" available that didn't receive the treatment while also sharing California's other characteristics. As such, there was no obvious way to estimate the *causal* effect of the legislation, all else equal. The synthetic control method solves this rather elegantly. It offers an algorithmic approach to constructing control groups. For the unit that receives treatment, the control is a weighted average of the untreated units that best predicts the outcome variable in the pre-treatment period for the treated unit. In the post-treatment period, it provides a  counterfactual scenario for the treated unit, as if it had not received treatment. In the case of tobacco legislation, the synthetic control weighs the predictors of smoking (drinking, demographic variables, etc.) from a panel dataset and estimates a synthetic control from donor states that best match the rate of smoking of California, for the years that precede the excise tax change. 
 
-![](prop99_scm1.png)
+![From Abadie, Diamond & Hainmueller 2010.](prop99_scm1.png)
 
 After the policy intervention (post-treatment), the rate of smoking is allowed to deviate, given that there is an effect. The difference between the rate of smoking in actual California and the synthetic California, in the post-treatment period, is the estimated effect of the excise tax increase on smoking. 
 
@@ -27,9 +27,9 @@ Sweden introduced an excise tax exemption for high-blended and pure biofuels in 
 ### Preparations
 So how should we go about constructing the synthetic control? First, we need to know what comparable countries that are untreated, i.e. that had no excise tax exemption in place, during the studied period.
 
-![](scm2_binarycoding.png)
+![Green squares indicate years with treatment.](scm2_binarycoding.png)
 
-We did a binary coding of EU country's excise tax policies instructed by state aid case documents in the European Commission's state aid database. This provided us with a set of untreated countries, that can be used as donors for the synthetic control. The green squares indicate years with treatment. For the next step, the model needs data on predictors for, in this case, carbon emissions from transport per capita as well as the actual outcome variable. We were instructed in choosing predictor variables by Andersson (2019) who uses a synthetic control model to estimate the effect of the original introduction of a carbon tax on transport fuels in 1990. The actual data on predictors was obtained from The World Bank database, and for the outcome variable, we obtained panel data for a large selection of countries for  1990 through 2019 from the Climate Watch carbon emissions database.
+We did a binary coding of EU country's excise tax policies instructed by state aid case documents in the European Commission's state aid database. This provided us with a set of untreated countries, that can be used as donors for the synthetic control. For the next step, the model needs data on predictors for, in this case, carbon emissions from transport per capita as well as the actual outcome variable. We were instructed in choosing predictor variables by Andersson (2019) who uses a synthetic control model to estimate the effect of the original introduction of a carbon tax on transport fuels in 1990. The actual data on predictors was obtained from The World Bank database, and for the outcome variable, we obtained panel data for a large selection of countries for  1990 through 2019 from the Climate Watch carbon emissions database.
 
 First, let's compare Sweden's carbon emissions from transport to that of other country's emissions in our dataset.
 
@@ -37,7 +37,7 @@ First, let's compare Sweden's carbon emissions from transport to that of other c
 
 It's clear that other, but not all, countries in this group experienced falling carbon emissions from transport in the late 2000's and on. A simple explanation is that all countries follow the EU Renewable Energy Directive and similar directives that preceded it and their dictated biofuel targets for the transport sectors, pursuing different policy tools for this purpose. For example, some applied obligatory blending quotas for biofuels in gasoline and diesel. The discrepancy in emissions is quiet large, both in absolute terms and in rate of change. It seems like there are confounding factors that muddle our ability to single out the effect of a single policy intervention, such as an excise tax change. Further, underlying factors such as road networks, GDP, fuel taxes and more make it hard to find a suitable control country, similar to Sweden but without the excise tax change, and with all else equal. Using the average carbon emissions from transport of all untreated countries, as a control, wouldn't help control for confounders and serves as a poor counterfactual to Sweden.
 
-![](scm4_average.png)
+![Sweden's carbon emissions from transport compared to the average of comparable countries.](scm4_average.png)
 
 But what if, instead of an average, we could apply weights to these countries, as determined by outcome and predictor variables, in order to create a synthetic control with a better fit. Having the lines fit, in the pre-treatment period, would indicate that both observed and unobserved confounding variables are controlled for. 
 
@@ -85,7 +85,7 @@ We can see that the synthetic control provides a decent but not perfect fit in t
 
 This post offers a basic implementation of a synthetic control model applied to a real and timely policy case. Despite its imperfect execution, the post aims to demonstrate the model's potential and its relevance for future policy research.
 
-Note: this implementation was done in R, primarily with the Synth library.
+Note: this implementation was done in R, primarily with the [Synth](https://cran.r-project.org/web/packages/Synth/index.html) library.
 
 ### References
 Abadie A, Diamond A, and Hainmueller J. 2010. Synthetic Control Methods for Comparative Case Studies: Estimating the Effect of California’s Tobacco Control Program. *Journal of the American Statistical Association*, 105 (490): 493.

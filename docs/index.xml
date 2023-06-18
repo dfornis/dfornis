@@ -23,8 +23,10 @@
 				width=&#34;856&#34;
 				height=&#34;730&#34;
 				loading=&#34;lazy&#34;
-				&gt;
+				alt=&#34;From Abadie, Diamond &amp; Hainmueller 2010.&#34;&gt;
 		&lt;/a&gt;
+		
+		&lt;figcaption&gt;From Abadie, Diamond &amp;amp; Hainmueller 2010.&lt;/figcaption&gt;
 		
 	&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;After the policy intervention (post-treatment), the rate of smoking is allowed to deviate, given that there is an effect. The difference between the rate of smoking in actual California and the synthetic California, in the post-treatment period, is the estimated effect of the excise tax increase on smoking.&lt;/p&gt;
@@ -38,11 +40,13 @@
 				width=&#34;1042&#34;
 				height=&#34;1002&#34;
 				loading=&#34;lazy&#34;
-				&gt;
+				alt=&#34;Green squares indicate years with treatment.&#34;&gt;
 		&lt;/a&gt;
 		
+		&lt;figcaption&gt;Green squares indicate years with treatment.&lt;/figcaption&gt;
+		
 	&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;We did a binary coding of EU country&amp;rsquo;s excise tax policies instructed by state aid case documents in the European Commission&amp;rsquo;s state aid database. This provided us with a set of untreated countries, that can be used as donors for the synthetic control. The green squares indicate years with treatment. For the next step, the model needs data on predictors for, in this case, carbon emissions from transport per capita as well as the actual outcome variable. We were instructed in choosing predictor variables by Andersson (2019) who uses a synthetic control model to estimate the effect of the original introduction of a carbon tax on transport fuels in 1990. The actual data on predictors was obtained from The World Bank database, and for the outcome variable, we obtained panel data for a large selection of countries for  1990 through 2019 from the Climate Watch carbon emissions database.&lt;/p&gt;
+&lt;p&gt;We did a binary coding of EU country&amp;rsquo;s excise tax policies instructed by state aid case documents in the European Commission&amp;rsquo;s state aid database. This provided us with a set of untreated countries, that can be used as donors for the synthetic control. For the next step, the model needs data on predictors for, in this case, carbon emissions from transport per capita as well as the actual outcome variable. We were instructed in choosing predictor variables by Andersson (2019) who uses a synthetic control model to estimate the effect of the original introduction of a carbon tax on transport fuels in 1990. The actual data on predictors was obtained from The World Bank database, and for the outcome variable, we obtained panel data for a large selection of countries for  1990 through 2019 from the Climate Watch carbon emissions database.&lt;/p&gt;
 &lt;p&gt;First, let&amp;rsquo;s compare Sweden&amp;rsquo;s carbon emissions from transport to that of other country&amp;rsquo;s emissions in our dataset.&lt;/p&gt;
 &lt;p&gt;&lt;figure style=&#34;flex-grow: 107; flex-basis: 258px&#34;&gt;
 		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm3_noweights.png&#34; data-size=&#34;1252x1164&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm3_noweights.png&#34;
@@ -61,8 +65,10 @@
 				width=&#34;1320&#34;
 				height=&#34;724&#34;
 				loading=&#34;lazy&#34;
-				&gt;
+				alt=&#34;Sweden&amp;rsquo;s carbon emissions from transport compared to the average of comparable countries.&#34;&gt;
 		&lt;/a&gt;
+		
+		&lt;figcaption&gt;Sweden’s carbon emissions from transport compared to the average of comparable countries.&lt;/figcaption&gt;
 		
 	&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;But what if, instead of an average, we could apply weights to these countries, as determined by outcome and predictor variables, in order to create a synthetic control with a better fit. Having the lines fit, in the pre-treatment period, would indicate that both observed and unobserved confounding variables are controlled for.&lt;/p&gt;
@@ -126,7 +132,8 @@
 &lt;h3 id=&#34;discussion&#34;&gt;Discussion&lt;/h3&gt;
 &lt;p&gt;We can see that the synthetic control provides a decent but not perfect fit in the pre-treatment periods. While imperfect, it does a better job than the average at controlling for parts of the variation that stems from covariates such as GDP, diesel price, and passenger car density, as well as unobserved variables. In the post-treatment period, we observe a gradual divergence between the actual carbon emissions for Sweden and the synthetic control which provides us with a counterfactual scenario for the development of carbon emissions from transport had Sweden not implemented an excise tax policy change.&lt;/p&gt;
 &lt;p&gt;This post offers a basic implementation of a synthetic control model applied to a real and timely policy case. Despite its imperfect execution, the post aims to demonstrate the model&amp;rsquo;s potential and its relevance for future policy research.&lt;/p&gt;
-&lt;p&gt;Note: this implementation was done in R, primarily with the Synth library.&lt;/p&gt;
+&lt;p&gt;Note: this implementation was done in R, primarily with the &lt;a class=&#34;link&#34; href=&#34;https://cran.r-project.org/web/packages/Synth/index.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Synth&lt;/a&gt; library.&lt;/p&gt;
 &lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
 &lt;p&gt;Abadie A, Diamond A, and Hainmueller J. 2010. Synthetic Control Methods for Comparative Case Studies: Estimating the Effect of California’s Tobacco Control Program. &lt;em&gt;Journal of the American Statistical Association&lt;/em&gt;, 105 (490): 493.&lt;/p&gt;
 &lt;p&gt;Abadie A, and Gardeazabal J. 2003. The Economic Costs of Conflict: A Case Study of the Basque Country. &lt;em&gt;American Economic Review&lt;/em&gt;, 93 (1):113–32.&lt;/p&gt;
