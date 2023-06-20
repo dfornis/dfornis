@@ -52,11 +52,11 @@
 &lt;p&gt;We undertook a binary coding of EU country&amp;rsquo;s excise tax policies instructed by state aid case documents in the European Commission&amp;rsquo;s state aid database. This provided us with a set of untreated countries, that can be used as donors for the synthetic control. For the next step, the model needs data on predictors for, in this case, carbon emissions from transport per capita as well as the actual outcome variable.&lt;/p&gt;
 &lt;p&gt;We were instructed in choosing predictor variables by Andersson (2019) who uses a synthetic control model to estimate the effect of the original introduction of a carbon tax on transport fuels in 1990. The actual data for these predictors was sourced from The World Bank database. For the outcome variable, we gathered panel data covering a broad selection of countries from 1990 to 2019 from the Climate Watch carbon emissions database.&lt;/p&gt;
 &lt;p&gt;First, let&amp;rsquo;s compare Sweden&amp;rsquo;s carbon emissions from transport to those of other countries in our dataset.&lt;/p&gt;
-&lt;p&gt;&lt;figure style=&#34;flex-grow: 107; flex-basis: 258px&#34;&gt;
-		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm3_noweights.png&#34; data-size=&#34;1252x1164&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm3_noweights.png&#34;
-				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm3_noweights_hu5076d4304f6c23db482684e008eae8d2_250685_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm3_noweights_hu5076d4304f6c23db482684e008eae8d2_250685_1024x0_resize_box_2.png 1024w&#34;
-				width=&#34;1252&#34;
-				height=&#34;1164&#34;
+&lt;p&gt;&lt;figure style=&#34;flex-grow: 238; flex-basis: 573px&#34;&gt;
+		&lt;a href=&#34;https://dfornis.github.io/dfornis/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm3_noweights.png&#34; data-size=&#34;1768x740&#34;&gt;&lt;img src=&#34;https://dfornis.github.io/dfornis/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm3_noweights.png&#34;
+				srcset=&#34;https://dfornis.github.io/dfornis/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm3_noweights_hude2c6e5894897aa73c2a2a0ab627a93e_196202_480x0_resize_box_2.png 480w, https://dfornis.github.io/dfornis/dfornis/p/ex-post-policy-evaluation-with-the-synthetic-control-method/scm3_noweights_hude2c6e5894897aa73c2a2a0ab627a93e_196202_1024x0_resize_box_2.png 1024w&#34;
+				width=&#34;1768&#34;
+				height=&#34;740&#34;
 				loading=&#34;lazy&#34;
 				&gt;
 		&lt;/a&gt;
