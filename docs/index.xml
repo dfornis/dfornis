@@ -94,10 +94,10 @@
 				width=&#34;924&#34;
 				height=&#34;220&#34;
 				loading=&#34;lazy&#34;
-				alt=&#34;Actual and synthetic values of predictors of carbon emissions from transport.&#34;&gt;
+				alt=&#34;Actual and synthetic values of predictors for transport carbon emissions.&#34;&gt;
 		&lt;/a&gt;
 		
-		&lt;figcaption&gt;Actual and synthetic values of predictors of carbon emissions from transport.&lt;/figcaption&gt;
+		&lt;figcaption&gt;Actual and synthetic values of predictors for transport carbon emissions.&lt;/figcaption&gt;
 		
 	&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;We can see that it optimized for a close match between Sweden (treated) and the synthetic control (untreated) in terms of diesel price, passenger cars per 1000 inhabitants and previous carbon emissions from transport, indicative of that these were strong predictors of the outcome variable.&lt;/p&gt;

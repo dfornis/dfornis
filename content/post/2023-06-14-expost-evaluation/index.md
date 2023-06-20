@@ -72,7 +72,7 @@ The predictor variable weights are implicitly and recursively determined in this
 
 Here are the predictor values that I obtained in this test run:
 
-![Actual and synthetic values of predictors of carbon emissions from transport.](scm5_weights_predictors.png)
+![Actual and synthetic values of predictors for transport carbon emissions.](scm5_weights_predictors.png)
 
 We can see that it optimized for a close match between Sweden (treated) and the synthetic control (untreated) in terms of diesel price, passenger cars per 1000 inhabitants and previous carbon emissions from transport, indicative of that these were strong predictors of the outcome variable.
 
