@@ -1,8 +1,8 @@
 +++
 author = "David Fornborg"
-title = "What makes a plot go (semi)-viral?"
+title = "Visualizing the Stockholm rental market"
 date = "2022-09-12"
-description = "20,000 politically interested swedes clicked on my rather dry-looking plot. I share my thoughts on what can help a more technical plot go (semi)-viral."
+description = "20,000 politically interested swedes clicked on my rather dry-looking plot. It tells the story of a rapidly deteriorating market for rental apartments."
 
 series = ["Themes Guide"]
 aliases = ["migrate-from-jekyl"]
@@ -24,10 +24,10 @@ As is often the case in a different subreddit, r/dataisbeautiful, a visualizatio
 
 ### Summary
 To summarize, these are ingredients that I believe helps a more technical plot garner a large audience:
-* Data that connects with the viewer on a personal level
-* Data that confirms (or contradicts (both are probably engaging)) the lived experience
-* Data that signals that someone's status should decrease (politicians in this case) or increase. This is a Tyler Cowen-esque speculation
-* Effectively communicates a shift in time or a discrepancy between groups
-* Delivered with a story or a striking fact that is deducible from the visualized data
+* Data that connects with the viewer on a personal level.
+* Data that confirms (or contradicts (both are probably engaging)) the lived experience.
+* Data that signals that someone's status should decrease (politicians in this case) or increase. This is a Tyler Cowen-esque speculation.
+* Effectively communicates a shift in time or a discrepancy between groups.
+* Delivered with a story or a striking fact that is deducible from the visualized data.
 
 
